@@ -3,61 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBcar - Cadastro de Afiliados</title>
+    <title>BBcar - Cadastro de Parceiros</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="futuristic-body">
     <header class="futuristic-header">
         <div class="logo">
-            <img src="../assets/img/logo.jpeg" alt="BBcar Logo">
+            <img src="../assets/img/logo.jpeg" alt="Logo BBcar">
         </div>
-        <h1>Cadastro de Afiliados</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Dashboard</a></li>
-                <li><a href="visao-geral.html">Visão Geral</a></li>
-                <li><a href="estatisticas.html">Estatísticas</a></li>
-                <li><a href="configuracoes.html">Configurações</a></li>
-                <li><a href="affiliates.html">Painel de Parceiros</a></li>
-                <li><a href="../index.html">Voltar ao BBcar</a></li>
-            </ul>
-        </nav>
+        <h1>Cadastro de Parceiros BBcar</h1>
+        <a href="../index.html" class="btn">Voltar ao BBcar</a>
     </header>
-    <main>
-        <section class="futuristic-section">
-            <h2>Seja um Afiliado BBcar</h2>
-            <form id="affiliate-form" class="futuristic-form">
-                <div class="form-group">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Telefone:</label>
-                    <input type="text" id="phone" name="phone" required>
-                </div>
-                <button type="submit" class="futuristic-btn">Cadastrar</button>
-            </form>
-            <p id="response-message" class="futuristic-response"></p>
-        </section>
-    </main>
+
+    <section class="futuristic-section">
+        <h2>Seja um Parceiro BBcar</h2>
+        <form id="affiliate-form" class="futuristic-form">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <button type="submit" class="futuristic-btn">Cadastrar</button>
+        </form>
+        <p id="response-message" class="futuristic-response"></p>
+    </section>
+
     <script>
-        document.getElementById("affiliate-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const phone = document.getElementById("phone").value;
+        document.addEventListener("DOMContentLoaded", () => {
+            const affiliateForm = document.getElementById("affiliate-form");
+            if (affiliateForm) {
+                affiliateForm.addEventListener("submit", function(event) {
+                    event.preventDefault();
 
-            const affiliateId = "AF-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-            const affiliates = JSON.parse(localStorage.getItem("affiliates")) || [];
-            affiliates.push({ id: affiliateId, name, email, phone, cliques: 0, conversoes: 0, ganhos: 0 });
-            localStorage.setItem("affiliates", JSON.stringify(affiliates));
+                    const name = document.getElementById("name").value;
+                    const email = document.getElementById("email").value;
+                    const phone = document.getElementById("phone").value;
 
-            document.getElementById("response-message").textContent = `Cadastro realizado com sucesso! Seu ID de Afiliado é: ${affiliateId}`;
-            document.getElementById("affiliate-form").reset();
+                    const affiliateData = {
+                        id: "AFF-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                        name,
+                        email,
+                        phone,
+                        link: `https://bbcar.com/partner/${name.toLowerCase().replace(/\s/g, '-')}-${Math.random().toString(36).substr(2, 5)}`
+                    };
+
+                    const affiliates = JSON.parse(localStorage.getItem("affiliates")) || [];
+                    affiliates.push(affiliateData);
+                    localStorage.setItem("affiliates", JSON.stringify(affiliates));
+
+                    document.getElementById("response-message").textContent = `Cadastro realizado com sucesso! Seu ID de Parceiro é ${affiliateData.id}. Seu link de parceiro é: ${affiliateData.link}`;
+                    affiliateForm.reset();
+                });
+            }
         });
     </script>
 </body>
