@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Afiliados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Cadastre-se como Afiliado</h1>
+    </header>
+    <main>
+        <form id="register-form">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p id="response-message"></p>
+    </main>
+    <script>
+        document.getElementById("register-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const idAfiliado = Math.random().toString(36).substr(2, 9); // Gera um ID único
+
+            localStorage.setItem("idAfiliado", idAfiliado); // Armazena o ID no navegador para testes
+
+            const responseMessage = document.getElementById("response-message");
+            responseMessage.textContent = `Cadastro realizado com sucesso! Seu ID de Afiliado é: ${idAfiliado}`;
+            console.log(`Afiliado cadastrado: Nome: ${name}, Email: ${email}, ID: ${idAfiliado}`);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+/* Estilo Global */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .logo img {
+    width: 150px;
+    display: inline-block;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #4CAF50;
+}
+
+/* Hero Banner */
+.hero-banner {
+    background: linear-gradient(to right, #4CAF50, #222);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.hero-banner .btn-primary {
+    background: white;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.hero-banner .btn-primary:hover {
+    transform: scale(1.1);
+}
+
+/* Destaques de Carros */
+.highlights {
+    text-align: center;
+    padding: 40px;
+}
+
+.car-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.car-card {
+    background: #eee;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-10px);
+}
+
+.car-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.car-card h3 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.car-card p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Venda de Veículos */
+.sell-your-car {
+    background: #fff;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sell-your-car h2 {
+    color: #4CAF50;
+}
+
+.sell-your-car form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sell-your-car button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sell-your-car button:hover {
+    background-color: #333;
+}
+
+/* Botão de WhatsApp */
+#whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+#whatsapp-button img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#whatsapp-button img:hover {
+    transform: scale(1.1);
+}
+
+/* Chatbot */
+#chatbot {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    z-index: 100;
+}
+
+#chatbot-btn {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#chatbot-btn:hover {
+    transform: scale(1.1);
+}
+
+#chat-window {
+    background: white;
+    border: 2px solid #4CAF50;
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    bottom: 160px;
+    left: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-header {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+#chat-input {
+    border: none;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}

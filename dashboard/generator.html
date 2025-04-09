@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador Inteligente - BBcar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Gerador Inteligente de Sites</h1>
+    </header>
+    <main>
+        <section class="generator">
+            <h2>Crie Seu Site em Minutos</h2>
+            <form id="site-generator-form">
+                <label for="company-name">Nome da Empresa:</label>
+                <input type="text" id="company-name" name="company-name" placeholder="Digite o nome">
+                <label for="sector">Setor:</label>
+                <input type="text" id="sector" name="sector" placeholder="Digite o setor">
+                <label for="logo-upload">Logotipo:</label>
+                <input type="file" id="logo-upload" name="logo-upload">
+                <button type="button" id="generate-site">Gerar Site</button>
+            </form>
+        </section>
+        <section id="generated-site-preview" class="hidden">
+            <h2>Preview do Site</h2>
+            <div id="preview-content"></div>
+        </section>
+    </main>
+    <script src="generator.js"></script>
+</body>
+</html>
