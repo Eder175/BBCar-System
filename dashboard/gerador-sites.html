@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBcar - Gerador de Sites</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="futuristic-header">
+        <div class="logo">
+            <img src="../assets/img/logo.jpeg" alt="BBcar Logo">
+        </div>
+        <h1>Gerador de Sites</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="visao-geral.html">Visão Geral</a></li>
+                <li><a href="estatisticas.html">Estatísticas</a></li>
+                <li><a href="configuracoes.html">Configurações</a></li>
+                <li><a href="propostas.html">Propostas</a></li>
+                <li><a href="gerador-sites.html">Gerador de Sites</a></li>
+                <li><a href="affiliates.html">Painel de Parceiros</a></li>
+                <li><a href="../index.html">Voltar ao BBcar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="site-generator">
+            <h2>Crie um Site para o seu Negócio</h2>
+            <form id="site-generator-form">
+                <label for="nicho">Selecione o Nicho do Site:</label>
+                <select id="nicho" name="nicho" required>
+                    <option value="">Selecione...</option>
+                    <option value="ecommerce">E-commerce (Loja Online)</option>
+                    <option value="restaurante">Restaurante</option>
+                    <option value="imobiliaria">Imobiliária</option>
+                    <option value="servicos">Serviços (ex.: Consultoria)</option>
+                    <option value="portifolio">Portfólio Pessoal</option>
+                </select>
+
+                <label for="nome-negocio">Nome do Negócio:</label>
+                <input type="text" id="nome-negocio" name="nome-negocio" required>
+
+                <label for="cor-principal">Cor Principal:</label>
+                <input type="color" id="cor-principal" name="cor-principal" value="#4CAF50">
+
+                <label for="logo">Logo do Negócio (opcional):</label>
+                <input type="file" id="logo" name="logo" accept="image/*">
+
+                <button type="submit">Gerar Site</button>
+            </form>
+            <div id="site-preview" class="hidden">
+                <h3>Pré-visualização do Site</h3>
+                <iframe id="site-iframe" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
+                <button id="download-site">Baixar Código do Site</button>
+            </div>
+        </section>
+    </main>
+    <script>
+        document.getElementById("site-generator-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const nicho = document.getElementById("nicho").value;
+            const nomeNegocio = document.getElementById("nome-negocio").value;
+            const corPrincipal = document.getElementById("cor-principal").value;
+            const logo = document.getElementById("logo").files[0];
+
+            // Gerar o HTML básico do site com base no nicho
+            let siteContent = `
+                <!DOCTYPE html>
+                <html lang="pt-BR">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${nomeNegocio}</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 0;
+                            background: #f5f5f5;
+                        }
+                        header {
+                            background: ${corPrincipal};
+                            color: white;
+                            padding: 20px;
+                            text-align: center;
+                        }
+                        main {
+                            padding: 40px;
+                            text-align: center;
+                        }
+                        footer {
+                            background: #333;
+                            color: white;
+                            padding: 10px;
+                            text-align: center;
+                            position: fixed;
+                            bottom: 0;
+                            width: 100%;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <header>
+                        <h1>${nomeNegocio}</h1>
+                    </header>
+                    <main>
+                        <h2>Bem-vindo ao ${nomeNegocio}</h2>
+                        <p>Este é o seu site gerado automaticamente pela BBcar!</p>
+            `;
+
+            if (nicho === "ecommerce") {
+                siteContent += `
+                        <section>
+                            <h3>Nossos Produtos</h3>
+                            <p>Adicione seus produtos aqui.</p>
+                        </section>
+                `;
+            } else if (nicho === "restaurante") {
+                siteContent += `
+                        <section>
+                            <h3>Nosso Cardápio</h3>
+                            <p>Adicione seu cardápio aqui.</p>
+                        </section>
+                `;
+            } else if (nicho === "imobiliaria") {
+                siteContent += `
+                        <section>
+                            <h3>Imóveis Disponíveis</h3>
+                            <p>Adicione os imóveis aqui.</p>
+                        </section>
+                `;
+            } else if (nicho === "servicos") {
+                siteContent += `
+                        <section>
+                            <h3>Nossos Serviços</h3>
+                            <p>Adicione seus serviços aqui.</p>
+                        </section>
+                `;
+            } else if (nicho === "portifolio") {
+                siteContent += `
+                        <section>
+                            <h3>Meus Projetos</h3>
+                            <p>Adicione seus projetos aqui.</p>
+                        </section>
+                `;
+            }
+
+            siteContent += `
+                    </main>
+                    <footer>
+                        <p>© ${new Date().getFullYear()} ${nomeNegocio}. Todos os direitos reservados.</p>
+                    </footer>
+                </body>
+                </html>
+            `;
+
+            // Exibir a pré-visualização
+            const siteIframe = document.getElementById("site-iframe");
+            siteIframe.srcdoc = siteContent;
+            document.getElementById("site-preview").classList.remove("hidden");
+
+            // Configurar o botão de download
+            document.getElementById("download-site").onclick = () => {
+                const blob = new Blob([siteContent], { type: "text/html" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${nomeNegocio.toLowerCase().replace(/\s/g, "-")}-site.html`;
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+        });
+    </script>
+</body>
+</html>

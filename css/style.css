@@ -118,6 +118,14 @@ nav ul li a:hover {
 
 .sell-your-car h2 {
     color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sell-your-car p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
 }
 
 .sell-your-car form {
@@ -126,18 +134,56 @@ nav ul li a:hover {
     gap: 15px;
 }
 
+.sell-your-car label {
+    font-weight: bold;
+    color: #333;
+}
+
+.sell-your-car input,
+.sell-your-car select,
+.sell-your-car textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.sell-your-car input:focus,
+.sell-your-car select:focus,
+.sell-your-car textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.sell-your-car input[type="file"] {
+    padding: 5px;
+}
+
 .sell-your-car button {
     background: #4CAF50;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
 .sell-your-car button:hover {
-    background-color: #333;
+    background-color: #45a049;
+}
+
+.sell-your-car #sell-response {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e0ffe0;
+    border-radius: 5px;
+    color: #333;
+    text-align: center;
 }
 
 /* Botão de WhatsApp */
@@ -223,6 +269,10 @@ nav ul li a:hover {
     font-size: 14px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Métricas (do dashboard) */
@@ -362,10 +412,6 @@ a.btn:hover {
 
 .btn-secondary:hover {
     background-color: #cc0000;
-}
-
-.hidden {
-    display: none;
 }
 
 /* Estilização para o resultado da análise de vendas */

@@ -54,17 +54,44 @@
             <h2>Venda seu Veículo</h2>
             <p>Submeta os detalhes do seu carro e receba uma proposta!</p>
             <form id="sell-car-form">
-                <label for="car-make">Marca do Carro:</label>
-                <input type="text" id="car-make" name="car-make" required>
+                <label for="marca">Marca do Carro:</label>
+                <input type="text" id="marca" name="marca" required>
 
-                <label for="car-model">Modelo:</label>
-                <input type="text" id="car-model" name="car-model" required>
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
 
-                <label for="car-year">Ano:</label>
-                <input type="number" id="car-year" name="car-year" required>
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required>
 
-                <label for="car-price">Preço Desejado (€):</label>
-                <input type="number" id="car-price" name="car-price" required>
+                <label for="km">Quilometragem (KM):</label>
+                <input type="number" id="km" name="km" required>
+
+                <label for="cor">Cor:</label>
+                <input type="text" id="cor" name="cor" required>
+
+                <label for="iuc">IUC (Imposto Único de Circulação) Pago Até:</label>
+                <input type="date" id="iuc" name="iuc" required>
+
+                <label for="ipo">IPO (Inspeção Periódica Obrigatória) Válida Até:</label>
+                <input type="date" id="ipo" name="ipo" required>
+
+                <label for="condicao">Condição Geral do Veículo:</label>
+                <select id="condicao" name="condicao" required>
+                    <option value="">Selecione...</option>
+                    <option value="excelente">Excelente</option>
+                    <option value="bom">Bom</option>
+                    <option value="regular">Regular</option>
+                    <option value="necessita-reparos">Necessita de Reparos</option>
+                </select>
+
+                <label for="detalhes">Detalhes Adicionais (ex.: avarias, histórico de manutenção):</label>
+                <textarea id="detalhes" name="detalhes" rows="4"></textarea>
+
+                <label for="car-image">Foto do Carro:</label>
+                <input type="file" id="car-image" name="car-image" accept="image/*" required>
+
+                <label for="preco">Preço Desejado (€):</label>
+                <input type="number" id="preco" name="preco" step="0.01" required>
 
                 <button type="submit">Enviar Proposta</button>
             </form>
@@ -76,6 +103,18 @@
             <a href="https://wa.me/5511999999999" target="_blank">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
             </a>
+        </div>
+
+        <!-- Chatbot -->
+        <div id="chatbot">
+            <button id="chatbot-btn">Fale com a IA da BBcar</button>
+            <div id="chat-window" class="hidden">
+                <div id="chat-header">IA da BBcar</div>
+                <div id="chat-messages">
+                    <p><strong>IA:</strong> Olá! Sou a IA da BBcar. Como posso te ajudar hoje? 😊</p>
+                </div>
+                <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+            </div>
         </div>
     </main>
 
@@ -92,14 +131,93 @@
         // Função para enviar proposta de venda
         document.getElementById("sell-car-form").addEventListener("submit", function(event) {
             event.preventDefault();
-            const make = document.getElementById("car-make").value;
-            const model = document.getElementById("car-model").value;
-            const year = document.getElementById("car-year").value;
-            const price = document.getElementById("car-price").value;
 
-            const responseMessage = document.getElementById("sell-response");
-            responseMessage.textContent = `Proposta enviada! Marca: ${make}, Modelo: ${model}, Ano: ${year}, Preço: €${price}. Entraremos em contato em breve.`;
-            console.log(`Proposta de venda: Marca: ${make}, Modelo: ${model}, Ano: ${year}, Preço: €${price}`);
+            const marca = document.getElementById("marca").value;
+            const modelo = document.getElementById("modelo").value;
+            const ano = document.getElementById("ano").value;
+            const km = document.getElementById("km").value;
+            const cor = document.getElementById("cor").value;
+            const iuc = document.getElementById("iuc").value;
+            const ipo = document.getElementById("ipo").value;
+            const condicao = document.getElementById("condicao").value;
+            const detalhes = document.getElementById("detalhes").value;
+            const preco = document.getElementById("preco").value;
+            const carImage = document.getElementById("car-image").files[0];
+
+            // Converter a imagem para base64 (para armazenar no localStorage)
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const carData = {
+                    id: "CAR-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                    marca,
+                    modelo,
+                    ano,
+                    km,
+                    cor,
+                    iuc,
+                    ipo,
+                    condicao,
+                    detalhes,
+                    preco,
+                    image: e.target.result // Imagem em base64
+                };
+
+                // Salvar no localStorage
+                const cars = JSON.parse(localStorage.getItem("carsForSale")) || [];
+                cars.push(carData);
+                localStorage.setItem("carsForSale", JSON.stringify(cars));
+
+                // Exibir mensagem de confirmação
+                document.getElementById("sell-response").textContent = `Proposta enviada com sucesso! ID do Veículo: ${carData.id}. Nossa equipe entrará em contato em breve.`;
+                document.getElementById("sell-car-form").reset();
+            };
+
+            if (carImage) {
+                reader.readAsDataURL(carImage);
+            }
+        });
+
+        // Chatbot
+        const chatBtn = document.getElementById("chatbot-btn");
+        const chatWindow = document.getElementById("chat-window");
+        const chatMessages = document.getElementById("chat-messages");
+        const chatInput = document.getElementById("chat-input");
+
+        chatBtn.addEventListener("click", () => {
+            chatWindow.classList.toggle("hidden");
+            chatBtn.classList.toggle("hidden");
+        });
+
+        chatInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && chatInput.value.trim() !== "") {
+                const userMessage = chatInput.value;
+                chatMessages.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
+
+                // Respostas da IA
+                let response = "Desculpe, não entendi. Pode repetir de outra forma?";
+                const messageLower = userMessage.toLowerCase();
+
+                if (messageLower.includes("vender meu carro")) {
+                    response = "Ótimo! Para vender seu carro, preencha o formulário na seção 'Venda seu Veículo'. Você precisará informar a marca, modelo, ano, quilometragem, cor, IUC, IPO, condição, e enviar uma foto. Posso te ajudar com alguma dúvida sobre o formulário?";
+                } else if (messageLower.includes("quais informações")) {
+                    response = "Você precisa informar a marca, modelo, ano, quilometragem, cor, IUC (Imposto Único de Circulação), IPO (Inspeção Periódica Obrigatória), condição geral do veículo, e enviar uma foto. Também pode adicionar detalhes extras, como avarias ou histórico de manutenção. Quer ajuda com algum campo?";
+                } else if (messageLower.includes("iuc") || messageLower.includes("imposto")) {
+                    response = "O IUC é o Imposto Único de Circulação, que deve estar pago para o carro estar em dia. No formulário, você deve informar a data até quando o IUC está pago. Por exemplo, '2025-12-31'. Precisa de mais ajuda?";
+                } else if (messageLower.includes("ipo") || messageLower.includes("inspeção")) {
+                    response = "O IPO é a Inspeção Periódica Obrigatória, que verifica se o carro está em condições de circular. No formulário, informe a data até quando a inspeção é válida, como '2025-06-30'. Alguma dúvida sobre isso?";
+                } else if (messageLower.includes("foto") || messageLower.includes("imagem")) {
+                    response = "Você pode enviar uma foto do carro no formulário. Clique no campo 'Foto do Carro' e selecione uma imagem do seu dispositivo. Certifique-se de que a foto mostre bem o estado do veículo! Precisa de ajuda com isso?";
+                } else if (messageLower.includes("olá") || messageLower.includes("oi")) {
+                    response = "Oi! Tudo bem? Estou aqui para te ajudar a vender seu carro ou tirar qualquer dúvida sobre a BBcar. No que você precisa de ajuda?";
+                }
+
+                setTimeout(() => {
+                    chatMessages.innerHTML += `<p><strong>IA:</strong> ${response}</p>`;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 500);
+
+                chatInput.value = "";
+            }
         });
     </script>
 </body>
