@@ -43,6 +43,112 @@ nav ul li a:hover {
     background-color: #4CAF50;
 }
 
+/* Modal para Venda seu Veículo */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close:hover {
+    color: #ff4444;
+}
+
+.modal-content h2 {
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content label {
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.modal-content input[type="file"] {
+    padding: 5px;
+}
+
+.modal-content button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+.modal-content #sell-response {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e0ffe0;
+    border-radius: 5px;
+    color: #333;
+    text-align: center;
+}
+
 /* Hero Banner */
 .hero-banner {
     background: linear-gradient(to right, #4CAF50, #222);
@@ -105,85 +211,6 @@ nav ul li a:hover {
 .car-card p {
     font-size: 16px;
     color: #333;
-}
-
-/* Venda de Veículos */
-.sell-your-car {
-    background: #fff;
-    padding: 40px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sell-your-car h2 {
-    color: #4CAF50;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.sell-your-car p {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #666;
-}
-
-.sell-your-car form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.sell-your-car label {
-    font-weight: bold;
-    color: #333;
-}
-
-.sell-your-car input,
-.sell-your-car select,
-.sell-your-car textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-.sell-your-car input:focus,
-.sell-your-car select:focus,
-.sell-your-car textarea:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-.sell-your-car input[type="file"] {
-    padding: 5px;
-}
-
-.sell-your-car button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.sell-your-car button:hover {
-    background-color: #45a049;
-}
-
-.sell-your-car #sell-response {
-    margin-top: 20px;
-    padding: 15px;
-    background: #e0ffe0;
-    border-radius: 5px;
-    color: #333;
-    text-align: center;
 }
 
 /* Botão de WhatsApp */
@@ -252,6 +279,20 @@ nav ul li a:hover {
     text-align: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    position: relative;
+}
+
+#chat-header .close {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: white;
+}
+
+#chat-header .close:hover {
+    color: #ff4444;
 }
 
 #chat-messages {

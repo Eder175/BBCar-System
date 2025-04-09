@@ -142,10 +142,12 @@
 
         sellCarLink.addEventListener("click", (e) => {
             e.preventDefault();
+            console.log("Link 'Venda seu Veículo' clicado!"); // Depuração
             sellCarModal.classList.remove("hidden");
         });
 
         closeSellModal.addEventListener("click", () => {
+            console.log("Botão de fechar modal clicado!"); // Depuração
             sellCarModal.classList.add("hidden");
         });
 
@@ -259,6 +261,7 @@
         });
 
         closeChat.addEventListener("click", () => {
+            console.log("Botão de fechar clicado!"); // Depuração
             chatWindow.classList.add("hidden");
             chatBtn.classList.remove("hidden");
         });
