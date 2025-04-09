@@ -18,7 +18,7 @@
                 <li><a href="visao-geral.html">Visão Geral</a></li>
                 <li><a href="estatisticas.html">Estatísticas</a></li>
                 <li><a href="configuracoes.html">Configurações</a></li>
-                <li><a href="carrinho/index.html">Carrinho</a></li>
+                <li><a href="carrinho/index.html">Carrinho (<span id="cart-count">0</span>)</a></li>
                 <li><a href="affiliates.html">Painel de Parceiros</a></li>
             </ul>
         </nav>
@@ -54,5 +54,12 @@
 
     <script src="ia-vendas.js"></script>
     <script src="notificacoes.js"></script>
+    <script>
+        // Atualizar o contador do carrinho
+        document.addEventListener("DOMContentLoaded", () => {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-count").textContent = cart.length;
+        });
+    </script>
 </body>
 </html>

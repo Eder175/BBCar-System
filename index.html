@@ -27,7 +27,7 @@
         <section class="hero-banner">
             <h2>Descubra Seu Próximo Carro</h2>
             <p>Os melhores preços e qualidade que você só encontra aqui na BBcar.</p>
-            <a href="#highlighted-cars" class="btn-primary">Ver Carros</a>
+            <a href="dashboard/carrinho/index.html" class="btn-primary">Ver Carros</a>
         </section>
 
         <!-- Destaques -->
@@ -38,11 +38,13 @@
                     <img src="assets/img/car1.jpg" alt="Carro 1">
                     <h3>Carro 1</h3>
                     <p>Preço: € 20.000</p>
+                    <button class="btn" onclick="addToCart('Carro 1', 20000)">Adicionar ao Carrinho</button>
                 </div>
                 <div class="car-card">
                     <img src="assets/img/car2.png" alt="Carro 2">
                     <h3>Carro 2</h3>
                     <p>Preço: € 30.000</p>
+                    <button class="btn" onclick="addToCart('Carro 2', 30000)">Adicionar ao Carrinho</button>
                 </div>
             </div>
         </section>
@@ -52,3 +54,53 @@
             <h2>Venda seu Veículo</h2>
             <p>Submeta os detalhes do seu carro e receba uma proposta!</p>
             <form id="sell-car-form">
+                <label for="car-make">Marca do Carro:</label>
+                <input type="text" id="car-make" name="car-make" required>
+
+                <label for="car-model">Modelo:</label>
+                <input type="text" id="car-model" name="car-model" required>
+
+                <label for="car-year">Ano:</label>
+                <input type="number" id="car-year" name="car-year" required>
+
+                <label for="car-price">Preço Desejado (€):</label>
+                <input type="number" id="car-price" name="car-price" required>
+
+                <button type="submit">Enviar Proposta</button>
+            </form>
+            <p id="sell-response"></p>
+        </section>
+
+        <!-- Botão de WhatsApp -->
+        <div id="whatsapp-button">
+            <a href="https://wa.me/5511999999999" target="_blank">
+                <img src="assets/img/whatsapp.png" alt="WhatsApp">
+            </a>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Função para adicionar ao carrinho
+        function addToCart(carName, price) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({ name: carName, price: price });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(`${carName} foi adicionado ao carrinho!`);
+        }
+
+        // Função para enviar proposta de venda
+        document.getElementById("sell-car-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const make = document.getElementById("car-make").value;
+            const model = document.getElementById("car-model").value;
+            const year = document.getElementById("car-year").value;
+            const price = document.getElementById("car-price").value;
+
+            const responseMessage = document.getElementById("sell-response");
+            responseMessage.textContent = `Proposta enviada! Marca: ${make}, Modelo: ${model}, Ano: ${year}, Preço: €${price}. Entraremos em contato em breve.`;
+            console.log(`Proposta de venda: Marca: ${make}, Modelo: ${model}, Ano: ${year}, Preço: €${price}`);
+        });
+    </script>
+</body>
+</html>

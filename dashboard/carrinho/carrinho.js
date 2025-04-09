@@ -1,49 +1,62 @@
-const canvas = document.getElementById("carrinhoCanvas");
-const ctx = canvas.getContext("2d");
+document.addEventListener("DOMContentLoaded", () => {
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotalElement = document.getElementById("cart-total");
+    const checkoutBtn = document.getElementById("checkout-btn");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    // Carrega os itens do carrinho
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-const carrinho = {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    width: 50,
-    height: 30,
-    color: "#ff0000",
-    speed: 5,
-    dx: 0,
-    dy: 0
-};
+    // Função para atualizar o carrinho
+    function updateCart() {
+        cartItemsContainer.innerHTML = "";
+        let total = 0;
 
-function desenharCarrinho() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = carrinho.color;
-    ctx.fillRect(carrinho.x, carrinho.y, carrinho.width, carrinho.height);
-}
+        cart.forEach((item, index) => {
+            total += item.price;
+            const itemElement = document.createElement("div");
+            itemElement.className = "cart-item";
+            itemElement.innerHTML = `
+                <p>${item.name} - € ${item.price.toFixed(2)}</p>
+                <button onclick="removeFromCart(${index})">Remover</button>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+        });
 
-function atualizarCarrinho() {
-    carrinho.x += carrinho.dx;
-    carrinho.y += carrinho.dy;
+        cartTotalElement.textContent = total.toFixed(2);
+    }
 
-    if (carrinho.x < 0) carrinho.x = 0;
-    if (carrinho.y < 0) carrinho.y = 0;
-    if (carrinho.x + carrinho.width > canvas.width) carrinho.x = canvas.width - carrinho.width;
-    if (carrinho.y + carrinho.height > canvas.height) carrinho.y = canvas.height - carrinho.height;
+    // Função para remover item do carrinho
+    window.removeFromCart = function(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCart();
+    };
 
-    desenharCarrinho();
-    requestAnimationFrame(atualizarCarrinho);
-}
+    // Função para finalizar compra
+    checkoutBtn.addEventListener("click", () => {
+        if (cart.length === 0) {
+            alert("Seu carrinho está vazio!");
+            return;
+        }
 
-document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") carrinho.dx = carrinho.speed;
-    if (event.key === "ArrowLeft") carrinho.dx = -carrinho.speed;
-    if (event.key === "ArrowUp") carrinho.dy = -carrinho.speed;
-    if (event.key === "ArrowDown") carrinho.dy = carrinho.speed;
+        // Simula uma venda
+        const vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+        cart.forEach(item => {
+            vendas.push({
+                carro: item.name,
+                valor: item.price,
+                data: new Date().toISOString().split("T")[0]
+            });
+        });
+        localStorage.setItem("vendas", JSON.stringify(vendas));
+
+        // Limpa o carrinho
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCart();
+        alert("Compra finalizada com sucesso!");
+    });
+
+    // Atualiza o carrinho na inicialização
+    updateCart();
 });
-
-document.addEventListener("keyup", () => {
-    carrinho.dx = 0;
-    carrinho.dy = 0;
-});
-
-atualizarCarrinho();
