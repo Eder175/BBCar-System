@@ -7,16 +7,19 @@ body {
     color: #333;
 }
 
-/* Header */
+/* Cabeçalho */
 header {
     background: #222;
     color: white;
     padding: 20px;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header .logo img {
-    width: 150px;
+    width: 120px;
     display: inline-block;
 }
 
@@ -220,4 +223,85 @@ nav ul li a:hover {
     font-size: 14px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+}
+
+/* Métricas (do dashboard/style.css) */
+.metrics {
+    text-align: center;
+    padding: 50px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.metric-card {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: scale(1.05);
+}
+
+.metric-card p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Estilização do Carrinho (do dashboard/carrinho/style.css) */
+canvas {
+    display: block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Estilização adicional para formulários e seções */
+section {
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+a.btn {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a.btn:hover {
+    background-color: #333;
+}
+
+.hidden {
+    display: none;
 }
