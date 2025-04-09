@@ -1,64 +1,49 @@
-// Função para gerar links únicos para afiliados
-function gerarLinkAfiliado(idAfiliado) {
-    return `https://bbcar.com/loja?ref=${idAfiliado}`;
-}
-
-// Carrega o ID do afiliado do localStorage
-const idAfiliado = localStorage.getItem("idAfiliado") || "12345"; // ID fictício se não houver
-const linkAfiliado = gerarLinkAfiliado(idAfiliado);
-
-// Carrega os dados dos afiliados
-let afiliados = JSON.parse(localStorage.getItem("afiliados")) || [];
-let currentAfiliado = afiliados.find(afiliado => afiliado.id === idAfiliado) || {
-    clicks: 15,
-    conversions: 5,
-    earnings: 1500
-};
-
-// Atualiza as métricas automaticamente a cada 5 segundos
-setInterval(() => {
-    currentAfiliado.clicks += Math.floor(Math.random() * 5);
-    currentAfiliado.conversions += Math.floor(Math.random() * 2);
-    currentAfiliado.earnings += currentAfiliado.conversions * 50;
-
-    // Atualiza o localStorage
-    afiliados = afiliados.map(af => af.id === idAfiliado ? currentAfiliado : af);
-    localStorage.setItem("afiliados", JSON.stringify(afiliados));
-
-    document.getElementById("clicks").textContent = currentAfiliado.clicks;
-    document.getElementById("conversions").textContent = currentAfiliado.conversions;
-    document.getElementById("earnings").textContent = `€ ${currentAfiliado.earnings.toFixed(2)}`;
-}, 5000);
-
-// Exibe o link único e a tabela de afiliados no painel
 document.addEventListener("DOMContentLoaded", () => {
-    // Atualiza o link de afiliado
-    const linkElement = document.getElementById("affiliate-link");
-    if (linkElement) {
-        linkElement.textContent = linkAfiliado;
-        linkElement.href = linkAfiliado;
-    }
+    const affiliatesTable = document.getElementById("affiliates-table");
+    const cliquesElement = document.getElementById("cliques");
+    const conversoesElement = document.getElementById("conversoes");
+    const ganhosElement = document.getElementById("ganhos");
+    const affiliateLinkElement = document.getElementById("affiliate-link");
 
-    // Atualiza as métricas iniciais
-    document.getElementById("clicks").textContent = currentAfiliado.clicks;
-    document.getElementById("conversions").textContent = currentAfiliado.conversions;
-    document.getElementById("earnings").textContent = `€ ${currentAfiliado.earnings.toFixed(2)}`;
+    // Carrega os afiliados do localStorage
+    let affiliates = JSON.parse(localStorage.getItem("affiliates")) || [];
 
-    // Exibe a tabela de afiliados
-    const tableBody = document.getElementById("affiliates-table-body");
-    if (tableBody) {
-        tableBody.innerHTML = "";
-        afiliados.forEach(afiliado => {
+    // Função para atualizar as métricas
+    function updateMetrics() {
+        let totalCliques = 0;
+        let totalConversoes = 0;
+        let totalGanhos = 0;
+
+        affiliates.forEach(affiliate => {
+            totalCliques += affiliate.cliques;
+            totalConversoes += affiliate.conversoes;
+            totalGanhos += affiliate.ganhos;
+        });
+
+        cliquesElement.textContent = totalCliques;
+        conversoesElement.textContent = totalConversoes;
+        ganhosElement.textContent = totalGanhos.toFixed(2);
+
+        // Atualiza a tabela de afiliados
+        affiliatesTable.innerHTML = "";
+        affiliates.forEach(affiliate => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${afiliado.id}</td>
-                <td>${afiliado.name}</td>
-                <td>${afiliado.email}</td>
-                <td>${afiliado.clicks}</td>
-                <td>${afiliado.conversions}</td>
-                <td>€ ${afiliado.earnings.toFixed(2)}</td>
+                <td>${affiliate.id}</td>
+                <td>${affiliate.name}</td>
+                <td>${affiliate.email}</td>
+                <td>${affiliate.cliques}</td>
+                <td>${affiliate.conversoes}</td>
+                <td>€ ${affiliate.ganhos.toFixed(2)}</td>
             `;
-            tableBody.appendChild(row);
+            affiliatesTable.appendChild(row);
         });
+
+        // Atualiza o link de afiliado (exemplo fixo por enquanto)
+        affiliateLinkElement.textContent = `https://bbcar.com/loja?ref=${affiliates.length > 0 ? affiliates[0].id : "12345"}`;
     }
+
+    // Atualiza as métricas a cada 5 segundos
+    setInterval(updateMetrics, 5000);
+    updateMetrics();
 });
