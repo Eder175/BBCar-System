@@ -349,6 +349,21 @@ a.btn:hover {
     background-color: #333;
 }
 
+.btn-secondary {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #cc0000;
+}
+
 .hidden {
     display: none;
 }
@@ -373,4 +388,22 @@ a.btn:hover {
     background: #e0ffe0;
     border-radius: 5px;
     color: #333;
+}
+
+/* Estilização para notificações */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.notification:hover {
+    opacity: 0.9;
 }

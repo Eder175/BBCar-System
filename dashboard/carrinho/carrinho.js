@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartItemsContainer = document.getElementById("cart-items");
     const cartTotalElement = document.getElementById("cart-total");
     const checkoutBtn = document.getElementById("checkout-btn");
+    const clearCartBtn = document.getElementById("clear-cart-btn");
 
     // Carrega os itens do carrinho
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -31,6 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("cart", JSON.stringify(cart));
         updateCart();
     };
+
+    // Função para limpar o carrinho
+    clearCartBtn.addEventListener("click", () => {
+        cart = [];
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCart();
+        alert("Carrinho limpo com sucesso!");
+    });
 
     // Função para finalizar compra
     checkoutBtn.addEventListener("click", () => {
