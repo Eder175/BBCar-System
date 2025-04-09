@@ -225,7 +225,7 @@ nav ul li a:hover {
     border-bottom-right-radius: 10px;
 }
 
-/* Métricas (do dashboard/style.css) */
+/* Métricas (do dashboard) */
 .metrics {
     text-align: center;
     padding: 50px;
@@ -253,11 +253,58 @@ nav ul li a:hover {
     font-weight: bold;
 }
 
-/* Estilização do Carrinho (do dashboard/carrinho/style.css) */
-canvas {
-    display: block;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Estilização do Carrinho */
+.cart {
+    padding: 20px;
+    background: #fff;
     border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-item button {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+    background-color: #cc0000;
+}
+
+/* Estilização da Tabela de Afiliados */
+.affiliates-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.affiliates-list th,
+.affiliates-list td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.affiliates-list th {
+    background: #4CAF50;
+    color: white;
+}
+
+.affiliates-list tr:hover {
+    background-color: #f1f1f1;
 }
 
 /* Estilização adicional para formulários e seções */
@@ -304,4 +351,26 @@ a.btn:hover {
 
 .hidden {
     display: none;
+}
+
+/* Estilização para o resultado da análise de vendas */
+.sales-analysis {
+    text-align: center;
+}
+
+#resultado-analise {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Estilização para mensagens de resposta */
+#sell-response,
+#response-message {
+    margin-top: 10px;
+    padding: 10px;
+    background: #e0ffe0;
+    border-radius: 5px;
+    color: #333;
 }
