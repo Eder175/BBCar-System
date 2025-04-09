@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Carros - BBcar</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <img src="../assets/img/logo.jpeg" alt="Logo BBcar">
+        </div>
+        <h1>Cadastrar Carros à Venda</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../dashboard/index.html">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Cadastrar Novo Carro</h2>
+            <form id="cadastrar-carro-form">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required>
+
+                <label for="preco">Preço (€):</label>
+                <input type="number" id="preco" name="preco" step="0.01" required>
+
+                <label for="car-image">Foto do Carro:</label>
+                <input type="file" id="car-image" name="car-image" accept="image/*" required>
+
+                <button type="submit">Cadastrar Carro</button>
+            </form>
+            <p id="cadastrar-response"></p>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("cadastrar-carro-form");
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                const carData = {
+                    id: "CAR-LIST-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                    marca: document.getElementById("marca").value,
+                    modelo: document.getElementById("modelo").value,
+                    ano: document.getElementById("ano").value,
+                    preco: document.getElementById("preco").value,
+                };
+
+                const carImage = document.getElementById("car-image").files[0];
+                if (carImage) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        carData.image = e.target.result;
+
+                        // Salvar no localStorage
+                        const cars = JSON.parse(localStorage.getItem("carsForListing")) || [];
+                        cars.push(carData);
+                        localStorage.setItem("carsForListing", JSON.stringify(cars));
+
+                        // Exibir mensagem de confirmação
+                        document.getElementById("cadastrar-response").textContent = `Carro cadastrado com sucesso! ID: ${carData.id}`;
+                        form.reset();
+                    };
+                    reader.readAsDataURL(carImage);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
