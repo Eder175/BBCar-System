@@ -45,7 +45,6 @@ nav ul li a:hover {
 
 /* Modal para Venda seu Veículo */
 .modal {
-    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -53,11 +52,13 @@ nav ul li a:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
     background: #fff;
-    margin: 5% auto;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -289,6 +290,7 @@ nav ul li a:hover {
     transform: translateY(-50%);
     font-size: 18px;
     color: white;
+    cursor: pointer;
 }
 
 #chat-header .close:hover {
@@ -313,7 +315,7 @@ nav ul li a:hover {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Métricas (do dashboard) */
@@ -375,26 +377,26 @@ nav ul li a:hover {
     background-color: #cc0000;
 }
 
-/* Estilização da Tabela de Afiliados */
-.affiliates-list table {
+/* Estilização da Tabela de Parceiros */
+.partners-list table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.affiliates-list th,
-.affiliates-list td {
+.partners-list th,
+.partners-list td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-.affiliates-list th {
+.partners-list th {
     background: #4CAF50;
     color: white;
 }
 
-.affiliates-list tr:hover {
+.partners-list tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -496,7 +498,7 @@ a.btn:hover {
     opacity: 0.9;
 }
 
-/* Estilização Futurista para Cadastro de Afiliados */
+/* Estilização Futurista para Cadastro de Parceiros */
 .futuristic-body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #e0e0e0;
