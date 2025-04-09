@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BBcar - Configurações</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
+        <div class="logo">
+            <img src="../assets/img/logo.jpeg" alt="BBcar Logo">
+        </div>
         <h1>Configurações do Sistema</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Dashboard</a></li>
                 <li><a href="visao-geral.html">Visão Geral</a></li>
                 <li><a href="estatisticas.html">Estatísticas</a></li>
+                <li><a href="carrinho/index.html">Carrinho</a></li>
+                <li><a href="affiliates.html">Painel de Parceiros</a></li>
                 <li><a href="../index.html">Voltar ao BBcar</a></li>
             </ul>
         </nav>
@@ -21,12 +26,15 @@
 
     <section class="settings">
         <h2>Preferências</h2>
-        <label for="currency">Moeda:</label>
-        <select id="currency">
-            <option value="euro" selected>Euro (€)</option>
-            <option value="dollar">Dólar ($)</option>
-        </select>
-        <p>Modo escuro: <input type="checkbox" id="dark-mode"></p>
+        <form>
+            <label for="currency">Moeda:</label>
+            <select id="currency">
+                <option value="euro" selected>Euro (€)</option>
+                <option value="dollar">Dólar ($)</option>
+            </select>
+            <p>Modo escuro: <input type="checkbox" id="dark-mode"></p>
+            <button type="submit">Salvar</button>
+        </form>
     </section>
 
     <script src="script.js"></script>
