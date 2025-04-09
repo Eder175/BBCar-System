@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBcar - Dashboard de Vendas</title>
+    <title>BBcar - Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -14,52 +14,65 @@
         <h1>Dashboard BBcar</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Voltar ao BBcar</a></li>
+                <li><a href="carrinho/index.html">Carrinho</a></li>
                 <li><a href="visao-geral.html">Visão Geral</a></li>
                 <li><a href="estatisticas.html">Estatísticas</a></li>
                 <li><a href="configuracoes.html">Configurações</a></li>
-                <li><a href="carrinho/index.html">Carrinho (<span id="cart-count">0</span>)</a></li>
                 <li><a href="affiliates.html">Painel de Parceiros</a></li>
+                <li><a href="../index.html">Voltar ao BBcar</a></li>
             </ul>
         </nav>
     </header>
-
-    <section class="metrics">
-        <h2>Visão Geral das Vendas</h2>
-        <div class="metric-card">
-            <h3>Total de Carros Vendidos</h3>
-            <p id="total-sales">0</p>
-        </div>
-        <div class="metric-card">
-            <h3>Receita Total</h3>
-            <p id="total-revenue">€ 0,00</p>
-        </div>
-        <div class="metric-card">
-            <h3>Clientes Ativos</h3>
-            <p id="active-customers">0</p>
-        </div>
-    </section>
-
-    <section class="sales-analysis">
-        <h2>Análise de Vendas com IA</h2>
-        <button id="analisar-vendas">Analisar Vendas</button>
-        <div id="resultado-analise"></div>
-    </section>
-
-    <section class="partner-tools">
-        <h2>Controle de Parceiros</h2>
-        <p>Acesse o painel de parceiros para gerenciar métricas e links exclusivos.</p>
-        <a href="affiliates.html" class="btn">Gerenciar Parceiros</a>
-    </section>
-
-    <script src="ia-vendas.js"></script>
+    <main>
+        <section class="metrics">
+            <h2>Métricas do Sistema</h2>
+            <div class="metric-card">
+                <h3>Total de Vendas</h3>
+                <p id="total-vendas">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Receita (€)</h3>
+                <p id="receita">0.00</p>
+            </div>
+            <div class="metric-card">
+                <h3>Carros no Carrinho</h3>
+                <p id="carrinho-count">0</p>
+            </div>
+        </section>
+        <section class="sales-analysis">
+            <h2>Análise de Vendas</h2>
+            <button id="analisar-vendas">Analisar Vendas</button>
+            <div id="resultado-analise"></div>
+        </section>
+    </main>
     <script src="notificacoes.js"></script>
     <script>
-        // Atualizar o contador do carrinho
-        document.addEventListener("DOMContentLoaded", () => {
+        // Atualizar métricas
+        function updateMetrics() {
+            const vendas = JSON.parse(localStorage.getItem("vendas")) || [];
             const cart = JSON.parse(localStorage.getItem("cart")) || [];
-            document.getElementById("cart-count").textContent = cart.length;
+
+            const totalVendas = vendas.length;
+            const receita = vendas.reduce((sum, venda) => sum + venda.valor, 0);
+            const carrinhoCount = cart.length;
+
+            document.getElementById("total-vendas").textContent = totalVendas;
+            document.getElementById("receita").textContent = receita.toFixed(2);
+            document.getElementById("carrinho-count").textContent = carrinhoCount;
+        }
+
+        // Analisar vendas
+        document.getElementById("analisar-vendas").addEventListener("click", () => {
+            const vendas = JSON.parse(localStorage.getItem("vendas")) || [];
+            const resultado = vendas.length > 0
+                ? `Total de vendas: ${vendas.length}. Receita total: €${vendas.reduce((sum, venda) => sum + venda.valor, 0).toFixed(2)}.`
+                : "Nenhuma venda registrada.";
+            document.getElementById("resultado-analise").textContent = resultado;
         });
+
+        // Atualizar métricas a cada 5 segundos
+        setInterval(updateMetrics, 5000);
+        updateMetrics();
     </script>
 </body>
 </html>

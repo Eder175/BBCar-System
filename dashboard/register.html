@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Afiliados</title>
+    <title>BBcar - Cadastro de Afiliados</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -11,14 +11,13 @@
         <div class="logo">
             <img src="../assets/img/logo.jpeg" alt="BBcar Logo">
         </div>
-        <h1>Cadastre-se como Afiliado</h1>
+        <h1>Cadastro de Afiliados</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="../index.html">Dashboard</a></li>
                 <li><a href="visao-geral.html">Visão Geral</a></li>
                 <li><a href="estatisticas.html">Estatísticas</a></li>
                 <li><a href="configuracoes.html">Configurações</a></li>
-                <li><a href="carrinho/index.html">Carrinho</a></li>
                 <li><a href="affiliates.html">Painel de Parceiros</a></li>
                 <li><a href="../index.html">Voltar ao BBcar</a></li>
             </ul>
@@ -26,8 +25,8 @@
     </header>
     <main>
         <section>
-            <h2>Cadastre-se como Afiliado</h2>
-            <form id="register-form">
+            <h2>Seja um Afiliado BBcar</h2>
+            <form id="affiliate-form">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
 
@@ -35,7 +34,7 @@
                 <input type="email" id="email" name="email" required>
 
                 <label for="phone">Telefone:</label>
-                <input type="tel" id="phone" name="phone">
+                <input type="text" id="phone" name="phone" required>
 
                 <button type="submit">Cadastrar</button>
             </form>
@@ -43,24 +42,19 @@
         </section>
     </main>
     <script>
-        document.getElementById("register-form").addEventListener("submit", function(event) {
+        document.getElementById("affiliate-form").addEventListener("submit", function(event) {
             event.preventDefault();
-
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
             const phone = document.getElementById("phone").value;
-            const idAfiliado = 'AF-' + Math.random().toString(36).substr(2, 9).toUpperCase(); // Gera um ID único com prefixo
 
-            // Salva os dados no localStorage
-            const afiliado = { id: idAfiliado, name, email, phone, clicks: 0, conversions: 0, earnings: 0 };
-            let afiliados = JSON.parse(localStorage.getItem("afiliados")) || [];
-            afiliados.push(afiliado);
-            localStorage.setItem("afiliados", JSON.stringify(afiliados));
+            const affiliateId = "AF-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+            const affiliates = JSON.parse(localStorage.getItem("affiliates")) || [];
+            affiliates.push({ id: affiliateId, name, email, phone, cliques: 0, conversoes: 0, ganhos: 0 });
+            localStorage.setItem("affiliates", JSON.stringify(affiliates));
 
-            // Exibe mensagem de sucesso
-            const responseMessage = document.getElementById("response-message");
-            responseMessage.textContent = `Cadastro realizado com sucesso! Seu ID de Afiliado é: ${idAfiliado}`;
-            console.log(`Afiliado cadastrado: Nome: ${name}, Email: ${email}, Telefone: ${phone}, ID: ${idAfiliado}`);
+            document.getElementById("response-message").textContent = `Cadastro realizado com sucesso! Seu ID de Afiliado é: ${affiliateId}`;
+            document.getElementById("affiliate-form").reset();
         });
     </script>
 </body>

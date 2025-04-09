@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Afiliados</title>
+    <title>BBcar - Painel de Afiliados</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
         <h1>Painel de Afiliados</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="../index.html">Dashboard</a></li>
                 <li><a href="visao-geral.html">Visão Geral</a></li>
                 <li><a href="estatisticas.html">Estatísticas</a></li>
                 <li><a href="configuracoes.html">Configurações</a></li>
@@ -24,30 +24,26 @@
         </nav>
     </header>
     <main>
-        <section class="affiliate-panel">
+        <section class="metrics">
             <h2>Métricas de Afiliados</h2>
-            <div class="metrics">
-                <div class="metric-card">
-                    <h3>Cliques</h3>
-                    <p id="clicks">15</p>
-                </div>
-                <div class="metric-card">
-                    <h3>Conversões</h3>
-                    <p id="conversions">5</p>
-                </div>
-                <div class="metric-card">
-                    <h3>Ganhos (€)</h3>
-                    <p id="earnings">€ 1.500,00</p>
-                </div>
+            <div class="metric-card">
+                <h3>Cliques</h3>
+                <p id="cliques">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Conversões</h3>
+                <p id="conversoes">0</p>
+            </div>
+            <div class="metric-card">
+                <h3>Ganhos (€)</h3>
+                <p id="ganhos">0.00</p>
             </div>
         </section>
-
-        <section class="affiliate-tools">
+        <section>
             <h2>Seu Link de Afiliado</h2>
             <p>Compartilhe este link para promover a BBcar:</p>
-            <a id="affiliate-link" href="#" target="_blank">Carregando...</a>
+            <p id="affiliate-link">https://bbcar.com/loja?ref=12345</p>
         </section>
-
         <section class="affiliates-list">
             <h2>Lista de Afiliados</h2>
             <table>
@@ -61,9 +57,7 @@
                         <th>Ganhos (€)</th>
                     </tr>
                 </thead>
-                <tbody id="affiliates-table-body">
-                    <!-- Dados serão preenchidos pelo JavaScript -->
-                </tbody>
+                <tbody id="affiliates-table"></tbody>
             </table>
         </section>
     </main>
