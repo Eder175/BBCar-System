@@ -88,8 +88,9 @@
                     <label for="observacoes">Observações (ex.: avarias, histórico de manutenção, problemas conhecidos):</label>
                     <textarea id="observacoes" name="observacoes" rows="4" placeholder="Descreva tudo sobre o carro, incluindo avarias, histórico de manutenção, ou qualquer problema conhecido."></textarea>
 
-                    <label for="car-image">Foto do Carro:</label>
-                    <input type="file" id="car-image" name="car-image" accept="image/*" required>
+                    <label for="car-images">Fotos do Carro (máximo 5):</label>
+                    <input type="file" id="car-images" name="car-images" accept="image/*" multiple required>
+                    <div id="image-gallery" class="image-gallery"></div>
 
                     <label for="preco">Preço Desejado (€):</label>
                     <input type="number" id="preco" name="preco" step="0.01" required>
@@ -118,7 +119,7 @@
         <!-- Botão de WhatsApp -->
         <div id="whatsapp-button">
             <a href="https://wa.me/5511999999999" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                <img src="assets/img/whatsapp-icon.png" alt="WhatsApp">
             </a>
         </div>
 
@@ -150,7 +151,7 @@
                     const carCard = document.createElement("div");
                     carCard.classList.add("car-card");
                     carCard.innerHTML = `
-                        <img src="${car.image}" alt="${car.marca} ${car.modelo}">
+                        <img src="${car.images[0]}" alt="${car.marca} ${car.modelo}">
                         <h3>${car.marca} ${car.modelo} (${car.ano})</h3>
                         <p>Preço: €${parseFloat(car.preco).toFixed(2)}</p>
                         <button class="btn" onclick="addToCart('${car.marca} ${car.modelo}', ${car.preco})">Adicionar ao Carrinho</button>

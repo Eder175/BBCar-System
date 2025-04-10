@@ -39,6 +39,35 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Elemento 'close-sell-modal' não encontrado!");
     }
 
+    // Exibir prévia das imagens selecionadas
+    const carImagesInput = document.getElementById("car-images");
+    const imageGallery = document.getElementById("image-gallery");
+
+    if (carImagesInput) {
+        carImagesInput.addEventListener("change", () => {
+            imageGallery.innerHTML = ""; // Limpar galeria
+            const files = carImagesInput.files;
+
+            if (files.length > 5) {
+                alert("Você pode enviar no máximo 5 fotos.");
+                carImagesInput.value = "";
+                return;
+            }
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.alt = "Prévia da imagem do carro";
+                    imageGallery.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
     // Função para enviar proposta de venda e análise da IA
     const sellCarForm = document.getElementById("sell-car-form");
     if (sellCarForm) {
@@ -65,30 +94,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 condicao: document.getElementById("condicao").value,
                 observacoes: document.getElementById("observacoes").value,
                 preco: document.getElementById("preco").value,
+                images: [],
             };
 
-            const carImage = document.getElementById("car-image").files[0];
-            if (carImage) {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    carData.image = e.target.result;
+            const carImages = document.getElementById("car-images").files;
+            if (carImages.length > 0) {
+                const promises = Array.from(carImages).map(file => {
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    });
+                });
 
-                    // Salvar no localStorage
-                    const cars = JSON.parse(localStorage.getItem("carsForSale")) || [];
-                    cars.push(carData);
-                    localStorage.setItem("carsForSale", JSON.stringify(cars));
+                carData.images = await Promise.all(promises);
 
-                    // Exibir mensagem de confirmação
-                    document.getElementById("sell-response").textContent = `Proposta enviada com sucesso! ID do Veículo: ${carData.id}. Nossa equipe entrará em contato em breve.`;
-                    document.getElementById("sell-car-form").reset();
+                // Salvar no localStorage
+                const cars = JSON.parse(localStorage.getItem("carsForSale")) || [];
+                cars.push(carData);
+                localStorage.setItem("carsForSale", JSON.stringify(cars));
 
-                    // Fechar o modal após o envio
-                    sellCarModal.classList.add("hidden");
+                // Exibir mensagem de confirmação
+                document.getElementById("sell-response").textContent = `Proposta enviada com sucesso! ID do Veículo: ${carData.id}. Nossa equipe entrará em contato em breve.`;
+                document.getElementById("sell-car-form").reset();
+                imageGallery.innerHTML = ""; // Limpar galeria
 
-                    // Iniciar análise da IA
-                    await analyzeCarData(carData);
-                };
-                reader.readAsDataURL(carImage);
+                // Fechar o modal após o envio
+                sellCarModal.classList.add("hidden");
+
+                // Iniciar análise da IA
+                await analyzeCarData(carData);
+            } else {
+                document.getElementById("sell-response").textContent = "Por favor, selecione pelo menos uma foto do carro.";
             }
         });
     } else {
@@ -100,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const chatMessages = document.getElementById("chat-messages");
 
         try {
-            const response = await fetch("http://localhost:3001/api/analyze-car", { // Porta atualizada para 3001
+            const response = await fetch("http://localhost:3001/api/analyze-car", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -160,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 chatMessages.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
 
                 try {
-                    const response = await fetch("http://localhost:3001/api/chat", { // Porta atualizada para 3001
+                    const response = await fetch("http://localhost:3001/api/chat", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
