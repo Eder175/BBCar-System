@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 observacoes: document.getElementById("observacoes").value,
                 preco: document.getElementById("preco").value,
                 images: [],
+                status: "Pendente" // Adicionando status inicial
             };
 
             const carImages = document.getElementById("car-images").files;
@@ -109,10 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 carData.images = await Promise.all(promises);
 
-                // Salvar no localStorage
-                const cars = JSON.parse(localStorage.getItem("carsForSale")) || [];
-                cars.push(carData);
-                localStorage.setItem("carsForSale", JSON.stringify(cars));
+                // Salvar no localStorage com a chave "propostas" em vez de "carsForSale"
+                const propostas = JSON.parse(localStorage.getItem("propostas")) || [];
+                propostas.push(carData);
+                localStorage.setItem("propostas", JSON.stringify(propostas));
 
                 // Exibir mensagem de confirmação
                 document.getElementById("sell-response").textContent = `Proposta enviada com sucesso! ID do Veículo: ${carData.id}. Nossa equipe entrará em contato em breve.`;
@@ -223,4 +224,62 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("Elemento 'chat-input' não encontrado!");
     }
+
+    // Função para carregar as propostas (Tarefa 42)
+    function loadPropostas() {
+        const propostasBody = document.getElementById('propostas-body');
+        if (!propostasBody) return;
+
+        // Carregar propostas do localStorage
+        const propostas = JSON.parse(localStorage.getItem('propostas')) || [];
+
+        propostasBody.innerHTML = '';
+        propostas.forEach((proposta, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${proposta.nome}</td>
+                <td>${proposta.marca} ${proposta.modelo} (${proposta.ano})</td>
+                <td>€ ${proposta.preco}</td>
+                <td>${proposta.status || 'Pendente'}</td>
+                <td>
+                    <button class="btn" onclick="approveProposta(${index})">Aprovar</button>
+                    <button class="btn-secondary" onclick="rejectProposta(${index})">Rejeitar</button>
+                </td>
+            `;
+            propostasBody.appendChild(row);
+        });
+    }
+
+    // Função para aprovar uma proposta
+    window.approveProposta = function(index) {
+        const propostas = JSON.parse(localStorage.getItem('propostas')) || [];
+        propostas[index].status = 'Aprovada';
+        localStorage.setItem('propostas', JSON.stringify(propostas));
+        showNotification(`Proposta de ${propostas[index].nome} aprovada com sucesso!`);
+        loadPropostas();
+    };
+
+    // Função para rejeitar uma proposta
+    window.rejectProposta = function(index) {
+        const propostas = JSON.parse(localStorage.getItem('propostas')) || [];
+        propostas[index].status = 'Rejeitada';
+        localStorage.setItem('propostas', JSON.stringify(propostas));
+        showNotification(`Proposta de ${propostas[index].nome} rejeitada.`);
+        loadPropostas();
+    };
+
+    // Função para exibir notificação
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        if (notification) {
+            notification.textContent = message;
+            notification.classList.remove('hidden');
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+    }
+
+    // Carregar as propostas ao abrir a página
+    loadPropostas();
 });

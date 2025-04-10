@@ -379,26 +379,31 @@ nav ul li a:hover {
     background-color: #cc0000;
 }
 
-/* Estilização da Tabela de Parceiros */
-.partners-list table {
+/* Estilização da Tabela de Parceiros e Propostas */
+.partners-list table,
+#propostas-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
 .partners-list th,
-.partners-list td {
+.partners-list td,
+#propostas-table th,
+#propostas-table td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-.partners-list th {
+.partners-list th,
+#propostas-table th {
     background: #4CAF50;
     color: white;
 }
 
-.partners-list tr:hover {
+.partners-list tr:hover,
+#propostas-table tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -409,6 +414,12 @@ section {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Centralizar o formulário de login */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 form {

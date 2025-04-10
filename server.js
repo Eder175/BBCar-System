@@ -18,28 +18,39 @@ app.get("/", (req, res) => {
 
 // Função para buscar preços de carros semelhantes usando web scraping
 async function scrapeCarPrices(marca, modelo, ano) {
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
+    let browser;
+    try {
+        browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+        const page = await browser.newPage();
 
-    const searchQuery = `${marca} ${modelo} ${ano}`.replace(/\s+/g, '+');
-    const url = `https://www.standvirtual.com/carros?q=${searchQuery}`;
-    await page.goto(url, { waitUntil: "networkidle2" });
+        const searchQuery = `${marca} ${modelo} ${ano}`.replace(/\s+/g, '+');
+        const url = `https://www.standvirtual.com/carros?q=${searchQuery}`;
+        console.log(`Acessando URL para web scraping: ${url}`);
+        await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
 
-    const prices = await page.evaluate(() => {
-        const priceElements = document.querySelectorAll(".offer-price__number");
-        const pricesArray = [];
-        priceElements.forEach(element => {
-            const priceText = element.innerText.replace(/[^\d]/g, '');
-            const price = parseFloat(priceText);
-            if (!isNaN(price)) {
-                pricesArray.push(price);
-            }
+        const prices = await page.evaluate(() => {
+            const priceElements = document.querySelectorAll(".offer-price__number");
+            const pricesArray = [];
+            priceElements.forEach(element => {
+                const priceText = element.innerText.replace(/[^\d]/g, '');
+                const price = parseFloat(priceText);
+                if (!isNaN(price)) {
+                    pricesArray.push(price);
+                }
+            });
+            return pricesArray;
         });
-        return pricesArray;
-    });
 
-    await browser.close();
-    return prices;
+        console.log(`Preços encontrados: ${prices}`);
+        return prices;
+    } catch (error) {
+        console.error("Erro ao realizar web scraping:", error.message);
+        throw error;
+    } finally {
+        if (browser) {
+            await browser.close();
+        }
+    }
 }
 
 // Endpoint para enviar mensagens à IA
@@ -58,7 +69,7 @@ app.post("/api/chat", async (req, res) => {
         const response = await axios.post(
             "https://api.openai.com/v1/chat/completions",
             {
-                model: "gpt-3.5-turbo", // Mudando para gpt-3.5-turbo
+                model: "gpt-3.5-turbo",
                 messages: [
                     { role: "system", content: "Você é a IA da BBcar, uma plataforma de compra e venda de carros. Ajude os usuários a vender ou comprar carros, analise preços de mercado, e forneça respostas úteis e naturais. Use um tom amigável e profissional." },
                     { role: "user", content: message },
@@ -88,6 +99,7 @@ app.post("/api/chat", async (req, res) => {
 // Endpoint para análise de preços de carros
 app.post("/api/analyze-car", async (req, res) => {
     const carData = req.body;
+    console.log("Dados do carro recebidos para análise:", carData);
 
     let similarCarPrices;
     try {
