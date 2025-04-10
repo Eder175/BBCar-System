@@ -11,6 +11,11 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Rota GET simples para confirmar que o servidor está funcionando
+app.get("/", (req, res) => {
+    res.send("Servidor BBcar-System está funcionando! Acesse os endpoints /api/chat ou /api/analyze-car para interagir com a API.");
+});
+
 // Função para buscar preços de carros semelhantes usando web scraping
 async function scrapeCarPrices(marca, modelo, ano) {
     const browser = await puppeteer.launch({ headless: true });
