@@ -4,12 +4,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth
 
 // Configuração do Firebase
 const firebaseConfig = {
-    apiKey: "sua-api-key",
-    authDomain: "seu-projeto.firebaseapp.com",
-    projectId: "seu-projeto",
-    storageBucket: "seu-projeto.appspot.com",
-    messagingSenderId: "seu-id",
-    appId: "seu-app-id"
+    apiKey: "AIzaSyDkzRxrpIX1bq9ZuYl3_-5YRnMDDnfei0A",
+    authDomain: "bbcar-system.firebaseapp.com",
+    projectId: "bbcar-system",
+    storageBucket: "bbcar-system.firebasestorage.app",
+    messagingSenderId: "26592448394",
+    appId: "1:26592448394:web:4ad18d088908508ac58273"
 };
 
 // Inicializar o Firebase
