@@ -76,5 +76,16 @@
         setInterval(updateMetrics, 5000);
         updateMetrics();
     </script>
+    <script type="module">
+        import { auth } from "../js/firebase-config.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Usuário não está autenticado, redireciona para a página de login
+                window.location.href = "login.html";
+            }
+        });
+    </script>
 </body>
 </html>
