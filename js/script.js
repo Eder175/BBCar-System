@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const chatMessages = document.getElementById("chat-messages");
 
         try {
-            const response = await fetch("http://localhost:3000/api/analyze-car", {
+            const response = await fetch("http://localhost:3001/api/analyze-car", { // Porta atualizada para 3001
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 chatMessages.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
 
                 try {
-                    const response = await fetch("http://localhost:3000/api/chat", {
+                    const response = await fetch("http://localhost:3001/api/chat", { // Porta atualizada para 3001
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
