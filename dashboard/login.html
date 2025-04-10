@@ -7,35 +7,26 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <header class="main-header">
+    <header>
         <div class="logo">
-            <img src="../assets/img/logo.jpeg" alt="Logo BBcar">
+            <img src="../assets/img/logo.jpeg" alt="BBcar Logo">
         </div>
         <h1>Login - BBcar</h1>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="../index.html">Início</a></li>
-            </ul>
-        </nav>
     </header>
-
     <main>
-        <section class="login-section">
+        <section class="login-form">
             <h2>Faça Login</h2>
             <form id="login-form">
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>
-
                 <label for="password">Senha:</label>
                 <input type="password" id="password" name="password" required>
-
                 <button type="submit">Entrar</button>
             </form>
             <p id="login-error" style="color: red;"></p>
             <p>Não tem uma conta? <a href="register.html">Registre-se</a></p>
         </section>
     </main>
-
     <script type="module">
         import { auth } from "../js/firebase-config.js";
         import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
@@ -43,25 +34,19 @@
         const loginForm = document.getElementById("login-form");
         const loginError = document.getElementById("login-error");
 
-        loginForm.addEventListener("submit", (e) => {
+        loginForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Login bem-sucedido
-                    const user = userCredential.user;
-                    alert("Login bem-sucedido! Bem-vindo, " + user.email);
-                    window.location.href = "index.html"; // Redireciona para o dashboard
-                })
-                .catch((error) => {
-                    // Erro no login
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    loginError.textContent = "Erro: " + errorMessage;
-                });
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error("Erro ao fazer login:", error.message);
+                loginError.textContent = "Erro ao fazer login: " + error.message;
+            }
         });
     </script>
 </body>
