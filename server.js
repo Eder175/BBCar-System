@@ -1,11 +1,13 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 const port = 3000;
 
-// Middleware para parsear JSON
+// Middleware para CORS e parsear JSON
+app.use(cors());
 app.use(express.json());
 
 // Endpoint para enviar mensagens à IA
@@ -73,7 +75,7 @@ app.post("/api/analyze-car", async (req, res) => {
     basePrice *= kmFactor;
 
     // Ajustar com base nas observações (ex.: motor trancado)
-    if (carData.observacoes.toLowerCase().includes("motor trancado")) {
+    if (carData.observacoes && carData.observacoes.toLowerCase().includes("motor trancado")) {
         basePrice *= 0.3;
     }
 

@@ -110,19 +110,8 @@
         <!-- Destaques -->
         <section class="highlights" id="highlighted-cars">
             <h2>Carros em Destaque</h2>
-            <div class="car-container">
-                <div class="car-card">
-                    <img src="assets/img/car1.jpg" alt="Carro 1">
-                    <h3>Carro 1</h3>
-                    <p>Preço: € 20.000</p>
-                    <button class="btn" onclick="addToCart('Carro 1', 20000)">Adicionar ao Carrinho</button>
-                </div>
-                <div class="car-card">
-                    <img src="assets/img/car2.png" alt="Carro 2">
-                    <h3>Carro 2</h3>
-                    <p>Preço: € 30.000</p>
-                    <button class="btn" onclick="addToCart('Carro 2', 30000)">Adicionar ao Carrinho</button>
-                </div>
+            <div class="car-container" id="car-container">
+                <!-- Carros serão adicionados dinamicamente aqui -->
             </div>
         </section>
 
@@ -149,6 +138,28 @@
         </div>
     </main>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const carContainer = document.getElementById("car-container");
+            const cars = JSON.parse(localStorage.getItem("carsForListing")) || [];
+
+            if (cars.length === 0) {
+                carContainer.innerHTML = "<p>Nenhum carro cadastrado ainda.</p>";
+            } else {
+                cars.forEach(car => {
+                    const carCard = document.createElement("div");
+                    carCard.classList.add("car-card");
+                    carCard.innerHTML = `
+                        <img src="${car.image}" alt="${car.marca} ${car.modelo}">
+                        <h3>${car.marca} ${car.modelo} (${car.ano})</h3>
+                        <p>Preço: €${parseFloat(car.preco).toFixed(2)}</p>
+                        <button class="btn" onclick="addToCart('${car.marca} ${car.modelo}', ${car.preco})">Adicionar ao Carrinho</button>
+                    `;
+                    carContainer.appendChild(carCard);
+                });
+            }
+        });
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
