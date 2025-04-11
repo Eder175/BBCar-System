@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Chave secreta para autenticação JWT
-const JWT_SECRET = process.env.JWT_SECRET || "sua-chave-secreta-aqui";
+const JWT_SECRET = process.env.JWT_SECRET || "bbcar-system-secret-2025";
 
 // Middleware de autenticação simples
 const authenticateToken = (req, res, next) => {
@@ -39,8 +39,8 @@ const authenticateToken = (req, res, next) => {
 const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com");
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
-// Endereço e ABI do contrato inteligente (você precisará implantar o contrato primeiro)
-const contractAddress = "SEU_ENDERECO_DO_CONTRATO_AQUI"; // Substitua pelo endereço do contrato implantado
+// Endereço e ABI do contrato inteligente
+const contractAddress = "0xABC123..."; // Substitua por SEU_ENDERECO_DO_CONTRATO_AQUI
 const contractABI = [
     {
         "inputs": [
