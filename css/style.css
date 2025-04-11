@@ -379,31 +379,26 @@ nav ul li a:hover {
     background-color: #cc0000;
 }
 
-/* Estilização da Tabela de Parceiros e Propostas */
-.partners-list table,
-#propostas-table {
+/* Estilização da Tabela de Parceiros */
+.partners-list table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
 .partners-list th,
-.partners-list td,
-#propostas-table th,
-#propostas-table td {
+.partners-list td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-.partners-list th,
-#propostas-table th {
+.partners-list th {
     background: #4CAF50;
     color: white;
 }
 
-.partners-list tr:hover,
-#propostas-table tr:hover {
+.partners-list tr:hover {
     background-color: #f1f1f1;
 }
 
@@ -414,12 +409,6 @@ section {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Centralizar o formulário de login */
-.login-form {
-    max-width: 400px;
-    margin: 0 auto;
 }
 
 form {
@@ -652,26 +641,4 @@ a.btn:hover {
         opacity: 1;
         transform: translateX(0);
     }
-}
-
-/* Estilo para a Galeria de Imagens (Tarefa 41) */
-.image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.image-gallery img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.image-gallery img:hover {
-    transform: scale(1.1);
 }
