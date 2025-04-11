@@ -3,400 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBcar - Bem-vindo</title>
+    <title>BBcar - Seu Novo Carro Está Aqui!</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="main-header">
+    <header>
         <div class="logo">
-            <img src="assets/img/logo.jpeg" alt="Logo BBcar">
+            <img src="assets/img/logo.jpeg" alt="BBcar Logo">
         </div>
         <h1>Seu Novo Carro Está Aqui!</h1>
         <nav>
-            <ul class="nav-links">
+            <ul>
                 <li><a href="dashboard/index.html">Dashboard</a></li>
                 <li><a href="pages/about.html">Sobre Nós</a></li>
                 <li><a href="pages/contact.html">Contato</a></li>
-                <li><a href="dashboard/register.html">Seja Parceiro</a></li>
+                <li><a href="dashboard/partners.html">Seja um Parceiro</a></li>
                 <li><a href="#" id="sell-car-link">Venda seu Veículo</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- Modal para Venda seu Veículo -->
-        <div id="sell-car-modal" class="modal hidden">
-            <div class="modal-content">
-                <span id="close-sell-modal" class="close">×</span>
-                <h2>Venda seu Veículo</h2>
-                <p>Submeta os detalhes do seu carro e receba uma proposta!</p>
-                <form id="sell-car-form">
-                    <label for="marca">Marca do Carro:</label>
-                    <input type="text" id="marca" name="marca" required>
-
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" id="modelo" name="modelo" required>
-
-                    <label for="ano">Ano:</label>
-                    <input type="number" id="ano" name="ano" required>
-
-                    <label for="motor">Motor (ex.: 1.6 TDI, 2.0 Gasolina):</label>
-                    <input type="text" id="motor" name="motor" required>
-
-                    <label for="km">Quilometragem (KM):</label>
-                    <input type="number" id="km" name="km" required>
-
-                    <label for="cor">Cor:</label>
-                    <input type="text" id="cor" name="cor" required>
-
-                    <label for="iuc">IUC (Imposto Único de Circulação) Pago Até:</label>
-                    <input type="date" id="iuc" name="iuc" required>
-
-                    <label for="ipo">IPO (Inspeção Periódica Obrigatória) Válida Até:</label>
-                    <input type="date" id="ipo" name="ipo" required>
-
-                    <label for="condicao">Condição Geral do Veículo:</label>
-                    <select id="condicao" name="condicao" required>
-                        <option value="">Selecione...</option>
-                        <option value="excelente">Excelente</option>
-                        <option value="bom">Bom</option>
-                        <option value="regular">Regular</option>
-                        <option value="necessita-reparos">Necessita de Reparos</option>
-                    </select>
-
-                    <label for="observacoes">Observações (ex.: avarias, histórico de manutenção, problemas conhecidos):</label>
-                    <textarea id="observacoes" name="observacoes" rows="4" placeholder="Descreva tudo sobre o carro, incluindo avarias, histórico de manutenção, ou qualquer problema conhecido."></textarea>
-
-                    <label for="car-image">Foto do Carro:</label>
-                    <input type="file" id="car-image" name="car-image" accept="image/*" required>
-
-                    <label for="preco">Preço Desejado (€):</label>
-                    <input type="number" id="preco" name="preco" step="0.01" required>
-
-                    <button type="submit">Enviar Proposta</button>
-                </form>
-                <p id="sell-response"></p>
-            </div>
-        </div>
-
-        <!-- Banner Chamativo -->
         <section class="hero-banner">
-            <h2>Descubra Seu Próximo Carro</h2>
-            <p>Os melhores preços e qualidade que você só encontra aqui na BBcar.</p>
-            <a href="dashboard/carrinho/index.html" class="btn-primary">Ver Carros</a>
+            <div class="hero-content">
+                <h2>Descubra Seu Próximo Carro</h2>
+                <p>Os melhores preços e qualidade você só encontra aqui na BBcar.</p>
+                <a href="#highlights" class="btn-primary">Ver Carros</a>
+            </div>
         </section>
 
-        <!-- Destaques -->
-        <section class="highlights" id="highlighted-cars">
+        <section class="highlights" id="highlights">
             <h2>Carros em Destaque</h2>
             <div class="car-container">
                 <div class="car-card">
-                    <img src="assets/img/car1.jpg" alt="Carro 1">
+                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Carro 1">
                     <h3>Carro 1</h3>
-                    <p>Preço: € 20.000</p>
-                    <button class="btn" onclick="addToCart('Carro 1', 20000)">Adicionar ao Carrinho</button>
+                    <p>€ 20.000</p>
+                    <button onclick="addToCart('Carro 1', 20000)">Adicionar ao Carrinho</button>
                 </div>
                 <div class="car-card">
-                    <img src="assets/img/car2.png" alt="Carro 2">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Carro 2">
                     <h3>Carro 2</h3>
-                    <p>Preço: € 30.000</p>
-                    <button class="btn" onclick="addToCart('Carro 2', 30000)">Adicionar ao Carrinho</button>
+                    <p>€ 25.000</p>
+                    <button onclick="addToCart('Carro 2', 25000)">Adicionar ao Carrinho</button>
                 </div>
             </div>
         </section>
-
-        <!-- Botão de WhatsApp -->
-        <div id="whatsapp-button">
-            <a href="https://wa.me/5511999999999" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-            </a>
-        </div>
-
-        <!-- Chatbot -->
-        <div id="chatbot">
-            <button id="chatbot-btn">Fale com a IA da BBcar</button>
-            <div id="chat-window" class="hidden">
-                <div id="chat-header">
-                    IA da BBcar
-                    <span id="close-chat" class="close">×</span>
-                </div>
-                <div id="chat-messages">
-                    <p><strong>IA:</strong> Olá! Sou a IA da BBcar. Como posso te ajudar hoje? 😊</p>
-                </div>
-                <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
-            </div>
-        </div>
     </main>
 
+    <!-- Modal para Venda seu Veículo -->
+    <div id="sell-car-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="close-sell-modal">×</span>
+            <h2>Venda seu Veículo</h2>
+            <p>Preencha os dados abaixo para enviar sua proposta de venda.</p>
+            <form id="sell-car-form">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" required>
+
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" required>
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" required>
+
+                <label for="concelho">Concelho:</label>
+                <input type="text" id="concelho" name="concelho" required>
+
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required>
+
+                <label for="motor">Motor:</label>
+                <input type="text" id="motor" name="motor" required>
+
+                <label for="km">Quilometragem (KM):</label>
+                <input type="number" id="km" name="km" required>
+
+                <label for="cor">Cor:</label>
+                <input type="text" id="cor" name="cor" required>
+
+                <label for="iuc">IUC (Imposto Único de Circulação):</label>
+                <input type="text" id="iuc" name="iuc" required>
+
+                <label for="ipo">IPO (Inspeção Periódica Obrigatória):</label>
+                <input type="text" id="ipo" name="ipo" required>
+
+                <label for="matricula">Matrícula (Placa):</label>
+                <input type="text" id="matricula" name="matricula" required placeholder="Ex.: 44SD56">
+
+                <label for="condicao">Condição do Veículo:</label>
+                <select id="condicao" name="condicao" required>
+                    <option value="excelente">Excelente</option>
+                    <option value="bom">Bom</option>
+                    <option value="regular">Regular</option>
+                    <option value="necessita-reparos">Necessita de Reparos</option>
+                </select>
+
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" placeholder="Ex.: Algum dano visível? Histórico de manutenção?"></textarea>
+
+                <label for="preco">Preço Desejado (€):</label>
+                <input type="number" id="preco" name="preco" required>
+
+                <label for="car-images">Fotos do Carro (máximo 5):</label>
+                <input type="file" id="car-images" name="car-images" accept="image/*" multiple>
+                <div id="image-gallery" class="image-gallery"></div>
+
+                <button type="submit">Enviar Proposta</button>
+            </form>
+            <div id="sell-response"></div>
+            <div id="nft-result" class="hidden">
+                <h3>NFT Gerado para o Carro</h3>
+                <p id="nft-message"></p>
+                <a id="nft-link" href="#" target="_blank">Ver NFT</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão do WhatsApp -->
+    <div id="whatsapp-button">
+        <a href="https://wa.me/5511999999999" target="_blank">
+            <img src="assets/img/whatsapp-icon.png" alt="WhatsApp">
+        </a>
+    </div>
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+        <button id="chatbot-btn">Fale com a IA da BBcar</button>
+        <div id="chat-window" class="hidden">
+            <div id="chat-header">
+                IA da BBcar
+                <span class="close" id="close-chat">×</span>
+            </div>
+            <div id="chat-messages">
+                <p><strong>IA:</strong> Olá! Sou a IA da BBcar. Como posso te ajudar hoje? 😊</p>
+            </div>
+            <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
-    <script>
-        // Garantir que o DOM esteja carregado antes de adicionar os eventos
-        document.addEventListener("DOMContentLoaded", () => {
-            // Função para adicionar ao carrinho
-            function addToCart(carName, price) {
-                let cart = JSON.parse(localStorage.getItem("cart")) || [];
-                cart.push({ name: carName, price: price });
-                localStorage.setItem("cart", JSON.stringify(cart));
-                alert(`${carName} foi adicionado ao carrinho!`);
-            }
-
-            // Abrir e fechar o modal de "Venda seu Veículo"
-            const sellCarLink = document.getElementById("sell-car-link");
-            const sellCarModal = document.getElementById("sell-car-modal");
-            const closeSellModal = document.getElementById("close-sell-modal");
-
-            if (sellCarLink) {
-                sellCarLink.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    console.log("Link 'Venda seu Veículo' clicado!"); // Depuração
-                    if (sellCarModal) {
-                        sellCarModal.classList.remove("hidden");
-                    } else {
-                        console.error("Modal 'sell-car-modal' não encontrado!");
-                    }
-                });
-            } else {
-                console.error("Elemento 'sell-car-link' não encontrado!");
-            }
-
-            if (closeSellModal) {
-                closeSellModal.addEventListener("click", () => {
-                    console.log("Botão de fechar modal clicado!"); // Depuração
-                    if (sellCarModal) {
-                        sellCarModal.classList.add("hidden");
-                    } else {
-                        console.error("Modal 'sell-car-modal' não encontrado!");
-                    }
-                });
-            } else {
-                console.error("Elemento 'close-sell-modal' não encontrado!");
-            }
-
-            // Função para enviar proposta de venda e análise da IA
-            const sellCarForm = document.getElementById("sell-car-form");
-            if (sellCarForm) {
-                sellCarForm.addEventListener("submit", function(event) {
-                    event.preventDefault();
-
-                    const marca = document.getElementById("marca").value;
-                    const modelo = document.getElementById("modelo").value;
-                    const ano = document.getElementById("ano").value;
-                    const motor = document.getElementById("motor").value;
-                    const km = document.getElementById("km").value;
-                    const cor = document.getElementById("cor").value;
-                    const iuc = document.getElementById("iuc").value;
-                    const ipo = document.getElementById("ipo").value;
-                    const condicao = document.getElementById("condicao").value;
-                    const observacoes = document.getElementById("observacoes").value;
-                    const preco = document.getElementById("preco").value;
-                    const carImage = document.getElementById("car-image").files[0];
-
-                    // Converter a imagem para base64 (para armazenar no localStorage)
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const carData = {
-                            id: "CAR-" + Math.random().toString(36).substr(2, 9).toUpperCase(),
-                            marca,
-                            modelo,
-                            ano,
-                            motor,
-                            km,
-                            cor,
-                            iuc,
-                            ipo,
-                            condicao,
-                            observacoes,
-                            preco,
-                            image: e.target.result // Imagem em base64
-                        };
-
-                        // Salvar no localStorage
-                        const cars = JSON.parse(localStorage.getItem("carsForSale")) || [];
-                        cars.push(carData);
-                        localStorage.setItem("carsForSale", JSON.stringify(cars));
-
-                        // Exibir mensagem de confirmação
-                        document.getElementById("sell-response").textContent = `Proposta enviada com sucesso! ID do Veículo: ${carData.id}. Nossa equipe entrará em contato em breve.`;
-                        document.getElementById("sell-car-form").reset();
-
-                        // Fechar o modal após o envio
-                        sellCarModal.classList.add("hidden");
-
-                        // Iniciar análise da IA
-                        analyzeCarData(carData);
-                    };
-
-                    if (carImage) {
-                        reader.readAsDataURL(carImage);
-                    }
-                });
-            } else {
-                console.error("Formulário 'sell-car-form' não encontrado!");
-            }
-
-            // Função para análise da IA
-            function analyzeCarData(carData) {
-                const chatMessages = document.getElementById("chat-messages");
-
-                // Simulação de busca por carros semelhantes (dados fictícios para demonstração)
-                const similarCars = [
-                    { marca: carData.marca, modelo: carData.modelo, ano: carData.ano, motor: carData.motor, km: 45000, condicao: "bom", preco: 18000, fonte: "OLX" },
-                    { marca: carData.marca, modelo: carData.modelo, ano: carData.ano, motor: carData.motor, km: 60000, condicao: "regular", preco: 15000, fonte: "Webmotors" },
-                    { marca: carData.marca, modelo: carData.modelo, ano: carData.ano - 1, motor: carData.motor, km: 50000, condicao: "excelente", preco: 20000, fonte: "Standvirtual" },
-                ];
-
-                // Calcular preço médio dos carros semelhantes
-                const averagePrice = similarCars.reduce((sum, car) => sum + car.preco, 0) / similarCars.length;
-
-                // Sugerir preço de compra (50% mais barato)
-                const suggestedPrice = averagePrice * 0.5;
-
-                // Gerar relatório considerando avarias e problemas
-                let report = `<p><strong>Relatório de Análise - Veículo ${carData.id}</strong></p>`;
-                report += `<p>Marca: ${carData.marca}, Modelo: ${carData.modelo}, Ano: ${carData.ano}, Motor: ${carData.motor}</p>`;
-                report += `<p>Quilometragem: ${carData.km} KM, Condição: ${carData.condicao}</p>`;
-                report += `<p>Preço Desejado pelo Cliente: €${carData.preco}</p>`;
-                report += `<p>Observações do Cliente: ${carData.observacoes || "Nenhuma observação fornecida."}</p>`;
-                report += `<p><strong>Análise de Mercado:</strong></p>`;
-                report += `<p>Carros semelhantes encontrados:</p>`;
-                similarCars.forEach((car, index) => {
-                    report += `<p>- Carro ${index + 1} (${car.fonte}): ${car.marca} ${car.modelo}, ${car.ano}, ${car.motor}, ${car.km} KM, Condição: ${car.condicao}, Preço: €${car.preco}</p>`;
-                });
-                report += `<p>Preço médio de carros semelhantes: €${averagePrice.toFixed(2)}</p>`;
-                report += `<p>Preço sugerido para compra (50% do preço médio): €${suggestedPrice.toFixed(2)}</p>`;
-                report += `<p><strong>Considerações:</strong></p>`;
-                report += `<p>- Possíveis avarias não mencionadas podem reduzir o valor do veículo.</p>`;
-                report += `<p>- Recomenda-se uma inspeção detalhada para identificar problemas ocultos (ex.: motor, suspensão, histórico de acidentes).</p>`;
-                report += `<p>- Ajuste o preço final com base na inspeção e nas condições reais do veículo.</p>`;
-
-                // Exibir o relatório no chat
-                setTimeout(() => {
-                    chatMessages.innerHTML += report;
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                    // Abrir o chat automaticamente para mostrar o relatório
-                    document.getElementById("chat-window").classList.remove("hidden");
-                    document.getElementById("chatbot-btn").classList.add("hidden");
-                }, 1000);
-            }
-
-            // Chatbot
-            const chatBtn = document.getElementById("chatbot-btn");
-            const chatWindow = document.getElementById("chat-window");
-            const chatMessages = document.getElementById("chat-messages");
-            const chatInput = document.getElementById("chat-input");
-            const closeChat = document.getElementById("close-chat");
-
-            if (chatBtn) {
-                chatBtn.addEventListener("click", () => {
-                    console.log("Botão 'Fale com a IA da BBcar' clicado!"); // Depuração
-                    chatWindow.classList.remove("hidden");
-                    chatBtn.classList.add("hidden");
-                });
-            } else {
-                console.error("Elemento 'chatbot-btn' não encontrado!");
-            }
-
-            if (closeChat) {
-                closeChat.addEventListener("click", () => {
-                    console.log("Botão de fechar clicado!"); // Depuração
-                    chatWindow.classList.add("hidden");
-                    chatBtn.classList.remove("hidden");
-                });
-            } else {
-                console.error("Elemento 'close-chat' não encontrado!");
-            }
-
-            if (chatInput) {
-                chatInput.addEventListener("keypress", (e) => {
-                    if (e.key === "Enter" && chatInput.value.trim() !== "") {
-                        const userMessage = chatInput.value;
-                        chatMessages.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
-
-                        // Detectar idioma (simplificado)
-                        const messageLower = userMessage.toLowerCase();
-                        let lang = "pt"; // Idioma padrão: português
-                        if (
-                            messageLower.includes("hello") ||
-                            messageLower.includes("hi") ||
-                            messageLower.includes("how are you")
-                        ) {
-                            lang = "en"; // Inglês detectado
-                        }
-
-                        // Respostas da IA
-                        let response = lang === "pt" ? "Desculpe, não entendi. Pode repetir de outra forma?" : "Sorry, I didn't understand. Can you repeat that differently?";
-
-                        // Respostas em português
-                        if (lang === "pt") {
-                            if (messageLower.includes("vender meu carro")) {
-                                response = "Ótimo! Para vender seu carro, clique em 'Venda seu Veículo' no menu acima. Você precisará informar a marca, modelo, ano, motor, quilometragem, cor, IUC, IPO, condição, observações, e enviar uma foto. Posso te ajudar com alguma dúvida sobre o formulário?";
-                            } else if (messageLower.includes("quais informações")) {
-                                response = "Você precisa informar a marca, modelo, ano, motor, quilometragem, cor, IUC (Imposto Único de Circulação), IPO (Inspeção Periódica Obrigatória), condição geral do veículo, observações, e enviar uma foto. Quer ajuda com algum campo?";
-                            } else if (messageLower.includes("iuc") || messageLower.includes("imposto")) {
-                                response = "O IUC é o Imposto Único de Circulação, que deve estar pago para o carro estar em dia. No formulário, você deve informar a data até quando o IUC está pago. Por exemplo, '2025-12-31'. Precisa de mais ajuda?";
-                            } else if (messageLower.includes("ipo") || messageLower.includes("inspeção")) {
-                                response = "O IPO é a Inspeção Periódica Obrigatória, que verifica se o carro está em condições de circular. No formulário, informe a data até quando a inspeção é válida, como '2025-06-30'. Alguma dúvida sobre isso?";
-                            } else if (messageLower.includes("foto") || messageLower.includes("imagem")) {
-                                response = "Você pode enviar uma foto do carro no formulário. Clique no campo 'Foto do Carro' e selecione uma imagem do seu dispositivo. Certifique-se de que a foto mostre bem o estado do veículo! Precisa de ajuda com isso?";
-                            } else if (messageLower.includes("olá") || messageLower.includes("oi")) {
-                                response = "Oi! Tudo bem? Estou aqui para te ajudar a vender seu carro ou tirar qualquer dúvida sobre a BBcar. No que você precisa de ajuda?";
-                            } else if (messageLower.includes("comprar carro")) {
-                                response = "Para comprar um carro, veja os 'Carros em Destaque' abaixo ou clique em 'Ver Carros' no banner para explorar mais opções. Quer ajuda para escolher um carro?";
-                            } else if (messageLower.includes("preço") || messageLower.includes("valor") || messageLower.includes("quanto custa")) {
-                                response = "Os preços dos carros em destaque estão listados abaixo. Por exemplo, o Carro 1 custa €20.000 e o Carro 2 custa €30.000. Se você quer vender seu carro, o preço será analisado pela nossa equipe após você enviar a proposta!";
-                            } else if (messageLower.includes("quanto paga") || messageLower.includes("quanto vocês pagam")) {
-                                response = "Para saber quanto podemos pagar pelo seu carro, envie uma proposta clicando em 'Venda seu Veículo' no menu acima. Após enviar os detalhes, eu farei uma análise de mercado e te darei uma sugestão de preço!";
-                            } else if (messageLower.includes("parceiro")) {
-                                response = "Quer ser um parceiro de negócio da BBcar? Clique em 'Seja Parceiro' no menu acima para se registrar e começar a colaborar conosco!";
-                            } else if (messageLower.includes("contato")) {
-                                response = "Você pode nos contatar pela página de 'Contato' no menu acima ou pelo WhatsApp, clicando no ícone no canto inferior direito da tela.";
-                            } else if (messageLower.includes("quem é você") || messageLower.includes("o que é bbcar")) {
-                                response = "Eu sou a IA da BBcar, e a BBcar é uma plataforma para você comprar e vender carros de forma fácil e segura! Estou aqui para te ajudar com qualquer dúvida.";
-                            }
-                        }
-
-                        // Respostas em inglês
-                        if (lang === "en") {
-                            if (messageLower.includes("sell my car")) {
-                                response = "Great! To sell your car, click on 'Venda seu Veículo' in the menu above. You'll need to provide the make, model, year, engine, mileage, color, IUC, IPO, condition, observations, and upload a photo. Can I help you with any questions about the form?";
-                            } else if (messageLower.includes("what information")) {
-                                response = "You need to provide the make, model, year, engine, mileage, color, IUC (Vehicle Circulation Tax), IPO (Mandatory Periodic Inspection), the car's condition, observations, and upload a photo. Need help with any field?";
-                            } else if (messageLower.includes("iuc") || messageLower.includes("tax")) {
-                                response = "The IUC is the Vehicle Circulation Tax, which must be paid for the car to be legal. In the form, you should enter the date until which the IUC is paid, for example, '2025-12-31'. Need more help?";
-                            } else if (messageLower.includes("ipo") || messageLower.includes("inspection")) {
-                                response = "The IPO is the Mandatory Periodic Inspection, which checks if the car is roadworthy. In the form, enter the date until which the inspection is valid, like '2025-06-30'. Any questions about this?";
-                            } else if (messageLower.includes("photo") || messageLower.includes("image")) {
-                                response = "You can upload a photo of the car in the form. Click on the 'Car Photo' field and select an image from your device. Make sure the photo clearly shows the car's condition! Need help with this?";
-                            } else if (messageLower.includes("hello") || messageLower.includes("hi")) {
-                                response = "Hi! How can I help you today? I'm here to assist with buying or selling cars on BBcar.";
-                            } else if (messageLower.includes("buy a car")) {
-                                response = "To buy a car, check out the 'Featured Cars' below or click 'Ver Carros' in the banner to explore more options. Need help choosing a car?";
-                            } else if (messageLower.includes("price") || messageLower.includes("cost") || messageLower.includes("how much")) {
-                                response = "The prices of the featured cars are listed below. For example, Car 1 costs €20,000 and Car 2 costs €30,000. If you want to sell your car, the price will be analyzed by our team after you submit the proposal!";
-                            } else if (messageLower.includes("how much do you pay")) {
-                                response = "To find out how much we can pay for your car, submit a proposal by clicking 'Venda seu Veículo' in the menu above. After you provide the details, I'll perform a market analysis and suggest a price!";
-                            } else if (messageLower.includes("partner")) {
-                                response = "Want to become a BBcar business partner? Click on 'Seja Parceiro' in the menu above to register and start collaborating with us!";
-                            } else if (messageLower.includes("contact")) {
-                                response = "You can contact us through the 'Contato' page in the menu above or via WhatsApp by clicking the icon in the bottom right corner of the screen.";
-                            } else if (messageLower.includes("who are you") || messageLower.includes("what is bbcar")) {
-                                response = "I’m the BBcar AI, and BBcar is a platform for you to buy and sell cars easily and securely! I’m here to help with any questions.";
-                            }
-                        }
-
-                        setTimeout(() => {
-                            chatMessages.innerHTML += `<p><strong>IA:</strong> ${response}</p>`;
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
-                        }, 500);
-
-                        chatInput.value = "";
-                    }
-                });
-            } else {
-                console.error("Elemento 'chat-input' não encontrado!");
-            }
-        });
-    </script>
 </body>
 </html>

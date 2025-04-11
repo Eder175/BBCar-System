@@ -3,36 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBcar - Carrinho Interativo</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>BBcar - Seu Novo Carro Está Aqui!</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="../assets/img/logo.jpeg" alt="BBcar Logo">
+            <img src="assets/logo.png" alt="BBcar Logo">
         </div>
-        <h1>Carrinho Interativo</h1>
+        <h1>Seu Novo Carro Está Aqui!</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Dashboard</a></li>
-                <li><a href="../visao-geral.html">Visão Geral</a></li>
-                <li><a href="../estatisticas.html">Estatísticas</a></li>
-                <li><a href="../configuracoes.html">Configurações</a></li>
-                <li><a href="../affiliates.html">Painel de Parceiros</a></li>
-                <li><a href="../index.html">Voltar ao BBcar</a></li>
+                <li><a href="dashboard/index.html">Dashboard</a></li>
+                <li><a href="pages/about.html">Sobre Nós</a></li>
+                <li><a href="pages/contact.html">Contato</a></li>
+                <li><a href="dashboard/partners.html">Seja um Parceiro</a></li>
+                <li><a href="#" id="sell-car-link">Venda seu Veículo</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section class="cart">
-            <h2>Seu Carrinho</h2>
-            <div id="cart-items"></div>
-            <p>Total: € <span id="cart-total">0.00</span></p>
-            <button id="clear-cart-btn" class="btn btn-secondary">Limpar Carrinho</button>
-            <button id="checkout-btn" class="btn">Finalizar Compra</button>
+        <section class="hero-banner">
+            <div class="hero-content">
+                <h2>Descubra Seu Próximo Carro</h2>
+                <p>Os melhores preços e qualidade você só encontra aqui na BBcar.</p>
+                <a href="#highlights" class="btn-primary">Ver Carros</a>
+            </div>
+        </section>
+
+        <section class="highlights" id="highlights">
+            <h2>Carros em Destaque</h2>
+            <div class="car-container">
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Carro 1">
+                    <h3>Carro 1</h3>
+                    <p>€ 20.000</p>
+                    <button onclick="addToCart('Carro 1', 20000)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="car-card">
+                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Carro 2">
+                    <h3>Carro 2</h3>
+                    <p>€ 25.000</p>
+                    <button onclick="addToCart('Carro 2', 25000)">Adicionar ao Carrinho</button>
+                </div>
+            </div>
         </section>
     </main>
 
-    <script src="carrinho.js"></script>
+    <!-- Modal para Venda seu Veículo -->
+    <div id="sell-car-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" id="close-sell-modal">×</span>
+            <h2>Venda seu Veículo</h2>
+            <p>Preencha os dados abaixo para enviar sua proposta de venda.</p>
+            <form id="sell-car-form">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" required>
+
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" required>
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" required>
+
+                <label for="concelho">Concelho:</label>
+                <input type="text" id="concelho" name="concelho" required>
+
+                <label for="pais">País:</label>
+                <input type="text" id="pais" name="pais" required>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required>
+
+                <label for="motor">Motor:</label>
+                <input type="text" id="motor" name="motor" required>
+
+                <label for="km">Quilometragem (KM):</label>
+                <input type="number" id="km" name="km" required>
+
+                <label for="cor">Cor:</label>
+                <input type="text" id="cor" name="cor" required>
+
+                <label for="iuc">IUC (Imposto Único de Circulação):</label>
+                <input type="text" id="iuc" name="iuc" required>
+
+                <label for="ipo">IPO (Inspeção Periódica Obrigatória):</label>
+                <input type="text" id="ipo" name="ipo" required>
+
+                <label for="condicao">Condição do Veículo:</label>
+                <select id="condicao" name="condicao" required>
+                    <option value="excelente">Excelente</option>
+                    <option value="bom">Bom</option>
+                    <option value="regular">Regular</option>
+                    <option value="necessita-reparos">Necessita de Reparos</option>
+                </select>
+
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" placeholder="Ex.: Algum dano visível? Histórico de manutenção?"></textarea>
+
+                <label for="preco">Preço Desejado (€):</label>
+                <input type="number" id="preco" name="preco" required>
+
+                <label for="car-images">Fotos do Carro (máximo 5):</label>
+                <input type="file" id="car-images" name="car-images" accept="image/*" multiple>
+                <div id="image-gallery" class="image-gallery"></div>
+
+                <button type="submit">Enviar Proposta</button>
+            </form>
+            <div id="sell-response"></div>
+        </div>
+    </div>
+
+    <!-- Botão do WhatsApp -->
+    <div id="whatsapp-button">
+        <a href="https://wa.me/5511999999999" target="_blank">
+            <img src="assets/whatsapp-icon.png" alt="WhatsApp">
+        </a>
+    </div>
+
+    <!-- Chatbot -->
+    <div id="chatbot">
+        <button id="chatbot-btn">Fale com a IA da BBcar</button>
+        <div id="chat-window" class="hidden">
+            <div id="chat-header">
+                IA da BBcar
+                <span class="close" id="close-chat">×</span>
+            </div>
+            <div id="chat-messages">
+                <p><strong>IA:</strong> Olá! Sou a IA da BBcar. Como posso te ajudar hoje? 😊</p>
+            </div>
+            <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

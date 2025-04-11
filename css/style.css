@@ -152,27 +152,106 @@ nav ul li a:hover {
     text-align: center;
 }
 
+/* Estilo para a galeria de imagens no modal */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.image-gallery img {
+    max-width: 100px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para o resultado do NFT */
+#nft-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(76, 175, 80, 0.5);
+    animation: slideIn 0.5s ease-in-out;
+}
+
+#nft-result h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#nft-result p {
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+#nft-result a {
+    display: block;
+    color: #1e88e5;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+#nft-result a:hover {
+    text-decoration: underline;
+    color: #1565c0;
+}
+
 /* Hero Banner */
 .hero-banner {
-    background: linear-gradient(to right, #4CAF50, #222);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.8), rgba(34, 34, 34, 0.8)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
     color: white;
     text-align: center;
-    padding: 50px 20px;
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-banner h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #fff, #ddd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Poppins', sans-serif; /* Mantendo a fonte do seu estilo global */
+}
+
+.hero-banner p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    color: #ddd;
+    font-family: 'Poppins', sans-serif;
 }
 
 .hero-banner .btn-primary {
-    background: white;
+    background: #fff;
     color: #4CAF50;
-    padding: 10px 20px;
+    padding: 15px 30px;
     border: none;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
+    border-radius: 50px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .hero-banner .btn-primary:hover {
     transform: scale(1.1);
+    background: #f0f0f0;
 }
 
 /* Destaques de Carros */
@@ -185,6 +264,7 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     gap: 20px;
+    flex-wrap: wrap; /* Adicionado para responsividade */
 }
 
 .car-card {
@@ -214,6 +294,20 @@ nav ul li a:hover {
 .car-card p {
     font-size: 16px;
     color: #333;
+}
+
+.car-card button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.car-card button:hover {
+    background: #45a049;
 }
 
 /* Botão de WhatsApp */
@@ -304,6 +398,10 @@ nav ul li a:hover {
     padding: 10px;
     overflow-y: auto;
     background: #f9f9f9;
+}
+
+#chat-messages p {
+    margin: 5px 0;
 }
 
 #chat-input {
