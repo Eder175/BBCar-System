@@ -36,11 +36,11 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Configuração do provedor Polygon (Mumbai Testnet para testes)
-const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com");
+const provider = new ethers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com");
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
 // Endereço e ABI do contrato inteligente
-const contractAddress = "0xABC123..."; // Substitua por SEU_ENDERECO_DO_CONTRATO_AQUI
+const contractAddress = "0xINSIRA_O_ENDERECO_DO_CONTRATO_AQUI"; // Substitua após implantar o contrato
 const contractABI = [
     {
         "inputs": [
@@ -64,6 +64,19 @@ const contractABI = [
             }
         ],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getCurrentTokenId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     }
 ];
@@ -172,6 +185,11 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
     const carData = req.body;
     console.log("Dados do carro recebidos para análise:", carData);
 
+    // Validação dos dados recebidos
+    if (!carData.marca || !carData.modelo || !carData.ano || !carData.matricula) {
+        return res.status(400).json({ error: "Campos obrigatórios (marca, modelo, ano, matrícula) não fornecidos." });
+    }
+
     let similarCarPrices;
     try {
         similarCarPrices = await scrapeCarPrices(carData.marca, carData.modelo, carData.ano);
@@ -218,16 +236,16 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
             marca: carData.marca,
             modelo: carData.modelo,
             ano: carData.ano,
-            motor: carData.motor,
+            motor: carData.motor || "Desconhecido",
             km: 45000 + index * 15000,
             condicao: ["bom", "regular", "excelente"][index % 3],
             preco: price,
             fonte: ["OLX", "Webmotors", "Standvirtual"][index % 3],
         }))
         : [
-            { marca: carData.marca, modelo: carData.modelo, ano: carData.ano, motor: carData.motor, km: 45000, condicao: "bom", preco: basePrice * 1.1, fonte: "OLX" },
-            { marca: carData.marca, modelo: carData.modelo, ano: carData.ano, motor: carData.motor, km: 60000, condicao: "regular", preco: basePrice * 0.9, fonte: "Webmotors" },
-            { marca: carData.marca, modelo: carData.modelo, ano: carData.ano - 1, motor: carData.motor, km: 50000, condicao: "excelente", preco: basePrice * 1.3, fonte: "Standvirtual" },
+            { marca: carData.marca, modelo: carData.modelo, ano: carData.ano, motor: carData.motor || "Desconhecido", km: 45000, condicao: "bom", preco: basePrice * 1.1, fonte: "OLX" },
+            { marca: carData.marca, modelo: carData.modelo, ano: carData.ano, motor: carData.motor || "Desconhecido", km: 60000, condicao: "regular", preco: basePrice * 0.9, fonte: "Webmotors" },
+            { marca: carData.marca, modelo: carData.modelo, ano: carData.ano - 1, motor: carData.motor || "Desconhecido", km: 50000, condicao: "excelente", preco: basePrice * 1.3, fonte: "Standvirtual" },
         ];
 
     const averagePrice = similarCars.reduce((sum, car) => sum + car.preco, 0) / similarCars.length;
@@ -249,8 +267,8 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
             { trait_type: "Modelo", value: carData.modelo },
             { trait_type: "Ano", value: carData.ano },
             { trait_type: "Matrícula", value: carData.matricula },
-            { trait_type: "Condição", value: carData.condicao },
-            { trait_type: "Quilometragem", value: `${carData.km} KM` },
+            { trait_type: "Condição", value: carData.condicao || "Desconhecida" },
+            { trait_type: "Quilometragem", value: `${carData.km || 0} KM` },
             { trait_type: "Preço Sugerido", value: `€${suggestedPrice.toFixed(2)}` },
             { trait_type: "Histórico de Manutenção", value: carHistory.maintenance },
             { trait_type: "Histórico de Acidentes", value: carHistory.accidents },
@@ -292,12 +310,12 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
 
     // Gerar relatório
     let report = `**Relatório de Análise - Veículo ${carData.id || "ID Não Fornecido"}**\n`;
-    report += `**Cliente:** ${carData.nome}, E-mail: ${carData.email}, Telefone: ${carData.telefone}\n`;
-    report += `**Localização do Carro:** ${carData.endereco}, ${carData.cidade}, ${carData.concelho}, ${carData.pais}\n`;
+    report += `**Cliente:** ${carData.nome || "Não informado"}, E-mail: ${carData.email || "Não informado"}, Telefone: ${carData.telefone || "Não informado"}\n`;
+    report += `**Localização do Carro:** ${carData.endereco || "Não informado"}, ${carData.cidade || "Não informado"}, ${carData.concelho || "Não informado"}, ${carData.pais || "Não informado"}\n`;
     report += `**Detalhes do Carro:**\n`;
-    report += `Marca: ${carData.marca}, Modelo: ${carData.modelo}, Ano: ${carData.ano}, Motor: ${carData.motor}\n`;
-    report += `Quilometragem: ${carData.km} KM, Condição: ${carData.condicao}\n`;
-    report += `Preço Desejado pelo Cliente: €${carData.preco}\n`;
+    report += `Marca: ${carData.marca}, Modelo: ${carData.modelo}, Ano: ${carData.ano}, Motor: ${carData.motor || "Desconhecido"}\n`;
+    report += `Quilometragem: ${carData.km || 0} KM, Condição: ${carData.condicao || "Desconhecida"}\n`;
+    report += `Preço Desejado pelo Cliente: €${carData.preco || "Não informado"}\n`;
     report += `Observações do Cliente: ${carData.observacoes || "Nenhuma observação fornecida."}\n`;
     report += `**Análise de Mercado:**\n`;
     report += `Carros semelhantes encontrados:\n`;

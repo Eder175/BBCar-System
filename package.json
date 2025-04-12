@@ -29,6 +29,7 @@
     "puppeteer": "^24.6.1"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.23.0"
   }
 }
