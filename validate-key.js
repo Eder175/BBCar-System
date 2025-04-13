@@ -1,6 +1,6 @@
 const { ethers } = require("ethers");
 
-// Chave privada do .env
+// Chave privada
 const privateKey = "0x43f1db6caa2bce7c684058aa94d46ab9612b798fae35940ff52d9a9c8713432";
 
 try {

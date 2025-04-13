@@ -35,9 +35,26 @@ const authenticateToken = (req, res, next) => {
     }
 };
 
-// Configuração do provedor Polygon (Mumbai Testnet para testes)
-const provider = new ethers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com");
-const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+// Configuração do provedor Polygon (Amoy Testnet)
+const provider = new ethers.JsonRpcProvider("https://rpc-amoy.polygon.technology");
+
+// Validar a chave privada antes de criar a carteira
+const privateKey = process.env.PRIVATE_KEY ? process.env.PRIVATE_KEY.trim() : null;
+let wallet;
+
+try {
+    if (!privateKey) {
+        throw new Error("Chave privada não fornecida no arquivo .env.");
+    }
+    if (!privateKey.startsWith("0x") || privateKey.length !== 66) {
+        throw new Error("Chave privada inválida: deve começar com 0x e ter 64 caracteres após o 0x.");
+    }
+    wallet = new ethers.Wallet(privateKey, provider);
+    console.log("Endereço da carteira:", wallet.address);
+} catch (error) {
+    console.error("Erro ao criar a carteira:", error.message);
+    process.exit(1); // Encerra o servidor se a chave privada for inválida
+}
 
 // Endereço e ABI do contrato inteligente
 const contractAddress = "0xINSIRA_O_ENDERECO_DO_CONTRATO_AQUI"; // Substitua após implantar o contrato
@@ -298,7 +315,7 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
         nftResult = {
             nftId: receipt.transactionHash,
             tokenURI,
-            explorerLink: `https://mumbai.polygonscan.com/tx/${receipt.transactionHash}`,
+            explorerLink: `https://amoy.polygonscan.com/tx/${receipt.transactionHash}`,
             message: `NFT gerado com sucesso para o carro com matrícula ${carData.matricula}!`,
         };
     } catch (error) {
