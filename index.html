@@ -6,11 +6,23 @@
     <title>BBcar - Seu Novo Carro Está Aqui!</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .loading {
+            display: none;
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="assets/img/logo.jpeg" alt="BBcar Logo">
+            <img src="assets/img/logo.jpeg" alt="Logotipo da BBcar">
         </div>
         <h1>Seu Novo Carro Está Aqui!</h1>
         <nav>
@@ -55,60 +67,60 @@
     <!-- Modal para Venda seu Veículo -->
     <div id="sell-car-modal" class="modal hidden">
         <div class="modal-content">
-            <span class="close" id="close-sell-modal">×</span>
+            <span class="close" id="close-sell-modal" aria-label="Fechar modal">×</span>
             <h2>Venda seu Veículo</h2>
             <p>Preencha os dados abaixo para enviar sua proposta de venda.</p>
             <form id="sell-car-form">
                 <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome" required aria-required="true">
 
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required aria-required="true">
 
                 <label for="telefone">Telefone:</label>
-                <input type="tel" id="telefone" name="telefone" required>
+                <input type="tel" id="telefone" name="telefone" required aria-required="true">
 
                 <label for="endereco">Endereço:</label>
-                <input type="text" id="endereco" name="endereco" required>
+                <input type="text" id="endereco" name="endereco" required aria-required="true">
 
                 <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" name="cidade" required>
+                <input type="text" id="cidade" name="cidade" required aria-required="true">
 
                 <label for="concelho">Concelho:</label>
-                <input type="text" id="concelho" name="concelho" required>
+                <input type="text" id="concelho" name="concelho" required aria-required="true">
 
                 <label for="pais">País:</label>
-                <input type="text" id="pais" name="pais" required>
+                <input type="text" id="pais" name="pais" required aria-required="true">
 
                 <label for="marca">Marca:</label>
-                <input type="text" id="marca" name="marca" required>
+                <input type="text" id="marca" name="marca" required aria-required="true">
 
                 <label for="modelo">Modelo:</label>
-                <input type="text" id="modelo" name="modelo" required>
+                <input type="text" id="modelo" name="modelo" required aria-required="true">
 
                 <label for="ano">Ano:</label>
-                <input type="number" id="ano" name="ano" required>
+                <input type="number" id="ano" name="ano" required aria-required="true">
 
                 <label for="motor">Motor:</label>
-                <input type="text" id="motor" name="motor" required>
+                <input type="text" id="motor" name="motor" required aria-required="true">
 
                 <label for="km">Quilometragem (KM):</label>
-                <input type="number" id="km" name="km" required>
+                <input type="number" id="km" name="km" required aria-required="true">
 
                 <label for="cor">Cor:</label>
-                <input type="text" id="cor" name="cor" required>
+                <input type="text" id="cor" name="cor" required aria-required="true">
 
                 <label for="iuc">IUC (Imposto Único de Circulação):</label>
-                <input type="text" id="iuc" name="iuc" required>
+                <input type="text" id="iuc" name="iuc" required aria-required="true">
 
                 <label for="ipo">IPO (Inspeção Periódica Obrigatória):</label>
-                <input type="text" id="ipo" name="ipo" required>
+                <input type="text" id="ipo" name="ipo" required aria-required="true">
 
                 <label for="matricula">Matrícula (Placa):</label>
-                <input type="text" id="matricula" name="matricula" required placeholder="Ex.: 44SD56">
+                <input type="text" id="matricula" name="matricula" required placeholder="Ex.: 44SD56" aria-required="true">
 
                 <label for="condicao">Condição do Veículo:</label>
-                <select id="condicao" name="condicao" required>
+                <select id="condicao" name="condicao" required aria-required="true">
                     <option value="excelente">Excelente</option>
                     <option value="bom">Bom</option>
                     <option value="regular">Regular</option>
@@ -119,42 +131,43 @@
                 <textarea id="observacoes" name="observacoes" placeholder="Ex.: Algum dano visível? Histórico de manutenção?"></textarea>
 
                 <label for="preco">Preço Desejado (€):</label>
-                <input type="number" id="preco" name="preco" required>
+                <input type="number" id="preco" name="preco" required aria-required="true">
 
                 <label for="car-images">Fotos do Carro (máximo 5):</label>
                 <input type="file" id="car-images" name="car-images" accept="image/*" multiple>
                 <div id="image-gallery" class="image-gallery"></div>
 
                 <button type="submit">Enviar Proposta</button>
+                <div id="loading" class="loading">Enviando sua proposta...</div>
             </form>
             <div id="sell-response"></div>
             <div id="nft-result" class="hidden">
                 <h3>NFT Gerado para o Carro</h3>
                 <p id="nft-message"></p>
-                <a id="nft-link" href="#" target="_blank">Ver NFT</a>
+                <a id="nft-link" href="#" target="_blank" rel="noopener noreferrer">Ver Transação na Blockchain</a>
             </div>
         </div>
     </div>
 
     <!-- Botão do WhatsApp -->
     <div id="whatsapp-button">
-        <a href="https://wa.me/5511999999999" target="_blank">
-            <img src="assets/img/whatsapp-icon.png" alt="WhatsApp">
+        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
+            <img src="assets/img/whatsapp-icon.png" alt="Fale conosco pelo WhatsApp">
         </a>
     </div>
 
     <!-- Chatbot -->
     <div id="chatbot">
-        <button id="chatbot-btn">Fale com a IA da BBcar</button>
+        <button id="chatbot-btn" aria-label="Abrir chat com a IA da BBcar">Fale com a IA da BBcar</button>
         <div id="chat-window" class="hidden">
             <div id="chat-header">
                 IA da BBcar
-                <span class="close" id="close-chat">×</span>
+                <span class="close" id="close-chat" aria-label="Fechar chat">×</span>
             </div>
             <div id="chat-messages">
                 <p><strong>IA:</strong> Olá! Sou a IA da BBcar. Como posso te ajudar hoje? 😊</p>
             </div>
-            <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+            <input type="text" id="chat-input" placeholder="Digite sua mensagem..." aria-label="Digite sua mensagem para a IA">
         </div>
     </div>
 

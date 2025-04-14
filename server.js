@@ -4,10 +4,14 @@ const cors = require("cors");
 const puppeteer = require("puppeteer");
 const { ethers } = require("ethers");
 const jwt = require("jsonwebtoken");
+const pinataSDK = require("@pinata/sdk");
 require("dotenv").config();
 
 const app = express();
 const port = 3001;
+
+// Configuração do Pinata
+const pinata = new pinataSDK({ pinataJWTKey: process.env.PINATA_JWT });
 
 // Middleware para CORS e parsear JSON
 app.use(cors());
@@ -16,10 +20,10 @@ app.use(express.json());
 // Chave secreta para autenticação JWT
 const JWT_SECRET = process.env.JWT_SECRET || "bbcar-system-secret-2025";
 
-// Middleware de autenticação simples
+// Middleware de autenticação
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1]; // Formato: "Bearer TOKEN"
+    const token = authHeader && authHeader.split(" ")[1];
 
     if (!token) {
         return res.status(401).json({ error: "Acesso negado. Token não fornecido." });
@@ -46,60 +50,40 @@ try {
     if (!privateKey) {
         throw new Error("Chave privada não fornecida no arquivo .env.");
     }
-    if (!privateKey.startsWith("0x") || privateKey.length !== 66) {
+    if (!privateKey.startsWith("0x") || privateKey.slice(2).length !== 64) {
         throw new Error("Chave privada inválida: deve começar com 0x e ter 64 caracteres após o 0x.");
     }
     wallet = new ethers.Wallet(privateKey, provider);
     console.log("Endereço da carteira:", wallet.address);
 } catch (error) {
     console.error("Erro ao criar a carteira:", error.message);
-    process.exit(1); // Encerra o servidor se a chave privada for inválida
+    process.exit(1);
 }
 
 // Endereço e ABI do contrato inteligente
-const contractAddress = "0xINSIRA_O_ENDERECO_DO_CONTRATO_AQUI"; // Substitua após implantar o contrato
+const contractAddress = "0xSeuContratoAqui"; // Substitua pelo endereço obtido no deploy
 const contractABI = [
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "recipient",
-                "type": "address"
-            },
-            {
-                "internalType": "string",
-                "name": "tokenURI",
-                "type": "string"
-            }
+        inputs: [
+            { internalType: "address", name: "recipient", type: "address" },
+            { internalType: "string", name: "tokenURI", type: "string" },
         ],
-        "name": "mintNFT",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
+        name: "mintNFT",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "nonpayable",
+        type: "function",
     },
     {
-        "inputs": [],
-        "name": "getCurrentTokenId",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
+        inputs: [],
+        name: "getCurrentTokenId",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+    },
 ];
 const carNFTContract = new ethers.Contract(contractAddress, contractABI, wallet);
 
-// Rota GET simples para confirmar que o servidor está funcionando
+// Rota GET para confirmar que o servidor está funcionando
 app.get("/", (req, res) => {
     res.send("Servidor BBcar-System está funcionando! Acesse os endpoints /api/chat ou /api/analyze-car para interagir com a API.");
 });
@@ -108,7 +92,6 @@ app.get("/", (req, res) => {
 app.post("/api/login", (req, res) => {
     const { username, password } = req.body;
 
-    // Simulação de autenticação (substitua por um banco de dados real no futuro)
     if (username === "admin" && password === "123456") {
         const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
         res.json({ token });
@@ -154,19 +137,35 @@ async function scrapeCarPrices(marca, modelo, ano) {
     }
 }
 
+// Função para fazer upload de imagens no Pinata
+async function uploadImageToPinata(imageFile) {
+    try {
+        const options = {
+            pinataMetadata: {
+                name: imageFile.name,
+            },
+            pinataOptions: {
+                cidVersion: 0,
+            },
+        };
+        const result = await pinata.pinFileToIPFS(imageFile, options);
+        return `ipfs://${result.IpfsHash}`;
+    } catch (error) {
+        console.error("Erro ao fazer upload da imagem para o Pinata:", error.message);
+        throw error;
+    }
+}
+
 // Endpoint para enviar mensagens à IA (protegido)
 app.post("/api/chat", authenticateToken, async (req, res) => {
     const { message } = req.body;
     console.log("Mensagem recebida no backend:", message);
-    console.log("Chave de API da OpenAI:", process.env.OPENAI_API_KEY ? "Chave presente" : "Chave ausente");
 
     if (!message) {
-        console.error("Erro: Mensagem não fornecida.");
         return res.status(400).json({ error: "Mensagem não fornecida." });
     }
 
     try {
-        console.log("Enviando requisição para a OpenAI...");
         const response = await axios.post(
             "https://api.openai.com/v1/chat/completions",
             {
@@ -185,7 +184,6 @@ app.post("/api/chat", authenticateToken, async (req, res) => {
             }
         );
 
-        console.log("Resposta da OpenAI recebida:", response.data);
         const reply = response.data.choices[0].message.content;
         res.json({ reply });
     } catch (error) {
@@ -202,7 +200,6 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
     const carData = req.body;
     console.log("Dados do carro recebidos para análise:", carData);
 
-    // Validação dos dados recebidos
     if (!carData.marca || !carData.modelo || !carData.ano || !carData.matricula) {
         return res.status(400).json({ error: "Campos obrigatórios (marca, modelo, ano, matrícula) não fornecidos." });
     }
@@ -222,23 +219,14 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
     if (similarCarPrices.length > 0) {
         basePrice = similarCarPrices.reduce((sum, price) => sum + price, 0) / similarCarPrices.length;
     } else {
-        if (carAge > 20) {
-            basePrice = 2000;
-        } else if (carAge > 10) {
-            basePrice = 5000;
-        } else {
-            basePrice = 10000;
-        }
+        if (carAge > 20) basePrice = 2000;
+        else if (carAge > 10) basePrice = 5000;
+        else basePrice = 10000;
 
-        if (carData.condicao === "excelente") {
-            basePrice *= 1.2;
-        } else if (carData.condicao === "bom") {
-            basePrice *= 1.0;
-        } else if (carData.condicao === "regular") {
-            basePrice *= 0.7;
-        } else if (carData.condicao === "necessita-reparos") {
-            basePrice *= 0.4;
-        }
+        if (carData.condicao === "excelente") basePrice *= 1.2;
+        else if (carData.condicao === "bom") basePrice *= 1.0;
+        else if (carData.condicao === "regular") basePrice *= 0.7;
+        else if (carData.condicao === "necessita-reparos") basePrice *= 0.4;
 
         const kmFactor = carData.km > 100000 ? 0.8 : 1.0;
         basePrice *= kmFactor;
@@ -268,17 +256,30 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
     const averagePrice = similarCars.reduce((sum, car) => sum + car.preco, 0) / similarCars.length;
     const suggestedPrice = averagePrice * 0.5;
 
+    // Upload das imagens para o Pinata
+    let imageUrl = "https://via.placeholder.com/500x500?text=Carro+Sem+Imagem";
+    if (carData.images && carData.images.length > 0) {
+        try {
+            // Simulação: No backend real, você precisaria receber as imagens via multipart/form-data
+            // Aqui assumimos que carData.images contém URLs ou nomes de arquivo
+            imageUrl = `ipfs://${carData.images[0]}`; // Placeholder para simulação
+            // Para upload real, você precisaria configurar um endpoint com multer para receber arquivos
+        } catch (error) {
+            console.error("Erro ao fazer upload da imagem:", error.message);
+        }
+    }
+
     // Gerar metadados do NFT
     const carHistory = {
         maintenance: carData.observacoes?.includes("manutenção") ? "Manutenção regular realizada" : "Sem histórico de manutenção informado",
         accidents: carData.observacoes?.toLowerCase().includes("acidente") ? "Veículo com histórico de acidente" : "Sem histórico de acidentes informado",
-        previousOwners: "Desconhecido", // Pode ser expandido no futuro
+        previousOwners: "Desconhecido",
     };
 
     const metadata = {
         name: `Carro ${carData.marca} ${carData.modelo} (${carData.matricula})`,
         description: `Certificado Digital BBCar para o carro ${carData.marca} ${carData.modelo}, matrícula ${carData.matricula}, ano ${carData.ano}.`,
-        image: carData.images?.[0] || "https://via.placeholder.com/500x500?text=Carro+Sem+Imagem",
+        image: imageUrl,
         attributes: [
             { trait_type: "Marca", value: carData.marca },
             { trait_type: "Modelo", value: carData.modelo },
@@ -294,20 +295,10 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
 
     let nftResult = {};
     try {
-        // Fazer upload dos metadados para o IPFS usando Pinata
-        const metadataResponse = await axios.post(
-            "https://api.pinata.cloud/pinning/pinJSONToIPFS",
-            metadata,
-            {
-                headers: {
-                    Authorization: `Bearer ${process.env.PINATA_JWT}`,
-                },
-            }
-        );
-        const tokenURI = `ipfs://${metadataResponse.data.IpfsHash}`;
+        const metadataResponse = await pinata.pinJSONToIPFS(metadata);
+        const tokenURI = `ipfs://${metadataResponse.IpfsHash}`;
         console.log("Metadados enviados para IPFS:", tokenURI);
 
-        // Mintar o NFT na blockchain Polygon
         const tx = await carNFTContract.mintNFT(wallet.address, tokenURI);
         const receipt = await tx.wait();
         console.log("NFT mintado com sucesso:", receipt);

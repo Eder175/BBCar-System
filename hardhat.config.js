@@ -10,4 +10,19 @@ module.exports = {
       accounts: [process.env.PRIVATE_KEY],
     },
   },
+  etherscan: {
+    apiKey: {
+      polygonAmoy: "SUA_CHAVE_API_POLYGONSCAN", // Obtenha em https://polygonscan.com/myapikey
+    },
+    customChains: [
+      {
+        network: "polygonAmoy",
+        chainId: 80002,
+        urls: {
+          apiURL: "https://api-amoy.polygonscan.com/api",
+          browserURL: "https://amoy.polygonscan.com",
+        },
+      },
+    ],
+  },
 };

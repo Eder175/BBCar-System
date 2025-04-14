@@ -9,6 +9,7 @@ const imageGallery = document.getElementById('image-gallery');
 const nftResult = document.getElementById('nft-result');
 const nftMessage = document.getElementById('nft-message');
 const nftLink = document.getElementById('nft-link');
+const submitButton = sellCarForm.querySelector('button[type="submit"]');
 
 // Token de autenticação (armazenado no localStorage)
 let authToken = localStorage.getItem('authToken');
@@ -59,9 +60,11 @@ closeSellModal.addEventListener('click', () => {
     sellCarModal.classList.add('hidden');
     sellResponse.textContent = '';
     nftResult.classList.add('hidden');
+    imageGallery.innerHTML = '';
+    sellCarForm.reset();
 });
 
-// Exibir imagens no upload
+// Exibir imagens no upload com validação
 carImagesInput.addEventListener('change', () => {
     imageGallery.innerHTML = '';
     const files = carImagesInput.files;
@@ -72,13 +75,45 @@ carImagesInput.addEventListener('change', () => {
     }
 
     for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!file.type.startsWith('image/')) {
+            alert('Por favor, envie apenas arquivos de imagem.');
+            carImagesInput.value = '';
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) { // Limite de 5MB por imagem
+            alert('Cada imagem deve ter no máximo 5MB.');
+            carImagesInput.value = '';
+            return;
+        }
         const img = document.createElement('img');
-        img.src = URL.createObjectURL(files[i]);
+        img.src = URL.createObjectURL(file);
         img.style.maxWidth = '100px';
         img.style.margin = '5px';
         imageGallery.appendChild(img);
     }
 });
+
+// Função para validar o formulário antes do envio
+function validateForm(formData) {
+    const ano = parseInt(formData.get('ano'));
+    const km = parseInt(formData.get('km'));
+    const preco = parseInt(formData.get('preco'));
+
+    if (ano < 1900 || ano > new Date().getFullYear()) {
+        alert('O ano do veículo deve estar entre 1900 e o ano atual.');
+        return false;
+    }
+    if (km < 0) {
+        alert('A quilometragem não pode ser negativa.');
+        return false;
+    }
+    if (preco < 0) {
+        alert('O preço desejado não pode ser negativo.');
+        return false;
+    }
+    return true;
+}
 
 // Enviar proposta e gerar NFT
 sellCarForm.addEventListener('submit', async (e) => {
@@ -91,6 +126,10 @@ sellCarForm.addEventListener('submit', async (e) => {
     }
 
     const formData = new FormData(sellCarForm);
+    if (!validateForm(formData)) {
+        return;
+    }
+
     const carData = {
         nome: formData.get('nome'),
         email: formData.get('email'),
@@ -111,17 +150,20 @@ sellCarForm.addEventListener('submit', async (e) => {
         condicao: formData.get('condicao'),
         observacoes: formData.get('observacoes'),
         preco: formData.get('preco'),
-        images: []
+        images: [],
     };
 
     // Adicionar imagens ao carData
     const files = carImagesInput.files;
     for (let i = 0; i < files.length; i++) {
-        carData.images.push(files[i].name);
+        carData.images.push(files[i].name); // Placeholder: o upload real será feito no backend
     }
 
     try {
-        // Enviar proposta para o backend
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+        sellResponse.textContent = 'Processando sua proposta, por favor aguarde...';
+
         const response = await fetch('http://localhost:3001/api/analyze-car', {
             method: 'POST',
             headers: {
@@ -132,9 +174,7 @@ sellCarForm.addEventListener('submit', async (e) => {
         });
 
         if (response.status === 401 || response.status === 403) {
-            // Token expirado ou inválido, tentar fazer login novamente
             await login();
-            // Tentar novamente a requisição com o novo token
             const retryResponse = await fetch('http://localhost:3001/api/analyze-car', {
                 method: 'POST',
                 headers: {
@@ -157,7 +197,10 @@ sellCarForm.addEventListener('submit', async (e) => {
         }
     } catch (error) {
         console.error('Erro ao enviar proposta:', error);
-        sellResponse.textContent = 'Erro ao enviar proposta. Tente novamente.';
+        sellResponse.textContent = `Erro ao enviar proposta: ${error.message}. Tente novamente.`;
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Enviar Proposta';
     }
 });
 
@@ -173,7 +216,6 @@ function handleResponse(data) {
         sellResponse.textContent += ` (Erro ao gerar NFT: ${data.nftResult?.error || 'Desconhecido'})`;
     }
 
-    // Salvar a proposta no localStorage (futuramente substituir por banco de dados)
     const proposals = JSON.parse(localStorage.getItem('proposals') || '[]');
     proposals.push({ ...data, carData });
     localStorage.setItem('proposals', JSON.stringify(proposals));
@@ -214,10 +256,12 @@ chatInput.addEventListener('keypress', async (e) => {
             chatMessages.appendChild(userMessage);
 
             chatInput.value = '';
+            chatInput.disabled = true;
 
             if (!authToken) {
                 alert('Você precisa estar logado para usar o chat.');
                 await login();
+                chatInput.disabled = false;
                 return;
             }
 
@@ -233,7 +277,6 @@ chatInput.addEventListener('keypress', async (e) => {
                 });
 
                 if (response.status === 401 || response.status === 403) {
-                    // Token expirado ou inválido, tentar fazer login novamente
                     await login();
                     const retryResponse = await fetch('http://localhost:3001/api/chat', {
                         method: 'POST',
@@ -258,8 +301,11 @@ chatInput.addEventListener('keypress', async (e) => {
             } catch (error) {
                 console.error('Erro ao enviar mensagem para a IA:', error);
                 const errorMessage = document.createElement('p');
-                errorMessage.innerHTML = `<strong>IA:</strong> Desculpe, houve um erro. Tente novamente!`;
+                errorMessage.innerHTML = `<strong>IA:</strong> Desculpe, houve um erro: ${error.message}. Tente novamente!`;
                 chatMessages.appendChild(errorMessage);
+            } finally {
+                chatInput.disabled = false;
+                chatInput.focus();
             }
         }
     }
