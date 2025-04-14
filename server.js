@@ -4,14 +4,17 @@ const cors = require("cors");
 const puppeteer = require("puppeteer");
 const { ethers } = require("ethers");
 const jwt = require("jsonwebtoken");
-const pinataSDK = require("@pinata/sdk");
+const { PinataSDK } = require("pinata-web3");
 require("dotenv").config();
 
 const app = express();
 const port = 3001;
 
 // Configuração do Pinata
-const pinata = new pinataSDK({ pinataJWTKey: process.env.PINATA_JWT });
+const pinata = new PinataSDK({
+    pinataJwt: process.env.PINATA_JWT,
+    pinataGateway: "https://gateway.pinata.cloud",
+});
 
 // Middleware para CORS e parsear JSON
 app.use(cors());
@@ -83,117 +86,17 @@ const contractABI = [
 ];
 const carNFTContract = new ethers.Contract(contractAddress, contractABI, wallet);
 
-// Rota GET para confirmar que o servidor está funcionando
-app.get("/", (req, res) => {
-    res.send("Servidor BBcar-System está funcionando! Acesse os endpoints /api/chat ou /api/analyze-car para interagir com a API.");
-});
-
-// Rota para login (simples, para gerar um token JWT)
-app.post("/api/login", (req, res) => {
-    const { username, password } = req.body;
-
-    if (username === "admin" && password === "123456") {
-        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
-        res.json({ token });
-    } else {
-        res.status(401).json({ error: "Credenciais inválidas." });
-    }
-});
-
-// Função para buscar preços de carros semelhantes usando web scraping
-async function scrapeCarPrices(marca, modelo, ano) {
-    let browser;
-    try {
-        browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] });
-        const page = await browser.newPage();
-
-        const searchQuery = `${marca} ${modelo} ${ano}`.replace(/\s+/g, "+");
-        const url = `https://www.standvirtual.com/carros?q=${searchQuery}`;
-        console.log(`Acessando URL para web scraping: ${url}`);
-        await page.goto(url, { waitUntil: "networkidle2", timeout: 30000 });
-
-        const prices = await page.evaluate(() => {
-            const priceElements = document.querySelectorAll(".offer-price__number");
-            const pricesArray = [];
-            priceElements.forEach(element => {
-                const priceText = element.innerText.replace(/[^\d]/g, "");
-                const price = parseFloat(priceText);
-                if (!isNaN(price)) {
-                    pricesArray.push(price);
-                }
-            });
-            return pricesArray;
-        });
-
-        console.log(`Preços encontrados: ${prices}`);
-        return prices;
-    } catch (error) {
-        console.error("Erro ao realizar web scraping:", error.message);
-        throw error;
-    } finally {
-        if (browser) {
-            await browser.close();
-        }
-    }
-}
-
 // Função para fazer upload de imagens no Pinata
 async function uploadImageToPinata(imageFile) {
     try {
-        const options = {
-            pinataMetadata: {
-                name: imageFile.name,
-            },
-            pinataOptions: {
-                cidVersion: 0,
-            },
-        };
-        const result = await pinata.pinFileToIPFS(imageFile, options);
-        return `ipfs://${result.IpfsHash}`;
+        const file = new File([imageFile], imageFile.name, { type: imageFile.type });
+        const upload = await pinata.upload.file(file);
+        return `ipfs://${upload.IpfsHash}`;
     } catch (error) {
         console.error("Erro ao fazer upload da imagem para o Pinata:", error.message);
         throw error;
     }
 }
-
-// Endpoint para enviar mensagens à IA (protegido)
-app.post("/api/chat", authenticateToken, async (req, res) => {
-    const { message } = req.body;
-    console.log("Mensagem recebida no backend:", message);
-
-    if (!message) {
-        return res.status(400).json({ error: "Mensagem não fornecida." });
-    }
-
-    try {
-        const response = await axios.post(
-            "https://api.openai.com/v1/chat/completions",
-            {
-                model: "gpt-3.5-turbo",
-                messages: [
-                    { role: "system", content: "Você é a IA da BBcar, uma plataforma de compra e venda de carros. Ajude os usuários a vender ou comprar carros, analise preços de mercado, e forneça respostas úteis e naturais. Use um tom amigável e profissional." },
-                    { role: "user", content: message },
-                ],
-                max_tokens: 500,
-            },
-            {
-                headers: {
-                    "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-
-        const reply = response.data.choices[0].message.content;
-        res.json({ reply });
-    } catch (error) {
-        console.error("Erro ao enviar mensagem para a OpenAI:", error.message);
-        if (error.response) {
-            console.error("Detalhes do erro:", error.response.data);
-        }
-        res.status(500).json({ error: "Erro ao processar a mensagem. Tente novamente." });
-    }
-});
 
 // Endpoint para análise de preços de carros e geração de NFT (protegido)
 app.post("/api/analyze-car", authenticateToken, async (req, res) => {
@@ -260,10 +163,7 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
     let imageUrl = "https://via.placeholder.com/500x500?text=Carro+Sem+Imagem";
     if (carData.images && carData.images.length > 0) {
         try {
-            // Simulação: No backend real, você precisaria receber as imagens via multipart/form-data
-            // Aqui assumimos que carData.images contém URLs ou nomes de arquivo
             imageUrl = `ipfs://${carData.images[0]}`; // Placeholder para simulação
-            // Para upload real, você precisaria configurar um endpoint com multer para receber arquivos
         } catch (error) {
             console.error("Erro ao fazer upload da imagem:", error.message);
         }
@@ -295,8 +195,8 @@ app.post("/api/analyze-car", authenticateToken, async (req, res) => {
 
     let nftResult = {};
     try {
-        const metadataResponse = await pinata.pinJSONToIPFS(metadata);
-        const tokenURI = `ipfs://${metadataResponse.IpfsHash}`;
+        const upload = await pinata.upload.json(metadata);
+        const tokenURI = `ipfs://${upload.IpfsHash}`;
         console.log("Metadados enviados para IPFS:", tokenURI);
 
         const tx = await carNFTContract.mintNFT(wallet.address, tokenURI);
