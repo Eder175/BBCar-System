@@ -66,29 +66,41 @@ if (mobileMenuButton && navMenu) {
     });
 }
 
-// Carrossel de carros com auto-scroll e pausa ao passar o mouse
+// Carrossel de carros com auto-scroll, pausa ao passar o mouse e dots
 const carousel = document.getElementById('car-carousel');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
+const dots = document.querySelectorAll('.carousel-dot');
 
 if (carousel && prevBtn && nextBtn) {
     let scrollPosition = 0;
-    const cardWidth = carousel.querySelector('.min-w-full').offsetWidth;
+    const cardWidth = carousel.querySelector('.carousel-item').offsetWidth;
     let autoScrollInterval;
+    let currentIndex = 0;
+
+    const updateDots = () => {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
+    };
 
     const scrollCarousel = (direction) => {
+        const totalItems = carousel.children.length;
         if (direction === 'next') {
-            scrollPosition += cardWidth;
-            if (scrollPosition >= carousel.scrollWidth - cardWidth) {
-                scrollPosition = 0;
-            }
+            currentIndex = (currentIndex + 1) % totalItems;
+            scrollPosition = currentIndex * cardWidth;
         } else {
-            scrollPosition -= cardWidth;
-            if (scrollPosition < 0) {
-                scrollPosition = carousel.scrollWidth - cardWidth;
-            }
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            scrollPosition = currentIndex * cardWidth;
         }
         carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        updateDots();
+    };
+
+    const goToSlide = (index) => {
+        currentIndex = index;
+        scrollPosition = index * cardWidth;
+        carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+        updateDots();
     };
 
     // Iniciar auto-scroll
@@ -114,6 +126,15 @@ if (carousel && prevBtn && nextBtn) {
         stopAutoScroll();
         scrollCarousel('prev');
         startAutoScroll();
+    });
+
+    // Eventos dos dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            stopAutoScroll();
+            goToSlide(index);
+            startAutoScroll();
+        });
     });
 
     // Pausar auto-scroll ao passar o mouse
