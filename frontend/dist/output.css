@@ -713,6 +713,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
 }
@@ -723,6 +727,10 @@ video {
 
 .hidden {
   display: none;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .h-12 {
@@ -747,6 +755,14 @@ video {
 
 .h-screen {
   height: 100vh;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-12 {
@@ -904,8 +920,17 @@ video {
   border-width: 2px;
 }
 
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-t {
   border-top-width: 1px;
+}
+
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity, 1));
 }
 
 .border-gray-700 {
@@ -953,6 +978,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[linear-gradient\(rgba\(0\2c 0\2c 0\2c 0\.5\)\2c rgba\(0\2c 0\2c 0\2c 0\.5\)\)\2c url\(\'https\:\/\/images\.unsplash\.com\/photo-1503376780353-7e6692767b70\?q\=80\&w\=2070\&auto\=format\&fit\=crop\'\)\] {
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop');
+}
+
 .bg-\[url\(\'https\:\/\/images\.unsplash\.com\/photo-1492144534655-ae79c964c9d7\?q\=80\&w\=2070\&auto\=format\&fit\=crop\'\)\] {
   background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2070&auto=format&fit=crop');
 }
@@ -971,6 +1000,10 @@ video {
 
 .bg-center {
   background-position: center;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 .object-cover {
@@ -1049,8 +1082,16 @@ video {
   padding-bottom: 1rem;
 }
 
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
 .pt-8 {
   padding-top: 2rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
@@ -1098,6 +1139,11 @@ video {
 
 .font-medium {
   font-weight: 500;
+}
+
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-400 {
@@ -1159,12 +1205,23 @@ video {
   transition-duration: 150ms;
 }
 
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .duration-300 {
   transition-duration: 300ms;
 }
 
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.hover\:bg-\[\#2c4373\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(44 67 115 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-green-600:hover {
@@ -1253,6 +1310,10 @@ video {
     justify-content: flex-start;
   }
 
+  .md\:pr-10 {
+    padding-right: 2.5rem;
+  }
+
   .md\:text-left {
     text-align: left;
   }
@@ -1260,6 +1321,16 @@ video {
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .md\:text-6xl {
