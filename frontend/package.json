@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build:prod": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+    "build:prod": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "start": "live-server"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "live-server": "^1.2.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.14"
   }

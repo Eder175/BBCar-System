@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça a BBCar, a plataforma líder em compra e venda de veículos com comissões multinível em Portugal e Europa.">
+    <meta name="keywords" content="BBCar, sobre nós, compra de carros, venda de carros, comissões multinível, Portugal, Europa">
+    <meta name="author" content="BBCar">
+    <title>BBCar - Sobre Nós</title>
+    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bbcar-dark: #1a2a44;
+            --bbcar-gold: #f5c107;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-bbcar-dark { background-color: var(--bbcar-dark); }
+        .text-bbcar-dark { color: var(--bbcar-dark); }
+        .bg-bbcar-gold { background-color: var(--bbcar-gold); }
+        .text-bbcar-gold { color: var(--bbcar-gold); }
+        .faq-answer {
+            display: none;
+        }
+        .faq-answer.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-bbcar-dark text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-car text-bbcar-gold text-3xl mr-2"></i>
+                <h1 class="text-2xl font-bold">BB<span class="text-bbcar-gold">Car</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="../index.html#inicio" class="text-white hover:text-bbcar-gold font-medium">Início</a>
+                <a href="../index.html#carros" class="text-white hover:text-bbcar-gold font-medium">Carros</a>
+                <a href="../index.html#vantagens" class="text-white hover:text-bbcar-gold font-medium">Vantagens</a>
+                <a href="../index.html#comissoes" class="text-white hover:text-bbcar-gold font-medium">Comissões</a>
+                <a href="#" class="text-white hover:text-bbcar-gold font-medium">Sobre</a>
+                <a href="partners.html" class="text-white hover:text-bbcar-gold font-medium">Seja um Parceiro</a>
+                <a href="sell-vehicle.html" class="text-white hover:text-bbcar-gold font-medium">Venda seu Veículo</a>
+                <a href="#" class="text-white hover:text-bbcar-gold font-medium">Carrinho</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition">
+                    <i class="fas fa-user mr-2"></i>Área do Associado
+                </button>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="bg-[linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop')] bg-no-repeat bg-center bg-cover text-white py-20 min-h-screen flex items-center">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Sobre a BBCar</h2>
+                <p class="mb-4 text-lg">Fundada em 2020 em Lisboa, a BBCar surgiu com a missão de revolucionar o mercado automóvel através de um modelo inovador de vendas com comissões multinível.</p>
+                <p class="mb-6 text-lg">Hoje somos a principal plataforma de venda de veículos com sistema de afiliados em Portugal e estamos expandindo rapidamente por toda a Europa, com planos para alcançar o mundo todo.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-bbcar-dark rounded-full flex items-center justify-center hover:bg-[#2c4373]">
+                        <i class="fab fa-facebook-f text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-bbcar-dark rounded-full flex items-center justify-center hover:bg-[#2c4373]">
+                        <i class="fab fa-twitter text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-bbcar-dark rounded-full flex items-center justify-center hover:bg-[#2c4373]">
+                        <i class="fab fa-instagram text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-bbcar-dark rounded-full flex items-center justify-center hover:bg-[#2c4373]">
+                        <i class="fab fa-linkedin-in text-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <h3 class="text-xl md:text-3xl font-bold mb-6">Perguntas Frequentes</h3>
+                <div id="faq" class="space-y-4">
+                    <div class="border-b border-gray-400 pb-4">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <span class="font-medium text-lg">Como me torno um associado BBCar?</span>
+                            <i class="fas fa-chevron-down text-bbcar-gold transition-transform duration-300"></i>
+                        </button>
+                        <p class="faq-answer mt-2 text-gray-300">O registro é gratuito e pode ser feito diretamente no nosso site. Após o cadastro, você receberá acesso à área do associado com todas as ferramentas necessárias.</p>
+                    </div>
+                    <div class="border-b border-gray-400 pb-4">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <span class="font-medium text-lg">Quanto posso ganhar com a BBCar?</span>
+                            <i class="fas fa-chevron-down text-bbcar-gold transition-transform duration-300"></i>
+                        </button>
+                        <p class="faq-answer mt-2 text-gray-300">Os ganhos variam conforme seu nível e tamanho da sua rede. Nossos associados de nível 5 costumam faturar entre 3.000€ e 15.000€ por mês.</p>
+                    </div>
+                    <div class="border-b border-gray-400 pb-4">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <span class="font-medium text-lg">A BBCar está disponível no meu país?</span>
+                            <i class="fas fa-chevron-down text-bbcar-gold transition-transform duration-300"></i>
+                        </button>
+                        <p class="faq-answer mt-2 text-gray-300">Atualmente operamos em 15 países europeus, com planos de expansão para mais 5 países até o final do ano.</p>
+                    </div>
+                    <div class="border-b border-gray-400 pb-4">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <span class="font-medium text-lg">Como são pagas as comissões?</span>
+                            <i class="fas fa-chevron-down text-bbcar-gold transition-transform duration-300"></i>
+                        </button>
+                        <p class="faq-answer mt-2 text-gray-300">Todas as comissões são pagas mensalmente via transferência bancária ou PayPal, até o dia 5 de cada mês.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-bbcar-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-car text-bbcar-gold text-3xl mr-2"></i>
+                        <h3 class="text-2xl font-bold">BB<span class="text-bbcar-gold">Car</span></h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">A plataforma líder em vendas de carros com comissões multinível em Portugal e Europa.</p>
+                    <p class="text-gray-400">
+                        <i class="fas fa-phone-alt mr-2"></i> +351 123 456 789<br>
+                        <i class="fas fa-envelope mr-2"></i> info@bbcar.com
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Termos e Condições</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Política de Privacidade</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-bbcar-gold">Perguntas Frequentes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Trabalhe Conosco</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Para Associados</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Área do Associado</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Materiais de Marketing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Treinamentos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Calculadora de Comissões</a></li>
+                        <li><a href="https://wa.me/123456789" class="text-gray-400 hover:text-bbcar-gold">Suporte</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Inscreva-se para receber novidades e oportunidades exclusivas.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Seu e-mail" class="bg-gray-700 text-white px-4 py-2 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-bbcar-gold">
+                        <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-r-md hover:bg-yellow-500">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">Ao se inscrever, você concorda com nossos Termos e Política de Privacidade.</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 BBCar. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Logo da Visa" class="h-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/1200px-MasterCard_Logo.svg.png" alt="Logo da Mastercard" class="h-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Paypal_2014_logo.png/640px-Paypal_2014_logo.png" alt="Logo do PayPal" class="h-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/MBWay_-_logo.png/640px-MBWay_-_logo.png" alt="Logo do MBWay" class="h-8">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/123456789" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                answer.classList.toggle('active');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+    </script>
+</body>
+</html>
