@@ -207,3 +207,11 @@ aiModal.addEventListener('click', (e) => {
         aiModal.style.display = 'none';
     }
 });
+
+// Verificar se as imagens carregaram corretamente
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', () => {
+        console.error(`Failed to load image: ${img.src}`);
+        img.src = 'assets/images/placeholder.jpg';
+    });
+});

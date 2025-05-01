@@ -17,7 +17,7 @@
     <!-- Modal de Boas-Vindas -->
     <div id="welcome-modal" class="modal">
         <div class="modal-content">
-            <span class="modal-close">×</span>
+            <span class="modal-close" aria-label="Fechar modal de boas-vindas">×</span>
             <h2 class="text-2xl font-bold text-bbcar-dark mb-4">Bem-vindo à BBCar!</h2>
             <p class="text-gray-600 mb-6">Junte-se à nossa comunidade e comece a ganhar comissões incríveis com a compra e venda de veículos usando blockchain.</p>
             <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition shine partner-btn">Quero Ser Associado</a>
@@ -27,7 +27,7 @@
     <!-- Modal da IA (Simulação Temporária) -->
     <div id="ai-modal" class="modal">
         <div class="modal-content">
-            <span class="modal-close">×</span>
+            <span class="modal-close" aria-label="Fechar modal da IA">×</span>
             <h2 class="text-2xl font-bold text-bbcar-dark mb-4"><i class="fas fa-robot mr-2"></i> Olá, sou a IA da BBCar!</h2>
             <p class="text-gray-600 mb-6">Estou aqui para ajudar você a encontrar o carro perfeito. No momento, estou em desenvolvimento, mas em breve poderei responder suas perguntas! O que você gostaria de saber?</p>
             <div class="bg-gray-100 p-4 rounded-lg mb-6">
@@ -41,7 +41,7 @@
     <header class="bg-bbcar-dark text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="assets/images/Nova logo BBCar 11.jpg" alt="Logo BBCar" class="logo" loading="lazy">
+                <img src="assets/images/Nova_logo_BBCar_11.jpg" alt="Logo BBCar" class="logo" loading="lazy">
             </div>
             <nav class="hidden md:flex space-x-6">
                 <a href="#inicio" class="text-white hover:text-bbcar-gold font-medium">Início</a>
@@ -57,12 +57,19 @@
                 <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine" aria-label="Acessar área do associado">
                     <i class="fas fa-user mr-2"></i>Área do Associado
                 </button>
-                <button class="md:hidden text-white">
+                <button class="md:hidden text-white" aria-label="Abrir menu mobile">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
     </header>
+
+    <!-- Global Promotion Banner -->
+    <section class="bg-bbcar-gold text-bbcar-dark py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg font-bold">🌍 Divulgue globalmente e ganhe comissões! Os carros são retirados em Portugal.</p>
+        </div>
+    </section>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero-section text-white py-20 h-screen flex items-center">
@@ -111,14 +118,15 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Carros em Destaque</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Descubra nossa seleção premium de veículos disponíveis em Portugal e em toda Europa</p>
+                <p class="text-gray-600 max-w-2xl mx-auto">Descubra nossa seleção premium de veículos disponíveis em Portugal</p>
             </div>
             <div class="carousel-container">
                 <div id="car-carousel" class="carousel">
                     <div class="carousel-item">
                         <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover transition duration-300">
                             <div class="relative">
-                                <img src="assets/images/BMW X5s.jpg" alt="BMW M5 disponível na BBCar" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'">
+                                <div class="spinner"></div>
+                                <img src="assets/images/BMW_X5s.jpg" alt="BMW M5 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'" onload="this.previousElementSibling.style.display='none'">
                                 <div class="absolute top-4 right-4 bg-bbcar-gold text-bbcar-dark px-3 py-1 rounded-full text-sm font-bold">Novo</div>
                             </div>
                             <div class="p-6">
@@ -146,7 +154,8 @@
                     <div class="carousel-item">
                         <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover transition duration-300">
                             <div class="relative">
-                                <img src="assets/images/Posche 911.jpg" alt="Audi A4 disponível na BBCar" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'">
+                                <div class="spinner"></div>
+                                <img src="assets/images/Porsche_911.jpg" alt="Audi A4 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'" onload="this.previousElementSibling.style.display='none'">
                                 <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">Usado</div>
                             </div>
                             <div class="p-6">
@@ -174,7 +183,8 @@
                     <div class="carousel-item">
                         <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover transition duration-300">
                             <div class="relative">
-                                <img src="assets/images/mercedes-c[220].jpg" alt="Mercedes-Benz C-Class disponível na BBCar" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'">
+                                <div class="spinner"></div>
+                                <img src="assets/images/mercedes-c220.jpg" alt="Mercedes-Benz C-Class disponível na BBCar em Portugal" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'" onload="this.previousElementSibling.style.display='none'">
                                 <div class="absolute top-4 right-4 bg-bbcar-gold text-bbcar-dark px-3 py-1 rounded-full text-sm font-bold">Novo</div>
                             </div>
                             <div class="p-6">
@@ -211,9 +221,9 @@
                     </button>
                 </div>
                 <div class="carousel-dots">
-                    <span class="carousel-dot active" data-index="0"></span>
-                    <span class="carousel-dot" data-index="1"></span>
-                    <span class="carousel-dot" data-index="2"></span>
+                    <span class="carousel-dot active" data-index="0" aria-label="Ir para o slide 1"></span>
+                    <span class="carousel-dot" data-index="1" aria-label="Ir para o slide 2"></span>
+                    <span class="carousel-dot" data-index="2" aria-label="Ir para o slide 3"></span>
                 </div>
             </div>
             <div class="text-center mt-12">
@@ -342,7 +352,7 @@
                 <div class="testimonial-card p-8">
                     <div class="testimonial-content">
                         <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de Maria Silva, associada da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de Maria Silva, associada da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'" loading="lazy">
                             <div>
                                 <h4 class="font-bold">Maria Silva</h4>
                                 <p class="text-bbcar-dark text-sm">Associada Nível 3 • Lisboa</p>
@@ -361,7 +371,7 @@
                 <div class="testimonial-card p-8">
                     <div class="testimonial-content">
                         <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de João Santos, associado da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de João Santos, associado da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'" loading="lazy">
                             <div>
                                 <h4 class="font-bold">João Santos</h4>
                                 <p class="text-bbcar-dark text-sm">Associado Nível 5 • Porto</p>
@@ -380,7 +390,7 @@
                 <div class="testimonial-card p-8">
                     <div class="testimonial-content">
                         <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Foto de Ana Costa, associada da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Foto de Ana Costa, associada da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'" loading="lazy">
                             <div>
                                 <h4 class="font-bold">Ana Costa</h4>
                                 <p class="text-bbcar-dark text-sm">Associada Nível 2 • Madrid</p>
@@ -453,7 +463,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <img src="assets/images/Nova logo BBCar 11.jpg" alt="Logo BBCar" class="logo" loading="lazy">
+                        <img src="assets/images/Nova_logo_BBCar_11.jpg" alt="Logo BBCar" class="logo" loading="lazy">
                     </div>
                     <p class="text-gray-400 mb-4">A plataforma líder em vendas de carros com comissões multinível em Portugal e Europa.</p>
                     <p class="text-gray-400">
@@ -496,10 +506,10 @@
             <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 mb-4 md:mb-0">© 2025 BBCar. Todos os direitos reservados.</p>
                 <div class="flex space-x-6">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Logo da Visa" class="h-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/1200px-MasterCard_Logo.svg.png" alt="Logo da Mastercard" class="h-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Paypal_2014_logo.png/640px-Paypal_2014_logo.png" alt="Logo do PayPal" class="h-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/MBWay_-_logo.png/640px-MBWay_-_logo.png" alt="Logo do MBWay" class="h-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Logo da Visa" class="h-8" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/1200px-MasterCard_Logo.svg.png" alt="Logo da Mastercard" class="h-8" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Paypal_2014_logo.png/640px-Paypal_2014_logo.png" alt="Logo do PayPal" class="h-8" loading="lazy">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/MBWay_-_logo.png/640px-MBWay_-_logo.png" alt="Logo do MBWay" class="h-8" loading="lazy">
                 </div>
             </div>
         </div>
@@ -507,7 +517,7 @@
 
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/123456789" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition" aria-label="Fale conosco no WhatsApp">
-        <img src="assets/images/whatsapp-1.gif" alt="WhatsApp" class="h-8 w-8" loading="lazy">
+        <img src="assets/images/whatsapp_1.gif" alt="WhatsApp BBCar" class="h-8 w-8" loading="lazy">
     </a>
 
     <script src="assets/js/script.js"></script>
