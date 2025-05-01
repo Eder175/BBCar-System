@@ -871,10 +871,6 @@ video {
   border-bottom-right-radius: 0.375rem;
 }
 
-.border {
-  border-width: 1px;
-}
-
 .border-2 {
   border-width: 2px;
 }
@@ -905,6 +901,11 @@ video {
 .bg-\[\#2c4373\] {
   --tw-bg-opacity: 1;
   background-color: rgb(44 67 115 / var(--tw-bg-opacity, 1));
+}
+
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gray-50 {
@@ -1147,10 +1148,6 @@ video {
 
 .duration-300 {
   transition-duration: 300ms;
-}
-
-.ease-out {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 .hover\:bg-\[\#2c4373\]:hover {

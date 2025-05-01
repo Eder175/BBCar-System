@@ -175,3 +175,41 @@ if (emailInput && submitButton) {
         emailInput.value = '';
     });
 }
+
+// Modal de Boas-Vindas
+const welcomeModal = document.getElementById('welcome-modal');
+const welcomeCloseModal = document.querySelector('#welcome-modal .modal-close');
+
+window.addEventListener('load', () => {
+    welcomeModal.style.display = 'block';
+});
+
+welcomeCloseModal.addEventListener('click', () => {
+    welcomeModal.style.display = 'none';
+});
+
+welcomeModal.addEventListener('click', (e) => {
+    if (e.target === welcomeModal) {
+        welcomeModal.style.display = 'none';
+    }
+});
+
+// Modal da IA (Simulação Temporária)
+const aiModal = document.getElementById('ai-modal');
+const aiCloseModal = document.querySelector('#ai-modal .modal-close');
+const aiButton = document.querySelector('.ai-button');
+
+aiButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    aiModal.style.display = 'block';
+});
+
+aiCloseModal.addEventListener('click', () => {
+    aiModal.style.display = 'none';
+});
+
+aiModal.addEventListener('click', (e) => {
+    if (e.target === aiModal) {
+        aiModal.style.display = 'none';
+    }
+});
