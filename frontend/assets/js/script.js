@@ -103,19 +103,16 @@ if (carousel && prevBtn && nextBtn) {
         updateDots();
     };
 
-    // Iniciar auto-scroll
     const startAutoScroll = () => {
         autoScrollInterval = setInterval(() => {
             scrollCarousel('next');
         }, 5000);
     };
 
-    // Parar auto-scroll
     const stopAutoScroll = () => {
         clearInterval(autoScrollInterval);
     };
 
-    // Eventos dos botões
     nextBtn.addEventListener('click', () => {
         stopAutoScroll();
         scrollCarousel('next');
@@ -128,7 +125,6 @@ if (carousel && prevBtn && nextBtn) {
         startAutoScroll();
     });
 
-    // Eventos dos dots
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             stopAutoScroll();
@@ -137,11 +133,9 @@ if (carousel && prevBtn && nextBtn) {
         });
     });
 
-    // Pausar auto-scroll ao passar o mouse
     carousel.addEventListener('mouseenter', stopAutoScroll);
     carousel.addEventListener('mouseleave', startAutoScroll);
 
-    // Iniciar o auto-scroll ao carregar a página
     startAutoScroll();
 }
 

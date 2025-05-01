@@ -110,6 +110,10 @@ body {
     50% { left: 150%; }
     100% { left: 150%; }
 }
+.logo {
+    height: 2rem;
+    width: auto;
+}
 .modal {
     display: none;
     position: fixed;
@@ -141,7 +145,6 @@ body {
     font-size: 1.5rem;
     color: var(--bbcar-dark);
 }
-/* Estilo do Carrossel - Ajustado para Responsividade */
 .carousel-container {
     position: relative;
     overflow: hidden;
@@ -200,7 +203,6 @@ body {
 .carousel-dot.active {
     background: var(--bbcar-gold);
 }
-/* Estilo da Seção Europa */
 .europe-section {
     background: linear-gradient(135deg, #f7fafc, #edf2f7);
     padding: 4rem 0;
@@ -214,7 +216,6 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border-color: var(--bbcar-gold);
 }
-/* Estilo dos Testemunhos */
 .testimonial-card {
     position: relative;
     overflow: hidden;
