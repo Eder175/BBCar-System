@@ -6,7 +6,7 @@
     <meta name="description" content="BBcar - A plataforma líder em compra e venda de veículos com comissões multinível em Portugal e Europa. Ganhe comissões incríveis com segurança usando blockchain.">
     <meta name="keywords" content="compra de carros, venda de carros, comissões multinível, blockchain, Portugal, Europa, BBCar">
     <meta name="author" content="BBCar Team">
-    <!-- Open Graph Meta Tags for Social Sharing -->
+    <!-- Open Graph Meta Tags para Compartilhamento Social -->
     <meta property="og:title" content="BBcar - Revolucionando a Compra e Venda de Veículos">
     <meta property="og:description" content="Compre e venda veículos com segurança e transparência usando a tecnologia blockchain, começando em Portugal e expandindo globalmente.">
     <meta property="og:image" content="assets/images/bbcar.jpg">
@@ -17,7 +17,7 @@
     <meta name="twitter:title" content="BBcar - Revolucionando a Compra e Venda de Veículos">
     <meta name="twitter:description" content="Compre e venda veículos com segurança e transparência usando a tecnologia blockchain, começando em Portugal e expandindo globalmente.">
     <meta name="twitter:image" content="assets/images/bbcar.jpg">
-    <!-- Structured Data for Organization -->
+    <!-- Dados Estruturados para Organização -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -46,12 +46,17 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Preload critical assets -->
-    <link rel="preload" href="assets/images/bbcar.jpg" as="image">
+    <!-- Pré-carregamento de recursos críticos -->
+    <link rel="preload" href="/assets/images/bbcar.jpg" as="image">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style">
 </head>
 <body class="bg-gray-50 transition-colors duration-300">
-    <!-- Language Switcher -->
+    <!-- Pré-carregador -->
+    <div id="preloader" class="fixed inset-0 bg-bbcar-dark flex items-center justify-center z-[9999]">
+        <div class="spinner w-16 h-16 border-4 border-t-4 border-bbcar-gold rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Seletor de Idioma -->
     <div class="language-switcher fixed top-4 left-4 z-50 bg-white rounded-md shadow-lg p-2">
         <select id="language-select" aria-label="Selecionar idioma" class="border-none focus:outline-none bg-transparent">
             <option value="pt-PT">Português</option>
@@ -83,53 +88,28 @@
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="bg-bbcar-dark text-white shadow-md sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="assets/images/bbcar.jpg?v=1" alt="Logo BBCar" class="logo h-12" loading="lazy">
-            </div>
-            <nav class="hidden md:flex space-x-6" id="main-nav">
-                <a href="#inicio" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Início</a>
-                <a href="#carros" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carros</a>
-                <a href="#vantagens" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Vantagens</a>
-                <a href="#comissoes" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Comissões</a>
-                <a href="pages/about.html" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Sobre</a>
-                <a href="pages/partners.html" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Seja um Parceiro</a>
-                <a href="pages/sell-vehicle.html" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Venda seu Veículo</a>
-                <a href="#" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carrinho</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition-all shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Acessar área do associado">
-                    <i class="fas fa-user mr-2"></i>Área do Associado
-                </button>
-                <button class="md:hidden text-white mobile-menu-toggle focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Abrir menu mobile" aria-expanded="false">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
+    <!-- Modal de Confirmação de Newsletter -->
+    <div id="newsletter-modal" class="modal bg-black bg-opacity-50 fixed inset-0 flex items-center justify-center hidden">
+        <div class="modal-content bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md animate-fade-in">
+            <button class="modal-close text-2xl font-bold absolute top-2 right-2 focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Fechar modal de confirmação de newsletter">×</button>
+            <h2 class="text-2xl font-bold text-bbcar-dark mb-4 text-center">Inscrição Confirmada!</h2>
+            <p class="text-gray-600 mb-6 text-center">Obrigado por se inscrever na nossa newsletter! Você receberá novidades e oportunidades exclusivas diretamente no seu e-mail.</p>
+            <button class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition-all shine block mx-auto focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Fechar modal">Fechar</button>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-bbcar-dark text-white">
-            <a href="#inicio" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Início</a>
-            <a href="#carros" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carros</a>
-            <a href="#vantagens" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Vantagens</a>
-            <a href="#comissoes" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Comissões</a>
-            <a href="pages/about.html" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Sobre</a>
-            <a href="pages/partners.html" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Seja um Parceiro</a>
-            <a href="pages/sell-vehicle.html" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Venda seu Veículo</a>
-            <a href="#" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carrinho</a>
-        </div>
-    </header>
+    </div>
 
-    <!-- Global Promotion Banner -->
+    <!-- Cabeçalho -->
+    <div data-include="includes/header.html"></div>
+
+    <!-- Banner de Promoção Global -->
     <section class="bg-bbcar-gold text-bbcar-dark py-4 animate-slide-in">
         <div class="container mx-auto px-4 text-center">
             <p class="text-lg font-bold">🌍 Divulgue globalmente e ganhe comissões! Os carros são retirados em Portugal.</p>
         </div>
     </section>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero-section text-white py-20 h-screen flex items-center bg-gradient-to-r from-bbcar-dark to-gray-800 animate-fade-in">
+    <!-- Seção Hero -->
+    <section id="inicio" class="hero-section text-white py-20 h-screen flex items-center animate-fade-in">
         <div class="container mx-auto px-4 hero-content">
             <div class="text-center md:text-left">
                 <h2 class="text-4xl md:text-6xl font-bold mb-6 fade-in-down">Revolucione a Compra do Seu Próximo Carro</h2>
@@ -146,7 +126,7 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
+    <!-- Seção de Estatísticas -->
     <section class="bg-white py-12 shadow-sm animate-slide-up">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -170,12 +150,13 @@
         </div>
     </section>
 
-    <!-- Featured Cars -->
+    <!-- Carros em Destaque -->
     <section id="carros" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
+            <div class="text-center mb-6">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Carros em Destaque</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Descubra nossa seleção premium de veículos disponíveis em Portugal</p>
+                <input type="text" id="car-search" placeholder="Pesquisar carros (ex.: BMW, SUV, 2023)" class="border-2 border-gray-300 rounded-md px-4 py-2 w-full max-w-md focus:outline-none focus:ring-2 focus:ring-bbcar-gold mt-4" aria-label="Pesquisar carros">
             </div>
             <div class="carousel-container">
                 <div id="car-carousel" class="carousel">
@@ -291,7 +272,7 @@
         </div>
     </section>
 
-    <!-- Benefits Section -->
+    <!-- Seção de Vantagens -->
     <section id="vantagens" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -324,7 +305,7 @@
         </div>
     </section>
 
-    <!-- Commission System -->
+    <!-- Sistema de Comissões -->
     <section id="comissoes" class="py-16 bg-bbcar-dark text-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -398,7 +379,7 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Depoimentos -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -467,7 +448,7 @@
         </div>
     </section>
 
-    <!-- Europe Coverage -->
+    <!-- Cobertura na Europa -->
     <section class="europe-section">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -498,7 +479,7 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- Seção de FAQ -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -525,7 +506,7 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- Seção de Chamada para Ação (CTA) -->
     <section class="py-16 bg-bbcar-dark text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-6">Pronto para Começar a Ganhar Comissões?</h2>
@@ -541,13 +522,13 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Rodapé -->
     <footer class="bg-bbcar-dark text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <img src="assets/images/bbcar.jpg?v=1" alt="Logo BBCar" class="logo" loading="lazy">
+                        <img src="/assets/images/bbcar.jpg" alt="Logo BBCar" class="logo h-12">
                     </div>
                     <p class="text-gray-400 mb-4">A plataforma líder em vendas de carros com comissões multinível em Portugal e Europa.</p>
                     <p class="text-gray-400">
@@ -555,105 +536,143 @@
                         <i class="fas fa-envelope mr-2"></i> info@bbcar.com
                     </p>
                     <div class="flex space-x-4 mt-4">
-                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Facebook da BBCar"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Twitter da BBCar"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Instagram da BBCar"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="LinkedIn da BBCar"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://facebook.com/bbcar" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Facebook da BBCar">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="https://twitter.com/bbcar" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Twitter da BBCar">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="https://instagram.com/bbcar" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Instagram da BBCar">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/bbcar" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="LinkedIn da BBCar">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Links Úteis</h4>
+                    <h3 class="text-lg font-bold mb-4">Links Rápidos</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Termos e Condições</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Política de Privacidade</a></li>
-                        <li><a href="pages/about.html#faq" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Perguntas Frequentes</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Trabalhe Conosco</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Blog</a></li>
+                        <li><a href="/index.html#inicio" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Início</a></li>
+                        <li><a href="/index.html#carros" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carros</a></li>
+                        <li><a href="/index.html#vantagens" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Vantagens</a></li>
+                        <li><a href="/index.html#comissoes" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Comissões</a></li>
+                        <li><a href="/pages/about.html" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Sobre</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Para Associados</h4>
+                    <h3 class="text-lg font-bold mb-4">Recursos</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Acesso à Área do Associado</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Materiais de Marketing</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Treinamentos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Calculadora de Comissões</a></li>
-                        <li><a href="https://wa.me/123456789" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Suporte</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Termos de Uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold transition focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Suporte</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Inscreva-se para receber novidades e oportunidades exclusivas.</p>
+                    <h3 class="text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Receba as últimas novidades e oportunidades exclusivas.</p>
                     <div class="flex">
-                        <input type="email" placeholder="Seu e-mail" class="bg-gray-700 text-white px-4 py-2 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Digite seu e-mail para a newsletter">
-                        <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-r-md hover:bg-yellow-500 shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Inscrever-se na newsletter">
+                        <input type="email" id="newsletter-email" placeholder="Seu e-mail" class="bg-gray-700 text-white px-4 py-2 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Digite seu e-mail para a newsletter">
+                        <button id="newsletter-subscribe" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-r-md hover:bg-yellow-500 shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Inscrever-se na newsletter">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
-                    <p class="text-xs text-gray-500 mt-2">Ao se inscrever, você concorda com nossos Termos e Política de Privacidade.</p>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 mb-4 md:mb-0">© 2025 BBCar. Todos os direitos reservados.</p>
-                <div class="flex space-x-6">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Logo da Visa" class="h-8" loading="lazy">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/1200px-MasterCard_Logo.svg.png" alt="Logo da Mastercard" class="h-8" loading="lazy">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Paypal_2014_logo.png/640px-Paypal_2014_logo.png" alt="Logo do PayPal" class="h-8" loading="lazy">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/MBWay_-_logo.png/640px-MBWay_-_logo.png" alt="Logo do MBWay" class="h-8" loading="lazy">
-                </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-gray-400">&copy; 2025 BBCar. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/123456789" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Fale conosco no WhatsApp">
-        <img src="assets/images/whatsapp_icon.png" alt="Ícone do WhatsApp" class="w-6 h-6">
-        <span class="sr-only">Fale conosco no WhatsApp</span>
-    </a>
+    <!-- Botão Voltar ao Topo -->
+    <button id="back-to-top" class="fixed bottom-6 right-20 bg-bbcar-gold text-bbcar-dark p-4 rounded-full shadow-lg hover:bg-yellow-500 transition hidden focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up text-xl"></i>
+    </button>
 
-    <!-- JavaScript for Interactivity -->
+    <!-- Scripts -->
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileMenu = document.querySelector('#mobile-menu');
-        mobileMenuToggle.addEventListener('click', () => {
-            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-
-        // Modal Functionality
-        const modals = document.querySelectorAll('.modal');
-        const modalCloses = document.querySelectorAll('.modal-close');
-        modals.forEach(modal => {
-            modalCloses.forEach(close => {
-                close.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                });
+        // Função para incluir HTML (para o cabeçalho)
+        function includeHTML() {
+            const includes = document.querySelectorAll('[data-include]');
+            includes.forEach(el => {
+                const file = el.getAttribute('data-include');
+                fetch(file)
+                    .then(response => response.text())
+                    .then(data => {
+                        el.innerHTML = data;
+                        // Reaplicar o script do menu mobile após carregar o cabeçalho
+                        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+                        const mobileMenu = document.querySelector('#mobile-menu');
+                        mobileMenuToggle.addEventListener('click', () => {
+                            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+                            mobileMenu.classList.toggle('hidden');
+                            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+                        });
+                    })
+                    .catch(err => console.error('Erro ao incluir HTML:', err));
             });
-            window.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
+        }
+        document.addEventListener('DOMContentLoaded', includeHTML);
+
+        // Pré-carregador
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('#preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+
+        // Modal de Boas-Vindas
+        const welcomeModal = document.querySelector('#welcome-modal');
+        setTimeout(() => {
+            welcomeModal.style.display = 'flex';
+        }, 2000);
+        welcomeModal.querySelector('.modal-close').addEventListener('click', () => {
+            welcomeModal.style.display = 'none';
+        });
+
+        // Modal da IA
+        const aiModal = document.querySelector('#ai-modal');
+        document.querySelectorAll('.ai-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                aiModal.style.display = 'flex';
             });
         });
-
-        // Show Welcome Modal on Load
-        window.onload = () => {
-            document.getElementById('welcome-modal').style.display = 'block';
-        };
-
-        // Show AI Modal on Click
-        document.querySelector('.ai-button').addEventListener('click', () => {
-            document.getElementById('ai-modal').style.display = 'block';
+        aiModal.querySelector('.modal-close').addEventListener('click', () => {
+            aiModal.style.display = 'none';
         });
 
-        // Carousel Functionality
+        // Modal de Newsletter
+        const newsletterSubscribe = document.querySelector('#newsletter-subscribe');
+        const newsletterModal = document.querySelector('#newsletter-modal');
+        newsletterSubscribe.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('#newsletter-email').value;
+            if (email) {
+                newsletterModal.style.display = 'flex';
+                document.querySelector('#newsletter-email').value = '';
+            } else {
+                alert('Por favor, insira um e-mail válido.');
+            }
+        });
+        newsletterModal.querySelector('.modal-close').addEventListener('click', () => {
+            newsletterModal.style.display = 'none';
+        });
+        newsletterModal.querySelector('button').addEventListener('click', () => {
+            newsletterModal.style.display = 'none';
+        });
+
+        // Carrossel
         const carousel = document.querySelector('#car-carousel');
-        const carouselItems = document.querySelectorAll('.carousel-item');
+        const items = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.carousel-dot');
         const prevBtn = document.querySelector('#prev-btn');
         const nextBtn = document.querySelector('#next-btn');
-        const dots = document.querySelectorAll('.carousel-dot');
         let currentIndex = 0;
 
         function updateCarousel() {
@@ -662,13 +681,13 @@
             dots[currentIndex].classList.add('active');
         }
 
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
             updateCarousel();
         });
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
             updateCarousel();
         });
 
@@ -677,69 +696,91 @@
                 currentIndex = parseInt(dot.getAttribute('data-index'));
                 updateCarousel();
             });
-            dot.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+            dot.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
                     currentIndex = parseInt(dot.getAttribute('data-index'));
                     updateCarousel();
                 }
             });
         });
 
-        // Basic Currency Conversion (Placeholder - Replace with API)
-        const currencyDisplays = document.querySelectorAll('.currency-display');
-        let currentCurrency = 'EUR';
-        const exchangeRates = {
-            'EUR': 1,
-            'USD': 1.1,
-            'GBP': 0.85
-        };
+        // Carrossel Automático
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }, 5000);
 
-        function updateCurrencyDisplay() {
-            currencyDisplays.forEach(display => {
-                const priceInEur = parseFloat(display.textContent.replace('€', '').replace('.', '').replace(',', '.'));
-                let newPrice;
-                if (currentCurrency === 'EUR') {
-                    newPrice = priceInEur.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
-                } else if (currentCurrency === 'USD') {
-                    newPrice = (priceInEur * exchangeRates['USD']).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-                } else if (currentCurrency === 'GBP') {
-                    newPrice = (priceInEur * exchangeRates['GBP']).toLocaleString('en-GB', { style: 'currency', currency: 'GBP' });
-                }
-                display.textContent = newPrice;
+        // Formatação de Moeda
+        document.querySelectorAll('.currency-display').forEach(element => {
+            const value = parseFloat(element.textContent.replace('€', '').replace('.', ''));
+            element.textContent = value.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+        });
+
+        // Troca de Idioma (Simulação)
+        const languageSelect = document.querySelector('#language-select');
+        languageSelect.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            console.log(`Idioma alterado para: ${lang}`);
+            // Aqui você pode implementar a lógica de tradução
+        });
+
+        // Efeito Parallax na Seção Hero
+        window.addEventListener('scroll', () => {
+            const heroSection = document.querySelector('.hero-section');
+            const scrollPosition = window.pageYOffset;
+            heroSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+        });
+
+        // Modo Escuro
+        const darkModeToggle = document.querySelector('#dark-mode-toggle');
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                darkModeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun text-xl"></i>' : '<i class="fas fa-moon text-xl"></i>';
+                localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
             });
         }
 
-        // Language and Currency Switcher (Placeholder - Replace with i18next for language)
-        document.getElementById('language-select').addEventListener('change', (e) => {
-            const lang = e.target.value;
-            if (lang === 'en') {
-                currentCurrency = 'USD';
-                document.documentElement.lang = 'en';
-                document.querySelector('h2.fade-in-down').textContent = "Revolutionize Your Next Car Purchase";
-            } else if (lang === 'es') {
-                currentCurrency = 'EUR';
-                document.documentElement.lang = 'es';
-                document.querySelector('h2.fade-in-down').textContent = "Revoluciona la Compra de tu Próximo Coche";
-            } else {
-                currentCurrency = 'EUR';
-                document.documentElement.lang = 'pt-PT';
-                document.querySelector('h2.fade-in-down').textContent = "Revolucione a Compra do Seu Próximo Carro";
+        // Aplicar Modo Escuro ao Carregar
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            if (darkModeToggle) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun text-xl"></i>';
             }
-            updateCurrencyDisplay();
+        }
+
+        // Botão Voltar ao Topo
+        const backToTopButton = document.querySelector('#back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Lazy Load Optimization
-        document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-fade-in');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('section').forEach(section => {
-                observer.observe(section);
+        // Funcionalidade de Pesquisa de Carros
+        const carSearch = document.querySelector('#car-search');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        carSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            carouselItems.forEach(item => {
+                const carName = item.querySelector('h3').textContent.toLowerCase();
+                const carDetails = item.querySelector('p').textContent.toLowerCase();
+                const carType = item.querySelector('.text-sm').textContent.toLowerCase();
+                if (
+                    carName.includes(searchTerm) ||
+                    carDetails.includes(searchTerm) ||
+                    carType.includes(searchTerm)
+                ) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
             });
         });
     </script>
