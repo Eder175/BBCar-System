@@ -162,6 +162,7 @@ body {
     flex: 0 0 100%;
     scroll-snap-align: center;
     padding: 0 10px;
+    min-height: 300px; /* Ensure the item has a minimum height even if images fail to load */
 }
 .carousel-item img {
     max-width: 100%;
@@ -179,6 +180,7 @@ body {
     border-top: 4px solid var(--bbcar-gold);
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    z-index: 10;
 }
 @keyframes spin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
