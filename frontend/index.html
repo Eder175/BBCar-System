@@ -5,83 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BBcar - A plataforma líder em compra e venda de veículos com comissões multinível em Portugal e Europa. Ganhe comissões incríveis com segurança usando blockchain.">
     <meta name="keywords" content="compra de carros, venda de carros, comissões multinível, blockchain, Portugal, Europa, BBCar">
-    <meta name="author" content="BBCar">
+    <meta name="author" content="BBCar Team">
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="BBcar - Revolucionando a Compra e Venda de Veículos">
+    <meta property="og:description" content="Compre e venda veículos com segurança e transparência usando a tecnologia blockchain, começando em Portugal e expandindo globalmente.">
+    <meta property="og:image" content="assets/images/bbcar.jpg">
+    <meta property="og:url" content="https://www.bbcar.com">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BBcar - Revolucionando a Compra e Venda de Veículos">
+    <meta name="twitter:description" content="Compre e venda veículos com segurança e transparência usando a tecnologia blockchain, começando em Portugal e expandindo globalmente.">
+    <meta name="twitter:image" content="assets/images/bbcar.jpg">
+    <!-- Structured Data for Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "BBCar",
+      "url": "https://www.bbcar.com",
+      "logo": "assets/images/bbcar.jpg",
+      "description": "Plataforma líder em compra e venda de veículos com comissões multinível em Portugal e Europa, usando tecnologia blockchain.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+351 123 456 789",
+        "contactType": "Customer Service",
+        "availableLanguage": ["Portuguese", "English", "Spanish"]
+      },
+      "sameAs": [
+        "https://facebook.com/bbcar",
+        "https://twitter.com/bbcar",
+        "https://instagram.com/bbcar",
+        "https://linkedin.com/company/bbcar"
+      ]
+    }
+    </script>
     <title>BBcar - Revolucionando a Compra e Venda de Veículos</title>
-    <link rel="icon" type="image/png" href="assets/images/fav-icon-32x32.png">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="dist/output.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/images/bbcar.jpg" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 transition-colors duration-300">
+    <!-- Language Switcher -->
+    <div class="language-switcher fixed top-4 left-4 z-50 bg-white rounded-md shadow-lg p-2">
+        <select id="language-select" aria-label="Selecionar idioma" class="border-none focus:outline-none bg-transparent">
+            <option value="pt-PT">Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+        </select>
+    </div>
+
     <!-- Modal de Boas-Vindas -->
-    <div id="welcome-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" aria-label="Fechar modal de boas-vindas">×</span>
-            <h2 class="text-2xl font-bold text-bbcar-dark mb-4">Bem-vindo à BBCar!</h2>
-            <p class="text-gray-600 mb-6">Junte-se à nossa comunidade e comece a ganhar comissões incríveis com a compra e venda de veículos usando blockchain.</p>
-            <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition shine partner-btn">Quero Ser Associado</a>
+    <div id="welcome-modal" class="modal bg-black bg-opacity-50 fixed inset-0 flex items-center justify-center hidden">
+        <div class="modal-content bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md animate-fade-in">
+            <button class="modal-close text-2xl font-bold absolute top-2 right-2 focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Fechar modal de boas-vindas">×</button>
+            <h2 class="text-2xl font-bold text-bbcar-dark mb-4 text-center">Bem-vindo à BBCar!</h2>
+            <p class="text-gray-600 mb-6 text-center">Junte-se à nossa comunidade e comece a ganhar comissões incríveis com a compra e venda de veículos usando blockchain.</p>
+            <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition-all shine block mx-auto w-max focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Quero ser associado">Quero Ser Associado</a>
         </div>
     </div>
 
-    <!-- Modal da IA (Simulação Temporária) -->
-    <div id="ai-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" aria-label="Fechar modal da IA">×</span>
-            <h2 class="text-2xl font-bold text-bbcar-dark mb-4"><i class="fas fa-robot mr-2"></i> Olá, sou a IA da BBCar!</h2>
-            <p class="text-gray-600 mb-6">Estou aqui para ajudar você a encontrar o carro perfeito. No momento, estou em desenvolvimento, mas em breve poderei responder suas perguntas! O que você gostaria de saber?</p>
-            <div class="bg-gray-100 p-4 rounded-lg mb-6">
+    <!-- Modal da IA -->
+    <div id="ai-modal" class="modal bg-black bg-opacity-50 fixed inset-0 flex items-center justify-center hidden">
+        <div class="modal-content bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md animate-fade-in">
+            <button class="modal-close text-2xl font-bold absolute top-2 right-2 focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Fechar modal da IA">×</button>
+            <h2 class="text-2xl font-bold text-bbcar-dark mb-4 flex items-center justify-center"><i class="fas fa-robot mr-2"></i> Olá, sou a IA da BBCar!</h2>
+            <p class="text-gray-600 mb-6 text-center">Estou aqui para ajudar você a encontrar o carro perfeito. No momento, estou em desenvolvimento, mas em breve poderei responder suas perguntas! O que você gostaria de saber?</p>
+            <div class="bg-gray-100 p-4 rounded-lg mb-6 text-center">
                 <p class="text-gray-600">Exemplo: "Quero um carro sedan usado em Portugal por menos de 300.000€."</p>
             </div>
-            <button class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition shine">Enviar Pergunta (Em Breve)</button>
+            <button class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition-all shine block mx-auto focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Enviar pergunta (em breve)">Enviar Pergunta (Em Breve)</button>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="bg-bbcar-dark text-white shadow-md sticky top-0 z-50">
+    <header class="bg-bbcar-dark text-white shadow-md sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="assets/images/Nova_logo_BBCar_11.jpg?v=1" alt="Logo BBCar" class="logo" loading="lazy">
+                <img src="assets/images/bbcar.jpg?v=1" alt="Logo BBCar" class="logo h-12" loading="lazy">
             </div>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#inicio" class="text-white hover:text-bbcar-gold font-medium">Início</a>
-                <a href="#carros" class="text-white hover:text-bbcar-gold font-medium">Carros</a>
-                <a href="#vantagens" class="text-white hover:text-bbcar-gold font-medium">Vantagens</a>
-                <a href="#comissoes" class="text-white hover:text-bbcar-gold font-medium">Comissões</a>
-                <a href="pages/about.html" class="text-white hover:text-bbcar-gold font-medium">Sobre</a>
-                <a href="pages/partners.html" class="text-white hover:text-bbcar-gold font-medium">Seja um Parceiro</a>
-                <a href="pages/sell-vehicle.html" class="text-white hover:text-bbcar-gold font-medium">Venda seu Veículo</a>
-                <a href="#" class="text-white hover:text-bbcar-gold font-medium">Carrinho</a>
+            <nav class="hidden md:flex space-x-6" id="main-nav">
+                <a href="#inicio" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Início</a>
+                <a href="#carros" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carros</a>
+                <a href="#vantagens" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Vantagens</a>
+                <a href="#comissoes" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Comissões</a>
+                <a href="pages/about.html" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Sobre</a>
+                <a href="pages/partners.html" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Seja um Parceiro</a>
+                <a href="pages/sell-vehicle.html" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Venda seu Veículo</a>
+                <a href="#" class="text-white hover:text-bbcar-gold font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carrinho</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine" aria-label="Acessar área do associado">
+                <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition-all shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Acessar área do associado">
                     <i class="fas fa-user mr-2"></i>Área do Associado
                 </button>
-                <button class="md:hidden text-white" aria-label="Abrir menu mobile">
+                <button class="md:hidden text-white mobile-menu-toggle focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Abrir menu mobile" aria-expanded="false">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-bbcar-dark text-white">
+            <a href="#inicio" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Início</a>
+            <a href="#carros" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carros</a>
+            <a href="#vantagens" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Vantagens</a>
+            <a href="#comissoes" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Comissões</a>
+            <a href="pages/about.html" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Sobre</a>
+            <a href="pages/partners.html" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Seja um Parceiro</a>
+            <a href="pages/sell-vehicle.html" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Venda seu Veículo</a>
+            <a href="#" class="block px-4 py-2 hover:bg-bbcar-gold hover:text-bbcar-dark transition-colors focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Carrinho</a>
+        </div>
     </header>
 
     <!-- Global Promotion Banner -->
-    <section class="bg-bbcar-gold text-bbcar-dark py-4">
+    <section class="bg-bbcar-gold text-bbcar-dark py-4 animate-slide-in">
         <div class="container mx-auto px-4 text-center">
             <p class="text-lg font-bold">🌍 Divulgue globalmente e ganhe comissões! Os carros são retirados em Portugal.</p>
         </div>
     </section>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero-section text-white py-20 h-screen flex items-center">
+    <section id="inicio" class="hero-section text-white py-20 h-screen flex items-center bg-gradient-to-r from-bbcar-dark to-gray-800 animate-fade-in">
         <div class="container mx-auto px-4 hero-content">
             <div class="text-center md:text-left">
                 <h2 class="text-4xl md:text-6xl font-bold mb-6 fade-in-down">Revolucione a Compra do Seu Próximo Carro</h2>
                 <p class="text-xl md:text-2xl mb-8 fade-in-up">Compre e venda veículos com segurança e transparência usando a tecnologia blockchain, começando em Portugal e expandindo globalmente.</p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start hero-buttons">
-                    <a href="#carros" class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition fade-in-up cta-button shine" aria-label="Ver carros disponíveis">
+                    <a href="#carros" class="bg-bbcar-gold text-bbcar-dark px-6 py-3 rounded-md font-bold hover:bg-yellow-500 transition-all fade-in-up cta-button shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Ver carros disponíveis">
                         Ver Carros <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="#contact" class="border-2 border-white px-6 py-3 rounded-md font-bold hover:bg-white hover:text-bbcar-dark transition fade-in-up cta-button shine ai-button" aria-label="Falar com a IA">
+                    <a href="#contact" class="border-2 border-white px-6 py-3 rounded-md font-bold hover:bg-white hover:text-bbcar-dark transition-all fade-in-up cta-button shine ai-button focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Falar com a IA">
                         Fale com a IA <i class="fas fa-robot ml-2"></i>
                     </a>
                 </div>
@@ -90,7 +147,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="bg-white py-12 shadow-sm">
+    <section class="bg-white py-12 shadow-sm animate-slide-up">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="p-4">
@@ -126,25 +183,25 @@
                         <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover transition duration-300">
                             <div class="relative">
                                 <div class="spinner"></div>
-                                <img src="assets/images/BMW_X5s.jpg" alt="BMW M5 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'" onload="this.previousElementSibling.style.display='none'" loading="lazy">
+                                <img src="assets/images/bmw_x5.jpg" alt="BMW X5 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onload="this.previousElementSibling.style.display='none'" loading="lazy">
                                 <div class="absolute top-4 right-4 bg-bbcar-gold text-bbcar-dark px-3 py-1 rounded-full text-sm font-bold">Novo</div>
                             </div>
                             <div class="p-6">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="text-xl font-bold">BMW M5</h3>
-                                    <span class="text-bbcar-dark font-bold">450.000€</span>
+                                    <h3 class="text-xl font-bold">BMW X5</h3>
+                                    <span class="text-bbcar-dark font-bold currency-display">450.000€</span>
                                 </div>
                                 <p class="text-gray-600 mb-4">2023 • 10.000 km • Gasolina</p>
                                 <div class="flex justify-between text-sm text-gray-500 mb-4">
-                                    <span><i class="fas fa-car mr-1"></i> Sedan</span>
+                                    <span><i class="fas fa-car mr-1"></i> SUV</span>
                                     <span><i class="fas fa-cogs mr-1"></i> Automático</span>
                                     <span><i class="fas fa-tachometer-alt mr-1"></i> 600cv</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button class="text-bbcar-dark hover:text-bbcar-gold font-medium" aria-label="Compartilhar BMW M5">
+                                    <button class="text-bbcar-dark hover:text-bbcar-gold font-medium focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Compartilhar BMW X5">
                                         <i class="fas fa-share-alt mr-1"></i> Partilhar
                                     </button>
-                                    <a href="#" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine" aria-label="Ver detalhes do BMW M5">
+                                    <a href="#" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Ver detalhes do BMW X5">
                                         Ver Detalhes
                                     </a>
                                 </div>
@@ -155,25 +212,25 @@
                         <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover transition duration-300">
                             <div class="relative">
                                 <div class="spinner"></div>
-                                <img src="assets/images/Porsche_911.jpg" alt="Audi A4 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'" onload="this.previousElementSibling.style.display='none'" loading="lazy">
+                                <img src="assets/images/porsche_911.jpg" alt="Porsche 911 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onload="this.previousElementSibling.style.display='none'" loading="lazy">
                                 <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">Usado</div>
                             </div>
                             <div class="p-6">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="text-xl font-bold">Audi A4</h3>
-                                    <span class="text-bbcar-dark font-bold">280.000€</span>
+                                    <h3 class="text-xl font-bold">Porsche 911</h3>
+                                    <span class="text-bbcar-dark font-bold currency-display">280.000€</span>
                                 </div>
-                                <p class="text-gray-600 mb-4">2020 • 25.000 km • Diesel</p>
+                                <p class="text-gray-600 mb-4">2020 • 25.000 km • Gasolina</p>
                                 <div class="flex justify-between text-sm text-gray-500 mb-4">
-                                    <span><i class="fas fa-car mr-1"></i> Sedan</span>
+                                    <span><i class="fas fa-car mr-1"></i> Esportivo</span>
                                     <span><i class="fas fa-cogs mr-1"></i> Automático</span>
-                                    <span><i class="fas fa-tachometer-alt mr-1"></i> 245cv</span>
+                                    <span><i class="fas fa-tachometer-alt mr-1"></i> 450cv</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button class="text-bbcar-dark hover:text-bbcar-gold font-medium" aria-label="Compartilhar Audi A4">
+                                    <button class="text-bbcar-dark hover:text-bbcar-gold font-medium focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Compartilhar Porsche 911">
                                         <i class="fas fa-share-alt mr-1"></i> Partilhar
                                     </button>
-                                    <a href="#" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine" aria-label="Ver detalhes do Audi A4">
+                                    <a href="#" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Ver detalhes do Porsche 911">
                                         Ver Detalhes
                                     </a>
                                 </div>
@@ -184,25 +241,25 @@
                         <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover transition duration-300">
                             <div class="relative">
                                 <div class="spinner"></div>
-                                <img src="assets/images/mercedes-c220.jpg" alt="Mercedes-Benz C-Class disponível na BBCar em Portugal" class="w-full h-48 object-cover" onerror="this.src='assets/images/placeholder.jpg'" onload="this.previousElementSibling.style.display='none'" loading="lazy">
+                                <img src="assets/images/mercedes_c220.jpg" alt="Mercedes-Benz C220 disponível na BBCar em Portugal" class="w-full h-48 object-cover" onload="this.previousElementSibling.style.display='none'" loading="lazy">
                                 <div class="absolute top-4 right-4 bg-bbcar-gold text-bbcar-dark px-3 py-1 rounded-full text-sm font-bold">Novo</div>
                             </div>
                             <div class="p-6">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="text-xl font-bold">Mercedes-Benz C-Class</h3>
-                                    <span class="text-bbcar-dark font-bold">350.000€</span>
+                                    <h3 class="text-xl font-bold">Mercedes-Benz C220</h3>
+                                    <span class="text-bbcar-dark font-bold currency-display">350.000€</span>
                                 </div>
-                                <p class="text-gray-600 mb-4">2023 • 5.000 km • Gasolina</p>
+                                <p class="text-gray-600 mb-4">2023 • 5.000 km • Diesel</p>
                                 <div class="flex justify-between text-sm text-gray-500 mb-4">
                                     <span><i class="fas fa-car mr-1"></i> Sedan</span>
                                     <span><i class="fas fa-cogs mr-1"></i> Automático</span>
                                     <span><i class="fas fa-tachometer-alt mr-1"></i> 300cv</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <button class="text-bbcar-dark hover:text-bbcar-gold font-medium" aria-label="Compartilhar Mercedes-Benz C-Class">
+                                    <button class="text-bbcar-dark hover:text-bbcar-gold font-medium focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Compartilhar Mercedes-Benz C220">
                                         <i class="fas fa-share-alt mr-1"></i> Partilhar
                                     </button>
-                                    <a href="#" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine" aria-label="Ver detalhes do Mercedes-Benz C-Class">
+                                    <a href="#" class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-md font-bold hover:bg-yellow-500 transition shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Ver detalhes do Mercedes-Benz C220">
                                         Ver Detalhes
                                     </a>
                                 </div>
@@ -211,23 +268,23 @@
                     </div>
                 </div>
                 <div class="carousel-nav left-0">
-                    <button id="prev-btn" aria-label="Carro anterior">
+                    <button id="prev-btn" aria-label="Carro anterior" class="focus:outline-none focus:ring-2 focus:ring-bbcar-gold">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 </div>
                 <div class="carousel-nav right-0">
-                    <button id="next-btn" aria-label="Próximo carro">
+                    <button id="next-btn" aria-label="Próximo carro" class="focus:outline-none focus:ring-2 focus:ring-bbcar-gold">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
                 <div class="carousel-dots">
-                    <span class="carousel-dot active" data-index="0" aria-label="Ir para o slide 1"></span>
-                    <span class="carousel-dot" data-index="1" aria-label="Ir para o slide 2"></span>
-                    <span class="carousel-dot" data-index="2" aria-label="Ir para o slide 3"></span>
+                    <span class="carousel-dot active" data-index="0" aria-label="Ir para o slide 1" role="button" tabindex="0"></span>
+                    <span class="carousel-dot" data-index="1" aria-label="Ir para o slide 2" role="button" tabindex="0"></span>
+                    <span class="carousel-dot" data-index="2" aria-label="Ir para o slide 3" role="button" tabindex="0"></span>
                 </div>
             </div>
             <div class="text-center mt-12">
-                <a href="#" class="border-2 border-bbcar-dark text-bbcar-dark px-8 py-3 rounded-md font-bold hover:bg-bbcar-dark hover:text-white transition shine" aria-label="Ver todos os carros">
+                <a href="#" class="border-2 border-bbcar-dark text-bbcar-dark px-8 py-3 rounded-md font-bold hover:bg-bbcar-dark hover:text-white transition shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Ver todos os carros">
                     Ver Todos os Carros <i class="fas fa-chevron-right ml-2"></i>
                 </a>
             </div>
@@ -334,7 +391,7 @@
                 </div>
             </div>
             <div class="text-center mt-12">
-                <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-8 py-3 rounded-md font-bold hover:bg-yellow-500 transition animate-bounce-custom shine partner-btn" aria-label="Tornar-se associado">
+                <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-8 py-3 rounded-md font-bold hover:bg-yellow-500 transition animate-bounce-custom shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Tornar-se associado">
                     Quero Ser Associado <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -352,7 +409,7 @@
                 <div class="testimonial-card p-8">
                     <div class="testimonial-content">
                         <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de Maria Silva, associada da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'" loading="lazy">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de Maria Silva, associada da BBCar" class="w-12 h-12 rounded-full mr-4" loading="lazy">
                             <div>
                                 <h4 class="font-bold">Maria Silva</h4>
                                 <p class="text-bbcar-dark text-sm">Associada Nível 3 • Lisboa</p>
@@ -371,10 +428,10 @@
                 <div class="testimonial-card p-8">
                     <div class="testimonial-content">
                         <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de João Santos, associado da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'" loading="lazy">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de João Santos, associado da BBCar" class="w-12 h-12 rounded-full mr-4" loading="lazy">
                             <div>
                                 <h4 class="font-bold">João Santos</h4>
-                                <p class="text-bbcar-dark text-sm">Associada Nível 5 • Porto</p>
+                                <p class="text-bbcar-dark text-sm">Associado Nível 5 • Porto</p>
                             </div>
                         </div>
                         <p class="text-gray-600 mb-4">"Com a BBCar transformei meu hobby por carros num negócio rentável. Hoje tenho uma rede com 37 associados e ganhos mensais consistentes."</p>
@@ -390,7 +447,7 @@
                 <div class="testimonial-card p-8">
                     <div class="testimonial-content">
                         <div class="flex items-center mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Foto de Ana Costa, associada da BBCar" class="w-12 h-12 rounded-full mr-4" onerror="this.src='assets/images/placeholder.jpg'" loading="lazy">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Foto de Ana Costa, associada da BBCar" class="w-12 h-12 rounded-full mr-4" loading="lazy">
                             <div>
                                 <h4 class="font-bold">Ana Costa</h4>
                                 <p class="text-bbcar-dark text-sm">Associada Nível 2 • Madrid</p>
@@ -418,7 +475,7 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Começamos em Portugal e agora estamos expandindo por todo o continente europeu</p>
             </div>
             <div id="map" class="map-container mb-8">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3177156.734141672!2d-8.675529!3d39.399872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDIzJzU5LjUiTiA4wrA0MCc0NC4zIlc!5e0!3m2!1spt-PT!2spt!4v1697654321987!5m2!1spt-PT!2spt" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3177156.734141672!2d-8.675529!3d39.399872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDIzJzU5LjUiTiA4wrA0MCc0NC4zIlc!5e0!3m2!1spt-PT!2spt!4v1697654321987!5m2!1spt-PT!2spt" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de cobertura da BBCar na Europa"></iframe>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div class="bg-gray-50 p-4 rounded-lg country-card">
@@ -441,16 +498,43 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Perguntas Frequentes</h2>
+            </div>
+            <div class="space-y-6 max-w-3xl mx-auto">
+                <details class="bg-white p-4 rounded-lg shadow-sm">
+                    <summary class="font-bold text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Como me torno um associado BBCar?</summary>
+                    <p class="text-gray-600 mt-2">O registo é gratuito e pode ser feito diretamente no nosso site. Após o cadastro, você receberá acesso à área do associado onde poderá começar a divulgar os carros e construir a sua rede.</p>
+                </details>
+                <details class="bg-white p-4 rounded-lg shadow-sm">
+                    <summary class="font-bold text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Quanto posso ganhar com a BBCar?</summary>
+                    <p class="text-gray-600 mt-2">Os ganhos variam conforme seu nível e tamanho da sua rede. Nossos associados de nível 5 costumam faturar entre <span class="font-bold">3.000 a 15.000€</span> por mês.</p>
+                </details>
+                <details class="bg-white p-4 rounded-lg shadow-sm">
+                    <summary class="font-bold text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-bbcar-gold">A BBCar está disponível no meu país?</summary>
+                    <p class="text-gray-600 mt-2">Atualmente operamos em 15 países europeus, com planos de expansão para mais 5 países até o final do ano.</p>
+                </details>
+                <details class="bg-white p-4 rounded-lg shadow-sm">
+                    <summary class="font-bold text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Como são pagas as comissões?</summary>
+                    <p class="text-gray-600 mt-2">Todas as comissões são pagas mensalmente via transferência bancária ou PayPal, até o dia 5 de cada mês.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="py-16 bg-bbcar-dark text-white">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-6">Pronto para Começar a Ganhar Comissões?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Junte-se a milhares de associados que já estão transformando sua paixão por carros em renda extra.</p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-8 py-4 rounded-md font-bold hover:bg-yellow-500 transition text-lg shine partner-btn" aria-label="Tornar-se associado gratuitamente">
+                <a href="pages/partners.html" class="bg-bbcar-gold text-bbcar-dark px-8 py-4 rounded-md font-bold hover:bg-yellow-500 transition text-lg shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Tornar-se associado gratuitamente">
                     Quero Ser Associado Grátis <i class="fas fa-arrow-right ml-2"></i>
                 </a>
-                <a href="https://wa.me/123456789" class="border-2 border-white px-8 py-4 rounded-md font-bold hover:bg-white hover:text-bbcar-dark transition text-lg shine" aria-label="Falar com consultor via WhatsApp">
+                <a href="https://wa.me/123456789" class="border-2 border-white px-8 py-4 rounded-md font-bold hover:bg-white hover:text-bbcar-dark transition text-lg shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Falar com consultor via WhatsApp">
                     Falar com Consultor <i class="fas fa-phone-alt ml-2"></i>
                 </a>
             </div>
@@ -463,32 +547,38 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <img src="assets/images/Nova_logo_BBCar_11.jpg?v=1" alt="Logo BBCar" class="logo" loading="lazy">
+                        <img src="assets/images/bbcar.jpg?v=1" alt="Logo BBCar" class="logo" loading="lazy">
                     </div>
                     <p class="text-gray-400 mb-4">A plataforma líder em vendas de carros com comissões multinível em Portugal e Europa.</p>
                     <p class="text-gray-400">
                         <i class="fas fa-phone-alt mr-2"></i> +351 123 456 789<br>
                         <i class="fas fa-envelope mr-2"></i> info@bbcar.com
                     </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Facebook da BBCar"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Twitter da BBCar"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Instagram da BBCar"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="LinkedIn da BBCar"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div>
                     <h4 class="text-lg font-bold mb-4">Links Úteis</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Termos e Condições</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Política de Privacidade</a></li>
-                        <li><a href="pages/about.html#faq" class="text-gray-400 hover:text-bbcar-gold">Perguntas Frequentes</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Trabalhe Conosco</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Termos e Condições</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Política de Privacidade</a></li>
+                        <li><a href="pages/about.html#faq" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Perguntas Frequentes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Trabalhe Conosco</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Blog</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-bold mb-4">Para Associados</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Área do Associado</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Materiais de Marketing</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Treinamentos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold">Calculadora de Comissões</a></li>
-                        <li><a href="https://wa.me/123456789" class="text-gray-400 hover:text-bbcar-gold">Suporte</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Acesso à Área do Associado</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Materiais de Marketing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Treinamentos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Calculadora de Comissões</a></li>
+                        <li><a href="https://wa.me/123456789" class="text-gray-400 hover:text-bbcar-gold focus:outline-none focus:ring-2 focus:ring-bbcar-gold">Suporte</a></li>
                     </ul>
                 </div>
                 <div>
@@ -496,7 +586,7 @@
                     <p class="text-gray-400 mb-4">Inscreva-se para receber novidades e oportunidades exclusivas.</p>
                     <div class="flex">
                         <input type="email" placeholder="Seu e-mail" class="bg-gray-700 text-white px-4 py-2 rounded-l-md w-full focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Digite seu e-mail para a newsletter">
-                        <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-r-md hover:bg-yellow-500 shine" aria-label="Inscrever-se na newsletter">
+                        <button class="bg-bbcar-gold text-bbcar-dark px-4 py-2 rounded-r-md hover:bg-yellow-500 shine focus:outline-none focus:ring-2 focus:ring-bbcar-gold" aria-label="Inscrever-se na newsletter">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -516,10 +606,142 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/123456789" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition" aria-label="Fale conosco no WhatsApp">
-        <img src="assets/images/whatsapp-icon.png" alt="WhatsApp BBCar" class="h-8 w-8" loading="lazy">
+    <a href="https://wa.me/123456789" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition focus:outline-none focus:ring-2 focus:ring-green-500" aria-label="Fale conosco no WhatsApp">
+        <img src="assets/images/whatsapp_icon.png" alt="Ícone do WhatsApp" class="w-6 h-6">
+        <span class="sr-only">Fale conosco no WhatsApp</span>
     </a>
 
-    <script src="assets/js/script.js"></script>
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenu = document.querySelector('#mobile-menu');
+        mobileMenuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Modal Functionality
+        const modals = document.querySelectorAll('.modal');
+        const modalCloses = document.querySelectorAll('.modal-close');
+        modals.forEach(modal => {
+            modalCloses.forEach(close => {
+                close.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Show Welcome Modal on Load
+        window.onload = () => {
+            document.getElementById('welcome-modal').style.display = 'block';
+        };
+
+        // Show AI Modal on Click
+        document.querySelector('.ai-button').addEventListener('click', () => {
+            document.getElementById('ai-modal').style.display = 'block';
+        });
+
+        // Carousel Functionality
+        const carousel = document.querySelector('#car-carousel');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.querySelector('#prev-btn');
+        const nextBtn = document.querySelector('#next-btn');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentIndex].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? carouselItems.length - 1 : currentIndex - 1;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === carouselItems.length - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.getAttribute('data-index'));
+                updateCarousel();
+            });
+            dot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    currentIndex = parseInt(dot.getAttribute('data-index'));
+                    updateCarousel();
+                }
+            });
+        });
+
+        // Basic Currency Conversion (Placeholder - Replace with API)
+        const currencyDisplays = document.querySelectorAll('.currency-display');
+        let currentCurrency = 'EUR';
+        const exchangeRates = {
+            'EUR': 1,
+            'USD': 1.1,
+            'GBP': 0.85
+        };
+
+        function updateCurrencyDisplay() {
+            currencyDisplays.forEach(display => {
+                const priceInEur = parseFloat(display.textContent.replace('€', '').replace('.', '').replace(',', '.'));
+                let newPrice;
+                if (currentCurrency === 'EUR') {
+                    newPrice = priceInEur.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+                } else if (currentCurrency === 'USD') {
+                    newPrice = (priceInEur * exchangeRates['USD']).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                } else if (currentCurrency === 'GBP') {
+                    newPrice = (priceInEur * exchangeRates['GBP']).toLocaleString('en-GB', { style: 'currency', currency: 'GBP' });
+                }
+                display.textContent = newPrice;
+            });
+        }
+
+        // Language and Currency Switcher (Placeholder - Replace with i18next for language)
+        document.getElementById('language-select').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            if (lang === 'en') {
+                currentCurrency = 'USD';
+                document.documentElement.lang = 'en';
+                document.querySelector('h2.fade-in-down').textContent = "Revolutionize Your Next Car Purchase";
+            } else if (lang === 'es') {
+                currentCurrency = 'EUR';
+                document.documentElement.lang = 'es';
+                document.querySelector('h2.fade-in-down').textContent = "Revoluciona la Compra de tu Próximo Coche";
+            } else {
+                currentCurrency = 'EUR';
+                document.documentElement.lang = 'pt-PT';
+                document.querySelector('h2.fade-in-down').textContent = "Revolucione a Compra do Seu Próximo Carro";
+            }
+            updateCurrencyDisplay();
+        });
+
+        // Lazy Load Optimization
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
